@@ -43,8 +43,7 @@ public class ControladorEntidades {
         for (Usuarios usu : listaUsuarios){
             if (usu.getNomUsuario().equals(usuario)){
                 if (usu.getContrasena().equals(contrasena)){
-                    mensaje = "Usuario y Contraseña correctos. Bienvenido/a!";
-                    new IniciarSesion().setVisible(false);
+                    mensaje = "Usuario y Contraseña correctos. Bienvenido/a!"; 
                     new Tramites().setVisible(true);
                     return mensaje;
                 }else{
@@ -65,5 +64,28 @@ public class ControladorEntidades {
         usu.setContrasena(Contrasena);
         
         controlPersis.guardarUsuario(usu);
+    }
+
+    public List<Clientes> traerClientes() {
+        return controlPersis.traerClientes();
+    }
+
+    public void borrarCliente(int id) {
+        controlPersis.borrarCliente(id);
+    }
+
+    public void modificarCliente(Clientes cli, String RFC, String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String numTelefono) {
+        cli.setRFC(RFC);
+        cli.setNombres(nombre);
+        cli.setApellidoP(apellidoP);
+        cli.setApellidoM(apellidoM);
+        cli.setFechaNacimiento(fechaNacimiento);
+        cli.setNumTelefono(numTelefono);
+        
+        controlPersis.modificarCliente(cli);
+    }
+
+    public Clientes traerCliente(int id) {
+        return controlPersis.traerCliente(id);
     }
 }

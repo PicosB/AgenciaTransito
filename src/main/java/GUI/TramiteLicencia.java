@@ -84,6 +84,11 @@ public class TramiteLicencia extends javax.swing.JFrame {
         btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -151,6 +156,11 @@ public class TramiteLicencia extends javax.swing.JFrame {
         new RegistroLicencia().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        new VerClientes().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnClientesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;

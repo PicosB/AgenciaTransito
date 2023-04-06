@@ -6,7 +6,10 @@ package Persistencia;
 
 import Entidades.Clientes;
 import Entidades.Usuarios;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,15 +19,41 @@ public class ControladorPersistencia {
     ClientesJpaController cliJpa = new ClientesJpaController();
     UsuariosJpaController usuJpa = new UsuariosJpaController();
     
+    //------------ Clientes ----------------------
     public void guardarCliente(Clientes cl) {
         cliJpa.create(cl);
     }
 
+    public List<Clientes> traerClientes() {
+        return cliJpa.findClientesEntities();
+    }
+    
+    public void borrarCliente(int id) {
+        try {
+            cliJpa.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //------------ Usuarios ----------------------
     public List<Usuarios> traerUsuarios() {
         return usuJpa.findUsuariosEntities();
     }
 
     public void guardarUsuario(Usuarios usu) {
         usuJpa.create(usu);
+    }
+
+    public void modificarCliente(Clientes cli) {
+        try {
+            cliJpa.edit(cli);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Clientes traerCliente(int id) {
+        return cliJpa.findClientes(id);
     }
 }
