@@ -5,12 +5,14 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -49,10 +51,14 @@ public class Clientes implements Serializable {
     @Column (name = "FechaNacimiento", nullable = false)
     private String fechaNacimiento;
 
+    @OneToMany
+    private LinkedList<Vehiculo> listaVehiculos;
+    
+    
     public Clientes() {
     }
 
-    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, String fechaNacimiento) {
+    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, String fechaNacimiento, LinkedList<Vehiculo> listaVehiculos) {
         this.id = id;
         this.RFC = RFC;
         this.nombres = nombres;
@@ -60,8 +66,9 @@ public class Clientes implements Serializable {
         this.apellidoM = apellidoM;
         this.numTelefono = numTelefono;
         this.fechaNacimiento = fechaNacimiento;
+        this.listaVehiculos = listaVehiculos;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -117,4 +124,14 @@ public class Clientes implements Serializable {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public LinkedList<Vehiculo> getListaVehiculos() {
+        return listaVehiculos;
+    }
+
+    public void setListaVehiculos(LinkedList<Vehiculo> listaVehiculos) {
+        this.listaVehiculos = listaVehiculos;
+    }
+    
+    
 }

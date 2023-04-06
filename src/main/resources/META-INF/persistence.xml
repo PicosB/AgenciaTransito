@@ -4,6 +4,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Entidades.Clientes</class>
     <class>Entidades.Usuarios</class>
+    <class>Entidades.Vehiculo</class>
+    <class>Entidades.Tramite</class>
+    <class>Entidades.Placa</class>
+    <class>Entidades.Licencia</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenciatramites?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
