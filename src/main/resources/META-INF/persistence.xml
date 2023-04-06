@@ -3,6 +3,7 @@
   <persistence-unit name="ConexionPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Entidades.Clientes</class>
+    <class>Entidades.Usuarios</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenciatramites?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

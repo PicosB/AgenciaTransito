@@ -63,7 +63,7 @@ public class Tramites extends javax.swing.JFrame {
         btnConsultar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAtras.setText("Atras");
+        btnAtras.setText("Salir");
         btnAtras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +144,7 @@ public class Tramites extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        new InicioAplicacion().setVisible(true);
+        new IniciarSesion().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
 

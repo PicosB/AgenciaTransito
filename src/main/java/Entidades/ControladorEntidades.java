@@ -4,14 +4,23 @@
  */
 package Entidades;
 
+import GUI.IniciarSesion;
+import GUI.Tramites;
 import Persistencia.ControladorPersistencia;
+import java.util.List;
 
 /**
  *
  * @author PC
  */
 public class ControladorEntidades {
-    ControladorPersistencia controlPersis = new ControladorPersistencia();
+    ControladorPersistencia controlPersis;
+
+    public ControladorEntidades() {
+        controlPersis  = new ControladorPersistencia();
+    }
+    
+    
     
     //---------------------------- Cliente-----------------------------
     public void guardarCliente(String RFC, String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String numTelefono) {
@@ -25,5 +34,36 @@ public class ControladorEntidades {
         cl.setNumTelefono(numTelefono);
         
         controlPersis.guardarCliente(cl);
+    }
+
+    //---------------------------- Usuario -----------------------------
+    public String validarUsuario(String usuario, String contrasena) {
+        String mensaje="";
+        List<Usuarios> listaUsuarios = controlPersis.traerUsuarios();
+        for (Usuarios usu : listaUsuarios){
+            if (usu.getNomUsuario().equals(usuario)){
+                if (usu.getContrasena().equals(contrasena)){
+                    mensaje = "Usuario y Contraseña correctos. Bienvenido/a!";
+                    new IniciarSesion().setVisible(false);
+                    new Tramites().setVisible(true);
+                    return mensaje;
+                }else{
+                    mensaje = "Contraseña incorrecta, favor de ingresarla de nuevo";
+                    return mensaje;
+                }
+            }else{
+                mensaje = "Usuario incorrecto/no se a encontrado...";
+            }
+        }
+        return mensaje;
+    }
+
+    public void guardarUsuario(String Usuario, String Contrasena) {
+        Usuarios usu = new Usuarios();
+        
+        usu.setNomUsuario(Usuario);
+        usu.setContrasena(Contrasena);
+        
+        controlPersis.guardarUsuario(usu);
     }
 }

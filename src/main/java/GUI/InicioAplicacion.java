@@ -135,7 +135,7 @@ public class InicioAplicacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        new Tramites().setVisible(true);
+        new IniciarSesion().setVisible(true);
         this.setVisible(false);
         
     }//GEN-LAST:event_btnIniciarActionPerformed

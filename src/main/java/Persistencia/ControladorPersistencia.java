@@ -5,6 +5,8 @@
 package Persistencia;
 
 import Entidades.Clientes;
+import Entidades.Usuarios;
+import java.util.List;
 
 /**
  *
@@ -12,8 +14,17 @@ import Entidades.Clientes;
  */
 public class ControladorPersistencia {
     ClientesJpaController cliJpa = new ClientesJpaController();
+    UsuariosJpaController usuJpa = new UsuariosJpaController();
     
     public void guardarCliente(Clientes cl) {
         cliJpa.create(cl);
+    }
+
+    public List<Usuarios> traerUsuarios() {
+        return usuJpa.findUsuariosEntities();
+    }
+
+    public void guardarUsuario(Usuarios usu) {
+        usuJpa.create(usu);
     }
 }
