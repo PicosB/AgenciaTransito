@@ -7,6 +7,7 @@ package Entidades;
 import GUI.IniciarSesion;
 import GUI.Tramites;
 import Persistencia.ControladorPersistencia;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class ControladorEntidades {
     
     
     //---------------------------- Cliente-----------------------------
-    public void guardarCliente(String RFC, String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String numTelefono) {
+    public void guardarCliente(String RFC, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String numTelefono) {
         Clientes cl = new Clientes();
         
         cl.setRFC(RFC);
@@ -74,7 +75,7 @@ public class ControladorEntidades {
         controlPersis.borrarCliente(id);
     }
 
-    public void modificarCliente(Clientes cli, String RFC, String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String numTelefono) {
+    public void modificarCliente(Clientes cli, String RFC, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String numTelefono) {
         cli.setRFC(RFC);
         cli.setNombres(nombre);
         cli.setApellidoP(apellidoP);

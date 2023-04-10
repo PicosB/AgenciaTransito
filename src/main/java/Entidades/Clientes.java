@@ -5,6 +5,7 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -47,9 +50,9 @@ public class Clientes implements Serializable {
     @Column (name = "NumeroTelefono", nullable = false)
     private String numTelefono;
     
-    @Basic
+    @Temporal (TemporalType.DATE)
     @Column (name = "FechaNacimiento", nullable = false)
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
 
     @OneToMany
     private LinkedList<Vehiculo> listaVehiculos;
@@ -58,7 +61,7 @@ public class Clientes implements Serializable {
     public Clientes() {
     }
 
-    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, String fechaNacimiento, LinkedList<Vehiculo> listaVehiculos) {
+    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento, LinkedList<Vehiculo> listaVehiculos) {
         this.id = id;
         this.RFC = RFC;
         this.nombres = nombres;
@@ -117,11 +120,11 @@ public class Clientes implements Serializable {
         this.numTelefono = numTelefono;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
