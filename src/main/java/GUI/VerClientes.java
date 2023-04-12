@@ -201,10 +201,10 @@ public class VerClientes extends javax.swing.JFrame {
                 
                 this.dispose();
             }else{
-                mostrarMensaje("No seleccionó ningun Cliente", "Error", "Error al eliminar");
+                mostrarMensaje("No seleccionó ningun Cliente", "Error", "Error al editar");
             }
         }else{
-            mostrarMensaje("No hay nada para eliminar en la tabla", "Error", "Error al eliminar");
+            mostrarMensaje("No hay nada para eliminar en la tabla", "Error", "Error al editar");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

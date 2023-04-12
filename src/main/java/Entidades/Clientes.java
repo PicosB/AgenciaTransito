@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,43 +26,42 @@ import javax.persistence.TemporalType;
 @Entity
 @Table (name = "Clientes")
 public class Clientes implements Serializable {
-@Id
+    
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Cliente")
+    @Column(name = "Id_Cliente")
     private Integer id;
     
     @Basic
-    @Column (name = "RFC", nullable = false)
+    @Column (name = "RFC")
     private String RFC;
     
     @Basic
-    @Column (name = "Nombres", nullable = false)
+    @Column (name = "Nombres")
     private String nombres;
     
     @Basic
-    @Column (name = "ApellidoPaterno", nullable = false)
+    @Column (name = "ApellidoPaterno")
     private String apellidoP;
     
     @Basic
-    @Column (name = "ApellidoMaterno", nullable = false)
+    @Column (name = "ApellidoMaterno")
     private String apellidoM;
     
     @Basic
-    @Column (name = "NumeroTelefono", nullable = false)
+    @Column (name = "NumeroTelefono")
     private String numTelefono;
     
     @Temporal (TemporalType.DATE)
-    @Column (name = "FechaNacimiento", nullable = false)
+    @Column (name = "FechaNacimiento")
     private Date fechaNacimiento;
-
-    @OneToMany
-    private LinkedList<Vehiculo> listaVehiculos;
+    
     
     
     public Clientes() {
     }
 
-    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento, LinkedList<Vehiculo> listaVehiculos) {
+    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento) {
         this.id = id;
         this.RFC = RFC;
         this.nombres = nombres;
@@ -69,7 +69,6 @@ public class Clientes implements Serializable {
         this.apellidoM = apellidoM;
         this.numTelefono = numTelefono;
         this.fechaNacimiento = fechaNacimiento;
-        this.listaVehiculos = listaVehiculos;
     }
 
     public Integer getId() {
@@ -127,14 +126,5 @@ public class Clientes implements Serializable {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
-    public LinkedList<Vehiculo> getListaVehiculos() {
-        return listaVehiculos;
-    }
-
-    public void setListaVehiculos(LinkedList<Vehiculo> listaVehiculos) {
-        this.listaVehiculos = listaVehiculos;
-    }
-    
-    
+ 
 }

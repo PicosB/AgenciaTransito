@@ -1,23 +1,25 @@
-/Users/luis/github/agenciaTransito/src/main/java/Persistencia/ClientesJpaController.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/RegistroUsuario.java
-/Users/luis/github/agenciaTransito/src/main/java/Persistencia/exceptions/NonexistentEntityException.java
-/Users/luis/github/agenciaTransito/src/main/java/Entidades/Vehiculo.java
-/Users/luis/github/agenciaTransito/src/main/java/Entidades/Usuarios.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/InicioAplicacion.java
-/Users/luis/github/agenciaTransito/src/main/java/Persistencia/ControladorPersistencia.java
-/Users/luis/github/agenciaTransito/src/main/java/Entidades/Clientes.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/IniciarSesion.java
-/Users/luis/github/agenciaTransito/src/main/java/Persistencia/VehiculoJpaController.java
-/Users/luis/github/agenciaTransito/src/main/java/Persistencia/exceptions/PreexistingEntityException.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/VerClientes.java
-/Users/luis/github/agenciaTransito/src/main/java/Entidades/Licencia.java
-/Users/luis/github/agenciaTransito/src/main/java/Main/AgenciaTransito.java
-/Users/luis/github/agenciaTransito/src/main/java/Entidades/ControladorEntidades.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/TramiteLicencia.java
-/Users/luis/github/agenciaTransito/src/main/java/Persistencia/UsuariosJpaController.java
-/Users/luis/github/agenciaTransito/src/main/java/Persistencia/exceptions/IllegalOrphanException.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/ModificarCliente.java
-/Users/luis/github/agenciaTransito/src/main/java/Entidades/Tramite.java
-/Users/luis/github/agenciaTransito/src/main/java/Entidades/Placa.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/RegistroLicencia.java
-/Users/luis/github/agenciaTransito/src/main/java/GUI/Tramites.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\LicenciaJpaController.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Entidades\Usuarios.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\ClientesJpaController.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\exceptions\NonexistentEntityException.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Entidades\Placa.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\TramiteJpaController.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\RegistroUsuario.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\ControladorPersistencia.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\exceptions\PreexistingEntityException.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\ModificarCliente.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\TramiteLicencia.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\RegistroLicencia.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\UsuariosJpaController.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Main\AgenciaTransito.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\exceptions\IllegalOrphanException.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Entidades\Clientes.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Entidades\Tramite.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Entidades\ControladorEntidades.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Entidades\Vehiculo.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\Tramites.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Persistencia\VehiculoJpaController.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\Entidades\Licencia.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\IniciarSesion.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\InicioAplicacion.java
+C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto_AgenciaTransito\src\main\java\GUI\VerClientes.java

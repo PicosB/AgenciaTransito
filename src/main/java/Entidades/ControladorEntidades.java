@@ -24,9 +24,8 @@ public class ControladorEntidades {
     
     
     //---------------------------- Cliente-----------------------------
-    public void guardarCliente(String RFC, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String numTelefono) {
+    public void guardarCliente(String RFC, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String numTelefono, String discapacitado, Date fechaExp, Date fechaVig, String anios, String precio) {
         Clientes cl = new Clientes();
-        
         cl.setRFC(RFC);
         cl.setNombres(nombre);
         cl.setApellidoP(apellidoP);
@@ -34,7 +33,16 @@ public class ControladorEntidades {
         cl.setFechaNacimiento(fechaNacimiento);
         cl.setNumTelefono(numTelefono);
         
+        Licencia lic = new Licencia();
+        lic.setDiscapacitado(discapacitado);
+        lic.setFechaExpedicion(fechaExp);
+        lic.setVigencia(fechaVig);
+        lic.setAnios(anios);
+        lic.setPrecio(precio);
+        lic.setCli(cl);
+        
         controlPersis.guardarCliente(cl);
+        controlPersis.guardarLicencia(lic);
     }
 
     //---------------------------- Usuario -----------------------------

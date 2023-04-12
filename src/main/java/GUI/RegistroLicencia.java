@@ -6,6 +6,7 @@ package GUI;
 
 import Entidades.ControladorEntidades;
 import java.util.Date;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +46,15 @@ public class RegistroLicencia extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtFechaNac2 = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        cmbDiscapacitado = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        cmbVigencia = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        txtFechaVigencia = new com.toedter.calendar.JDateChooser();
+        jLabel11 = new javax.swing.JLabel();
+        txtFechaExpedicion = new com.toedter.calendar.JDateChooser();
+        txtPrecio1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,23 +95,46 @@ public class RegistroLicencia extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Apellido Materno:");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText("Discapacitado:");
+
+        cmbDiscapacitado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cmbDiscapacitado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
+        cmbDiscapacitado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDiscapacitadoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Vigencia:");
+
+        cmbVigencia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 año", "2 años", "3 años" }));
+        cmbVigencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmbVigenciaMouseClicked(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Precio de Licencia:");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("Fecha Expedición:");
+
+        txtPrecio1.setEditable(false);
+        txtPrecio1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtPrecio1.setText("0.0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCancelar)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnRegistrar))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -123,43 +156,94 @@ public class RegistroLicencia extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtFechaNac2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbDiscapacitado, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel9)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cmbVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtFechaVigencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFechaExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(262, 262, 262)
+                        .addComponent(btnCancelar)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnRegistrar)))
+                .addContainerGap(111, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(182, 182, 182))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(cmbDiscapacitado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtFechaExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFechaNac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(cmbVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtFechaNac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnCancelar))
-                .addGap(34, 34, 34))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -179,9 +263,21 @@ public class RegistroLicencia extends javax.swing.JFrame {
         Date fechaNacimiento = txtFechaNac2.getDate();
         String numTelefono = txtTelefono.getText();
         
-        control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono);
+        String discapacitado = (String) cmbDiscapacitado.getSelectedItem();
+        Date fechaExp = txtFechaExpedicion.getDate();
+        Date fechaVig = txtFechaVigencia.getDate();
+        String anios = (String) cmbVigencia.getSelectedItem();
+        String precio = txtPrecio1.getText();
         
-        JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
+        control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono, discapacitado, fechaExp, fechaVig, anios, precio);
+        
+        //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
+        
+        JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
+        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Guardado exitoso");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
         
         txtRFC.setText("");
         txtNombre.setText("");
@@ -189,25 +285,72 @@ public class RegistroLicencia extends javax.swing.JFrame {
         txtApellidoM.setText("");
         txtFechaNac2.setDate(null);
         txtTelefono.setText("");
+        cmbDiscapacitado.setSelectedIndex(0);
+        txtFechaExpedicion.setDate(null);
+        txtFechaVigencia.setDate(null);
+        cmbVigencia.setSelectedIndex(0);
         
         this.setVisible(false);
         new TramiteLicencia().setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void cmbDiscapacitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDiscapacitadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDiscapacitadoActionPerformed
+
+    private void cmbVigenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVigenciaMouseClicked
+        int discapacitado = cmbDiscapacitado.getSelectedIndex();
+        int vigencia = cmbVigencia.getSelectedIndex();
+        
+        if((discapacitado == 1) && (vigencia == 1)){
+            txtPrecio1.setText("$200");
+        }
+        
+        if((discapacitado == 1) && (vigencia == 2)){
+            txtPrecio1.setText("$500");
+        }
+        
+        if((discapacitado == 1) && (vigencia == 3)){
+            txtPrecio1.setText("$700");
+        }
+        
+        if((discapacitado == 2) && (vigencia == 1)){
+            txtPrecio1.setText("$600");
+        }
+        
+        if((discapacitado == 2) && (vigencia == 2)){
+            txtPrecio1.setText("$900");
+        }
+        
+        if((discapacitado == 2) && (vigencia == 3)){
+            txtPrecio1.setText("$1,100");
+        }
+        
+    }//GEN-LAST:event_cmbVigenciaMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cmbDiscapacitado;
+    private javax.swing.JComboBox<String> cmbVigencia;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtApellidoM;
     private javax.swing.JTextField txtApellidoP;
+    private com.toedter.calendar.JDateChooser txtFechaExpedicion;
     private com.toedter.calendar.JDateChooser txtFechaNac2;
+    private com.toedter.calendar.JDateChooser txtFechaVigencia;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio1;
     private javax.swing.JTextField txtRFC;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

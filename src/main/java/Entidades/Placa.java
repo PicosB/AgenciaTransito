@@ -19,11 +19,19 @@ import javax.persistence.Table;
  */
 @Entity
 @Table (name = "Placa")
-public class Placa extends Tramite implements Serializable {
+public class Placa implements Serializable {
     
-    @Basic
-    @Column
+    @Id
+    @Column (name = "Codigo")
     private String codigo;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
     
     
 }

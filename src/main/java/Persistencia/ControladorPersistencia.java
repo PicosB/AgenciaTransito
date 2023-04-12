@@ -5,6 +5,7 @@
 package Persistencia;
 
 import Entidades.Clientes;
+import Entidades.Licencia;
 import Entidades.Usuarios;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 public class ControladorPersistencia {
     ClientesJpaController cliJpa = new ClientesJpaController();
     UsuariosJpaController usuJpa = new UsuariosJpaController();
+    LicenciaJpaController licJpa = new LicenciaJpaController();
     
     //------------ Clientes ----------------------
     public void guardarCliente(Clientes cl) {
@@ -36,15 +38,6 @@ public class ControladorPersistencia {
         }
     }
     
-    //------------ Usuarios ----------------------
-    public List<Usuarios> traerUsuarios() {
-        return usuJpa.findUsuariosEntities();
-    }
-
-    public void guardarUsuario(Usuarios usu) {
-        usuJpa.create(usu);
-    }
-
     public void modificarCliente(Clientes cli) {
         try {
             cliJpa.edit(cli);
@@ -56,4 +49,19 @@ public class ControladorPersistencia {
     public Clientes traerCliente(int id) {
         return cliJpa.findClientes(id);
     }
+   
+    //------------ Usuarios ----------------------
+    public List<Usuarios> traerUsuarios() {
+        return usuJpa.findUsuariosEntities();
+    }
+
+    public void guardarUsuario(Usuarios usu) {
+        usuJpa.create(usu);
+    }
+
+    //------------ Licencias ----------------------
+
+    public void guardarLicencia(Licencia lic) {
+        licJpa.create(lic);
+    }  
 }
