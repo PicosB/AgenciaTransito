@@ -45,6 +45,29 @@ public class ControladorEntidades {
         controlPersis.guardarLicencia(lic);
     }
 
+    public List<Clientes> traerClientes() {
+        return controlPersis.traerClientes();
+    }
+
+    public void borrarCliente(int id) {
+        controlPersis.borrarCliente(id);
+    }
+
+    public void modificarCliente(Clientes cli, String RFC, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String numTelefono) {
+        cli.setRFC(RFC);
+        cli.setNombres(nombre);
+        cli.setApellidoP(apellidoP);
+        cli.setApellidoM(apellidoM);
+        cli.setFechaNacimiento(fechaNacimiento);
+        cli.setNumTelefono(numTelefono);
+        
+        controlPersis.modificarCliente(cli);
+    }
+
+    public Clientes traerCliente(int id) {
+        return controlPersis.traerCliente(id);
+    }
+    
     //---------------------------- Usuario -----------------------------
     public String validarUsuario(String usuario, String contrasena) {
         String mensaje="";
@@ -75,26 +98,23 @@ public class ControladorEntidades {
         controlPersis.guardarUsuario(usu);
     }
 
-    public List<Clientes> traerClientes() {
-        return controlPersis.traerClientes();
+    //---------------------------- Licencia -----------------------------
+
+    public List<Licencia> traerLicencias() {
+        return controlPersis.traerLicencias();
     }
 
-    public void borrarCliente(int id) {
-        controlPersis.borrarCliente(id);
+    public Licencia traerLicencia(int id) {
+        return controlPersis.traerLicencia(id);
     }
 
-    public void modificarCliente(Clientes cli, String RFC, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String numTelefono) {
-        cli.setRFC(RFC);
-        cli.setNombres(nombre);
-        cli.setApellidoP(apellidoP);
-        cli.setApellidoM(apellidoM);
-        cli.setFechaNacimiento(fechaNacimiento);
-        cli.setNumTelefono(numTelefono);
+    public void RenovarLicencia(Licencia lic, String discapacitado, Date fechaExp, Date fechaVig, String anios, String precio) {
+        lic.setDiscapacitado(discapacitado);
+        lic.setFechaExpedicion(fechaExp);
+        lic.setVigencia(fechaVig);
+        lic.setAnios(anios);
+        lic.setPrecio(precio);
         
-        controlPersis.modificarCliente(cli);
-    }
-
-    public Clientes traerCliente(int id) {
-        return controlPersis.traerCliente(id);
+        controlPersis.renovarLicencia(lic);
     }
 }

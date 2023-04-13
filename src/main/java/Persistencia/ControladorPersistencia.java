@@ -64,4 +64,20 @@ public class ControladorPersistencia {
     public void guardarLicencia(Licencia lic) {
         licJpa.create(lic);
     }  
+
+    public List<Licencia> traerLicencias() {
+        return licJpa.findLicenciaEntities();
+    }
+
+    public Licencia traerLicencia(int id) {
+        return licJpa.findLicencia(id);
+    }
+
+    public void renovarLicencia(Licencia lic) {
+        try {
+            licJpa.edit(lic);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
