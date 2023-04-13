@@ -52,6 +52,11 @@ public class Tramites extends javax.swing.JFrame {
         btnPlacas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnPlacas.setText("Placas");
         btnPlacas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnPlacas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlacasActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsultar.setText("Consultar");
@@ -132,6 +137,12 @@ public class Tramites extends javax.swing.JFrame {
         new TramiteLicencia().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnLicenciaActionPerformed
+
+    private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
+        // TODO add your handling code here:
+        new TramitePlaca().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPlacasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;

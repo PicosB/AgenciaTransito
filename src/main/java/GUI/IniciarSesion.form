@@ -57,7 +57,7 @@
                                           <Component id="btnRegistrarse" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jSeparator3" alignment="1" pref="331" max="32767" attributes="0"/>
+                                      <Component id="jSeparator3" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>

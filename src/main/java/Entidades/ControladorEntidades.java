@@ -117,4 +117,24 @@ public class ControladorEntidades {
         
         controlPersis.renovarLicencia(lic);
     }
+    
+    // --------- Placa -----------
+    
+    
+    
+    // --------- Automovil --------
+    
+    
+    
+    public void guardarAutomovil (int id_vehiculo, String numSerie, String marca, String linea, String modelo, String color ){
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setColor(color);
+        vehiculo.setId(id_vehiculo);
+        vehiculo.setLinea(linea);
+        vehiculo.setMarca(marca);
+        vehiculo.setModelo(modelo);
+        vehiculo.setNumSerie(numSerie);
+        
+        
+    }
 }
