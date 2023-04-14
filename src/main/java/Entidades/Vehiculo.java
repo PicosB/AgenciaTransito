@@ -47,16 +47,21 @@ public class Vehiculo implements Serializable {
     @Column (name = "Color")
     private String color;
     
+    @Basic
+    @Column (name = "TipoVehiculo")
+    private String tipoVehiculo;
+    
     public Vehiculo() {
     }
 
-    public Vehiculo(Integer id, String numSerie, String marca, String linea, String modelo, String color) {
+    public Vehiculo(Integer id, String numSerie, String marca, String linea, String modelo, String color, String tipoVehiculo) {
         this.id = id;
         this.numSerie = numSerie;
         this.marca = marca;
         this.linea = linea;
         this.modelo = modelo;
         this.color = color;
+        this.tipoVehiculo = tipoVehiculo;
     }
 
     public String getNumSerie() {
@@ -106,4 +111,13 @@ public class Vehiculo implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(String tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
+    }
+    
 }

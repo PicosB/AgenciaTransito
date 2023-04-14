@@ -4,18 +4,27 @@
  */
 package GUI;
 
+import Entidades.ControladorEntidades;
+import Entidades.Placa;
+import java.util.Date;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author luis
+ * @author PC
  */
 public class RenovarPlaca extends javax.swing.JFrame {
-
+    ControladorEntidades control = null;
+    int id;
+    Placa pl;
     /**
      * Creates new form RenovarPlaca
      */
-    public RenovarPlaca() {
+    public RenovarPlaca(int id) {
+        control = new ControladorEntidades();
         initComponents();
-        this.setLocationRelativeTo(null);
+        cargarDatos(id);
     }
 
     /**
@@ -28,140 +37,211 @@ public class RenovarPlaca extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtPlaca = new javax.swing.JTextField();
-        aceptarBtn = new javax.swing.JButton();
-        cancelarBtn = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        cmbVehiculo = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtFechaEmision = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        txtFechaRecepcion = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
+        btnRenovar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Sinhala Sangam MN", 1, 24)); // NOI18N
-        jLabel1.setText("Renovación de placa");
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setText("Renovacion de Placa");
 
-        jLabel2.setFont(new java.awt.Font("Sinhala Sangam MN", 1, 18)); // NOI18N
-        jLabel2.setText("Placas del auto");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Tipo de Vehiculo:");
 
-        aceptarBtn.setText("Aceptar");
-
-        cancelarBtn.setText("Cancelar");
-        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarBtnActionPerformed(evt);
+        cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automovil" }));
+        cmbVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmbVehiculoMouseClicked(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Sinhala Sangam MN", 1, 18)); // NOI18N
-        jLabel3.setText("$1000.00 M.N.");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Codigo:");
 
-        jLabel4.setFont(new java.awt.Font("Sinhala Sangam MN", 1, 18)); // NOI18N
-        jLabel4.setText("Costo de placas");
+        txtCodigo.setEditable(false);
+        txtCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("Fecha Emision:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Fecha Recepción:");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Precio:");
+
+        txtPrecio.setEditable(false);
+        txtPrecio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtPrecio.setText("0.0");
+
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        btnRenovar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRenovar.setText("Renovar");
+        btnRenovar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRenovarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel2)
-                        .addGap(41, 41, 41)
-                        .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addGap(68, 68, 68)))
-                .addContainerGap(47, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(cancelarBtn)
-                .addGap(70, 70, 70)
-                .addComponent(aceptarBtn)
-                .addGap(91, 91, 91))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(36, 36, 36)
-                    .addComponent(jLabel4)
-                    .addContainerGap(244, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(25, 25, 25)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtFechaEmision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPrecio)
+                                .addComponent(txtFechaRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(154, 154, 154)
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(121, 121, 121)
+                            .addComponent(btnCancelar)
+                            .addGap(74, 74, 74)
+                            .addComponent(btnRenovar))))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aceptarBtn)
-                    .addComponent(cancelarBtn))
-                .addGap(35, 35, 35))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(172, Short.MAX_VALUE)
                     .addComponent(jLabel4)
-                    .addGap(101, 101, 101)))
+                    .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtFechaEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtFechaRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnRenovar))
+                .addGap(34, 34, 34))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
-        System.exit(0);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelarBtnActionPerformed
+    private void cmbVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVehiculoMouseClicked
+        int vehiculo = cmbVehiculo.getSelectedIndex();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RenovarPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RenovarPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RenovarPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RenovarPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        if(vehiculo == 1){
+            txtPrecio.setText("$1,000");
         }
-        //</editor-fold>
+    }//GEN-LAST:event_cmbVehiculoMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RenovarPlaca().setVisible(true);
-            }
-        });
-    }
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.setVisible(false);
+        new RenovacionPlaca().setVisible(true);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarActionPerformed
+        String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
+        String codigo = txtCodigo.getText();
+        Date fechaEmision = txtFechaEmision.getDate();
+        Date fechaRecepcion = txtFechaRecepcion.getDate();
+        String precio = txtPrecio.getText();
+
+        control.RenovarPlaca(pl, fechaEmision, fechaRecepcion, precio);
+
+        mostrarMensaje("Renovacion realizada correctamente", "Info", "Renovacion Correcta");
+
+        this.setVisible(false);
+        new RenovacionLicencia().setVisible(true);
+    }//GEN-LAST:event_btnRenovarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aceptarBtn;
-    private javax.swing.JButton cancelarBtn;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRenovar;
+    private javax.swing.JComboBox<String> cmbVehiculo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtPlaca;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField txtCodigo;
+    private com.toedter.calendar.JDateChooser txtFechaEmision;
+    private com.toedter.calendar.JDateChooser txtFechaRecepcion;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarDatos(int id) {
+        this.pl = control.traerPlaca(id);
+        
+        cmbVehiculo.setSelectedItem(pl.getVeh().getTipoVehiculo());
+        txtCodigo.setText(pl.getCodigo());
+        txtFechaEmision.setDate(pl.getFechaEmision());
+        txtFechaRecepcion.setDate(pl.getFechaRecepcion());
+
+    }
+    
+    public void mostrarMensaje (String mensaje, String tipo, String titulo){
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if(tipo.equals("Info")){
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(tipo.equals("Error")){
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);      
+    }
 }

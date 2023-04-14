@@ -6,43 +6,43 @@ package Persistencia;
 
 import Entidades.Placa;
 import Persistencia.exceptions.NonexistentEntityException;
-import Persistencia.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
  *
- * @author luis
+ * @author PC
  */
 public class PlacaJpaController implements Serializable {
 
     public PlacaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    
+    public PlacaJpaController(){
+        emf = Persistence.createEntityManagerFactory("ConexionPU");
+    }
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Placa placa) throws PreexistingEntityException, Exception {
+    public void create(Placa placa) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(placa);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findPlaca(placa.getCodigo()) != null) {
-                throw new PreexistingEntityException("Placa " + placa + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -60,7 +60,7 @@ public class PlacaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = placa.getCodigo();
+                Integer id = placa.getId_Placa();
                 if (findPlaca(id) == null) {
                     throw new NonexistentEntityException("The placa with id " + id + " no longer exists.");
                 }
@@ -73,7 +73,7 @@ public class PlacaJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -81,7 +81,7 @@ public class PlacaJpaController implements Serializable {
             Placa placa;
             try {
                 placa = em.getReference(Placa.class, id);
-                placa.getCodigo();
+                placa.getId_Placa();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The placa with id " + id + " no longer exists.", enfe);
             }
@@ -118,7 +118,7 @@ public class PlacaJpaController implements Serializable {
         }
     }
 
-    public Placa findPlaca(String id) {
+    public Placa findPlaca(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Placa.class, id);

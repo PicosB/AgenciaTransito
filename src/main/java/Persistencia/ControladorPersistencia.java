@@ -6,7 +6,9 @@ package Persistencia;
 
 import Entidades.Clientes;
 import Entidades.Licencia;
+import Entidades.Placa;
 import Entidades.Usuarios;
+import Entidades.Vehiculo;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,6 +22,8 @@ public class ControladorPersistencia {
     ClientesJpaController cliJpa = new ClientesJpaController();
     UsuariosJpaController usuJpa = new UsuariosJpaController();
     LicenciaJpaController licJpa = new LicenciaJpaController();
+    PlacaJpaController plaJpa = new PlacaJpaController();
+    VehiculoJpaController vehJpa = new VehiculoJpaController();
     
     //------------ Clientes ----------------------
     public void guardarCliente(Clientes cl) {
@@ -80,4 +84,33 @@ public class ControladorPersistencia {
             Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    //------------ Vehiculo ----------------------
+
+    public void guardarVehiculo(Vehiculo veh) {
+        vehJpa.create(veh);
+    }
+
+    
+    //------------ Placas ----------------------
+    
+    public void guardarPlaca(Placa pl) {
+        plaJpa.create(pl);
+    }
+
+    public List<Placa> traerPlacas() {
+        return plaJpa.findPlacaEntities();
+    }
+
+    public Placa traerPlaca(int id) {
+        return plaJpa.findPlaca(id);
+    }
+
+    public void renovarPlaca(Placa pl) {
+        try {
+            plaJpa.edit(pl);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

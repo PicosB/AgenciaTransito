@@ -118,23 +118,40 @@ public class ControladorEntidades {
         controlPersis.renovarLicencia(lic);
     }
     
-    // --------- Placa -----------
-    
-    
-    
-    // --------- Automovil --------
-    
-    
-    
-    public void guardarAutomovil (int id_vehiculo, String numSerie, String marca, String linea, String modelo, String color ){
-        Vehiculo vehiculo = new Vehiculo();
-        vehiculo.setColor(color);
-        vehiculo.setId(id_vehiculo);
-        vehiculo.setLinea(linea);
-        vehiculo.setMarca(marca);
-        vehiculo.setModelo(modelo);
-        vehiculo.setNumSerie(numSerie);
+    //---------------------------- Placa -----------------------------
+    public void guardarPlaca(String tipoVehiculo, String numSerie, String marca, String linea, String modelo, String color, String codigo, Date fechaEmi, Date fechaRece, String precio) {
+        Vehiculo veh = new Vehiculo();
+        veh.setTipoVehiculo(tipoVehiculo);
+        veh.setNumSerie(numSerie);
+        veh.setMarca(marca);
+        veh.setLinea(linea);
+        veh.setModelo(modelo);
+        veh.setColor(color);
         
+        Placa pl = new Placa();
+        pl.setCodigo(codigo);
+        pl.setFechaEmision(fechaEmi);
+        pl.setFechaRecepcion(fechaRece);
+        pl.setPrecio(precio);
+        pl.setVeh(veh);
         
+        controlPersis.guardarVehiculo(veh);
+        controlPersis.guardarPlaca(pl);
+    }
+
+    public List<Placa> traerPlacas() {
+        return controlPersis.traerPlacas();
+    }
+
+    public Placa traerPlaca(int id) {
+        return controlPersis.traerPlaca(id);
+    }
+
+    public void RenovarPlaca(Placa pl, Date fechaEmision, Date fechaRecepcion, String precio) {
+        pl.setFechaEmision(fechaEmision);
+        pl.setFechaRecepcion(fechaRecepcion);
+        pl.setPrecio(precio);
+        
+        controlPersis.renovarPlaca(pl);
     }
 }

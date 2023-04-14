@@ -126,11 +126,6 @@ public class RegistroLicencia extends javax.swing.JFrame {
         txtPrecio1.setEditable(false);
         txtPrecio1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPrecio1.setText("0.0");
-        txtPrecio1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecio1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -332,10 +327,6 @@ public class RegistroLicencia extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_cmbVigenciaMouseClicked
-
-    private void txtPrecio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecio1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

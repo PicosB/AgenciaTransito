@@ -139,7 +139,6 @@ public class Tramites extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLicenciaActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        // TODO add your handling code here:
         new TramitePlaca().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnPlacasActionPerformed
