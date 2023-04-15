@@ -60,7 +60,7 @@ public class LicenciaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = licencia.getId_Licencia();
+                Integer id = licencia.getId();
                 if (findLicencia(id) == null) {
                     throw new NonexistentEntityException("The licencia with id " + id + " no longer exists.");
                 }
@@ -81,7 +81,7 @@ public class LicenciaJpaController implements Serializable {
             Licencia licencia;
             try {
                 licencia = em.getReference(Licencia.class, id);
-                licencia.getId_Licencia();
+                licencia.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The licencia with id " + id + " no longer exists.", enfe);
             }

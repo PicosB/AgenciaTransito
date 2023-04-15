@@ -127,7 +127,7 @@ public class ControladorEntidades {
         veh.setLinea(linea);
         veh.setModelo(modelo);
         veh.setColor(color);
-        
+    
         Placa pl = new Placa();
         pl.setCodigo(codigo);
         pl.setFechaEmision(fechaEmi);

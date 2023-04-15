@@ -60,7 +60,7 @@ public class PlacaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = placa.getId_Placa();
+                Integer id = placa.getId();
                 if (findPlaca(id) == null) {
                     throw new NonexistentEntityException("The placa with id " + id + " no longer exists.");
                 }
@@ -81,7 +81,7 @@ public class PlacaJpaController implements Serializable {
             Placa placa;
             try {
                 placa = em.getReference(Placa.class, id);
-                placa.getId_Placa();
+                placa.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The placa with id " + id + " no longer exists.", enfe);
             }

@@ -181,13 +181,13 @@ public class RenovacionPlaca extends javax.swing.JFrame {
             }
         };
         
-        String titulos [] = {"id_Placa","Codigo","Precio","FechaEmision","FechaRecepcion","NumSerie Vehiculo"};
+        String titulos [] = {"id_Placa","Codigo","Precio","FechaEmision","FechaRecepcion","NumSerieVehiculo"};
         tabla.setColumnIdentifiers(titulos);
         List<Placa> listaPlacas = control.traerPlacas();
         
         if(listaPlacas != null){
             for (Placa pl : listaPlacas){
-                Object[] objeto = {pl.getId_Placa(),pl.getCodigo(),pl.getPrecio(),pl.getFechaEmision(),pl.getFechaRecepcion(),pl.getVeh().getNumSerie()};
+                Object[] objeto = {pl.getId(),pl.getCodigo(),pl.getPrecio(),pl.getFechaEmision(),pl.getFechaRecepcion(),pl.getVeh().getNumSerie()};
                 tabla.addRow(objeto);
             }
         }

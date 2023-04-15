@@ -23,19 +23,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table (name = "Licencia")
-public class Licencia implements Serializable{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_Licencia")
-    private Integer id_Licencia;
-    
+public class Licencia extends Tramite implements Serializable{
+   
     @Temporal (TemporalType.DATE)
     @Column (name = "FechaExpedicion")
     private Date fechaExpedicion;
     
     @Temporal (TemporalType.DATE)
-    @Column (name = "Vigencia")
+    @Column (name = "FechaVigencia")
     private Date vigencia;
     
     @Basic
@@ -45,26 +40,16 @@ public class Licencia implements Serializable{
     @Basic
     @Column (name = "Discapacitado")
     private String discapacitado;
-
-    @Basic
-    @Column (name = "Precio")
-    private String precio;
-    
-    @OneToOne
-    private Clientes cli;
-    
-    
+     
     public Licencia() {
     }
 
-    public Licencia(Integer id_Licencia, Date fechaExpedicion, Date vigencia, String anios, String discapacitado, String precio, Clientes cli) {
-        this.id_Licencia = id_Licencia;
+    public Licencia(Date fechaExpedicion, Date vigencia, String anios, String discapacitado,String precio, Clientes cli) {
+        super(precio, cli);
         this.fechaExpedicion = fechaExpedicion;
         this.vigencia = vigencia;
         this.anios = anios;
         this.discapacitado = discapacitado;
-        this.precio = precio;
-        this.cli = cli;
     }
 
     public Licencia(Date fechaExpedicion, Date vigencia) {
@@ -96,14 +81,6 @@ public class Licencia implements Serializable{
         this.anios = anios;
     }
 
-    public Clientes getCli() {
-        return cli;
-    }
-
-    public void setCli(Clientes cli) {
-        this.cli = cli;
-    }
-
     public String getDiscapacitado() {
         return discapacitado;
     }
@@ -111,21 +88,4 @@ public class Licencia implements Serializable{
     public void setDiscapacitado(String discapacitado) {
         this.discapacitado = discapacitado;
     }
-
-    public Integer getId_Licencia() {
-        return id_Licencia;
-    }
-
-    public void setId_Licencia(Integer id_Licencia) {
-        this.id_Licencia = id_Licencia;
-    }
-
-    public String getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(String precio) {
-        this.precio = precio;
-    }
-
 }

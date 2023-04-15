@@ -189,7 +189,7 @@ public class RenovacionLicencia extends javax.swing.JFrame {
         
         if(listaLicencias != null){
             for (Licencia lic : listaLicencias){
-                Object[] objeto = {lic.getId_Licencia(),lic.getFechaExpedicion(),lic.getVigencia(),lic.getAnios(),lic.getDiscapacitado(),lic.getPrecio(),lic.getCli().getRFC()};
+                Object[] objeto = {lic.getId(),lic.getFechaExpedicion(),lic.getVigencia(),lic.getAnios(),lic.getDiscapacitado(),lic.getPrecio(),lic.getCli().getRFC()};
                 tabla.addRow(objeto);
             }
         }

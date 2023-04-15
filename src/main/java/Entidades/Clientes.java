@@ -7,6 +7,7 @@ package Entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table (name = "Clientes")
 public class Clientes implements Serializable {
-    //Para ver si jala ya xd
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Cliente")
@@ -56,7 +57,8 @@ public class Clientes implements Serializable {
     @Column (name = "FechaNacimiento")
     private Date fechaNacimiento;
     
-    
+    @OneToMany (mappedBy = "cli")
+    private List<Tramite> listaTramites;
     
     public Clientes() {
     }
@@ -69,6 +71,17 @@ public class Clientes implements Serializable {
         this.apellidoM = apellidoM;
         this.numTelefono = numTelefono;
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento, List<Tramite> listaTramites) {
+        this.id = id;
+        this.RFC = RFC;
+        this.nombres = nombres;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.numTelefono = numTelefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.listaTramites = listaTramites;
     }
 
     public Integer getId() {
@@ -126,5 +139,12 @@ public class Clientes implements Serializable {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
- 
+
+    public List<Tramite> getListaTramites() {
+        return listaTramites;
+    }
+
+    public void setListaTramites(List<Tramite> listaTramites) {
+        this.listaTramites = listaTramites;
+    }
 }

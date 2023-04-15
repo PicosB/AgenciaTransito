@@ -23,20 +23,11 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table (name = "Placa")
-public class Placa implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_Placa")
-    private Integer id_Placa;
-    
+public class Placa extends Tramite implements Serializable {
+  
     @Basic
     @Column (name = "Codigo")
     private String codigo;
-    
-    @Basic
-    @Column (name = "Precio")
-    private String precio;
     
     @Temporal (TemporalType.DATE)
     @Column (name = "FechaEmision")
@@ -52,21 +43,12 @@ public class Placa implements Serializable {
     public Placa() {
     }
 
-    public Placa(Integer id_Placa, String codigo, String precio, Date fechaEmision, Date fechaRecepcion, Vehiculo veh) {
-        this.id_Placa = id_Placa;
+    public Placa(String codigo, Date fechaEmision, Date fechaRecepcion, Vehiculo veh, String precio, Clientes cli) {
+        super(precio, cli);
         this.codigo = codigo;
-        this.precio = precio;
         this.fechaEmision = fechaEmision;
         this.fechaRecepcion = fechaRecepcion;
         this.veh = veh;
-    }
-
-    public Integer getId_Placa() {
-        return id_Placa;
-    }
-
-    public void setId_Placa(Integer id_Placa) {
-        this.id_Placa = id_Placa;
     }
 
     public String getCodigo() {
@@ -75,14 +57,6 @@ public class Placa implements Serializable {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public String getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(String precio) {
-        this.precio = precio;
     }
 
     public Date getFechaEmision() {

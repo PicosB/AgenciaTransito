@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -50,7 +52,7 @@ public class Vehiculo implements Serializable {
     @Basic
     @Column (name = "TipoVehiculo")
     private String tipoVehiculo;
-    
+      
     public Vehiculo() {
     }
 
@@ -119,5 +121,4 @@ public class Vehiculo implements Serializable {
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
     }
-    
 }
