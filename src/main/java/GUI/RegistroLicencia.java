@@ -325,7 +325,6 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbVigenciaMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         int discapacitado = cmbDiscapacitado.getSelectedIndex();
         int vigencia = cmbVigencia.getSelectedIndex();
 
@@ -337,7 +336,6 @@ public class RegistroLicencia extends javax.swing.JFrame {
             fecha.setYear(fecha.getYear() + 1);
 
             this.txtFechaVigencia.setDate(fecha);
- System.out.println("");
         }
 
         if ((discapacitado == 1) && (vigencia == 2)) {
