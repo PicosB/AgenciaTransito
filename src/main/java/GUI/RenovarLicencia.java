@@ -278,6 +278,7 @@ public class RenovarLicencia extends javax.swing.JFrame {
             fecha.setYear(fecha.getYear() + 2);
 
             this.txtFechaVigencia.setDate(fecha);
+             System.out.println("");
         }
 
         if((discapacitado == 2) && (vigencia == 3)){

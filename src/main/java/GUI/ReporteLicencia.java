@@ -5,12 +5,7 @@
 package GUI;
 
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.cn;
+
 import reports.Conexion;
 
 /**
@@ -116,6 +111,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
+        /*
         try {
             JasperReport archivo = JasperCompileManager.compileReport("historial_tramites.jrxml");
            Conexion con  = new Conexion("jdbc:mysql://localhost/agenciatramites");
@@ -128,7 +124,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
         } catch (Exception e) {
  
         }   
-
+*/
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

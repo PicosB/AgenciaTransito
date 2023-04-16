@@ -219,6 +219,7 @@ public class RenovarPlaca extends javax.swing.JFrame {
 
         if(vehiculo == 1){
             txtPrecio.setText("$1,000");
+             System.out.println("");
             
         }
     }//GEN-LAST:event_btnAceptarDatosActionPerformed

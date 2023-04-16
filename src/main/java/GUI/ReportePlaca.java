@@ -5,10 +5,7 @@
 package GUI;
 
 import Entidades.ControladorEntidades;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+
 import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -124,6 +121,7 @@ public class ReportePlaca extends javax.swing.JFrame {
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
+        /*
         Document documento = new Document();
 
         try {
@@ -166,6 +164,7 @@ public class ReportePlaca extends javax.swing.JFrame {
         } catch (DocumentException | HeadlessException | FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Los datos ingresados no son validos");
         }
+        */
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
