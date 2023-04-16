@@ -60,6 +60,7 @@ public class RenovarPlaca extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Tipo de Vehiculo:");
 
+        cmbVehiculo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automovil" }));
         cmbVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,16 +72,21 @@ public class RenovarPlaca extends javax.swing.JFrame {
         jLabel2.setText("Codigo:");
 
         txtCodigo.setEditable(false);
-        txtCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtCodigo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Fecha Emision:");
 
         Date date = new Date();
         this.txtFechaEmision.setDate(date);
+        txtFechaEmision.setEnabled(false);
+        txtFechaEmision.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Fecha Recepción:");
+
+        txtFechaRecepcion.setEnabled(false);
+        txtFechaRecepcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("Precio:");
@@ -105,6 +111,7 @@ public class RenovarPlaca extends javax.swing.JFrame {
             }
         });
 
+        btnAceptarDatos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAceptarDatos.setText("Aceptar Datos");
         btnAceptarDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +125,6 @@ public class RenovarPlaca extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAceptarDatos)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(25, 25, 25)
@@ -149,7 +155,11 @@ public class RenovarPlaca extends javax.swing.JFrame {
                             .addGap(121, 121, 121)
                             .addComponent(btnCancelar)
                             .addGap(74, 74, 74)
-                            .addComponent(btnRenovar))))
+                            .addComponent(btnRenovar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAceptarDatos)
+                        .addGap(53, 53, 53)))
                 .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -173,9 +183,9 @@ public class RenovarPlaca extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addComponent(txtFechaRecepcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(4, 4, 4)
                 .addComponent(btnAceptarDatos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))

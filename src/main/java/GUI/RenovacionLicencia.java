@@ -52,6 +52,7 @@ public class RenovacionLicencia extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setText("Renovar Licencia");
 
+        tablaLicencias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tablaLicencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},

@@ -86,15 +86,15 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Modelo:");
 
-        txtNumSerie.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtNumSerie.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        txtColor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtColor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        txtModelo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtModelo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        txtMarca.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        txtLinea.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtLinea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Tipo de Vehiculo:");
@@ -109,7 +109,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel10.setText("Fecha Recepción:");
 
         txtCodigo.setEditable(false);
-        txtCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtCodigo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtPrecio.setEditable(false);
         txtPrecio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -117,8 +117,10 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         txtFechaEmision.setDate(date);
         txtFechaEmision.setEnabled(false);
+        txtFechaEmision.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         this.txtFechaRecepcion.setEnabled(false);
+        txtFechaRecepcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -139,6 +141,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("Numero Serie:");
 
+        cmbVehiculo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automovil" }));
         cmbVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,6 +149,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("Confirmar Datos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +251,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1))
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
                             .addComponent(btnCancelar))
@@ -277,7 +281,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel7)
                                 .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(92, Short.MAX_VALUE))))
+                        .addContainerGap(87, Short.MAX_VALUE))))
         );
 
         pack();
