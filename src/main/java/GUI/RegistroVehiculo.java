@@ -28,6 +28,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
     public RegistroVehiculo() {
         initComponents();
         cargarPlacas();
+        this.btnRegistrar.setEnabled(false);
 
     }
 
@@ -344,6 +345,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         fecha.setYear(fecha.getYear() + 1);
 
         this.txtFechaRecepcion.setDate(fecha);
+        this.btnRegistrar.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -379,20 +381,20 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         final String cadena = "ABCDEFGHIJKLMNOPQLRSTUVWXYZ";
         final int longitud = 3;
         StringBuilder sb = new StringBuilder();
-        
-        for (int i = 0; i < longitud; i++){
+
+        for (int i = 0; i < longitud; i++) {
             double aleatorio = Math.random() * cadena.length();
             int posicion = (int) aleatorio;
             char letra = cadena.charAt(posicion);
             sb.append(letra);
         }
-        
+
         numeros = (int) (Math.random() * 1000 + 99);
         numero = String.valueOf(numeros);
-        
+
         txtCodigo.setText(sb.toString() + "-" + numero);
-        
-        if (txtCodigo.getText().length() > 7 || txtCodigo.getText().length() < 7){
+
+        if (txtCodigo.getText().length() > 7 || txtCodigo.getText().length() < 7) {
             cargarPlacas();
         }
     }

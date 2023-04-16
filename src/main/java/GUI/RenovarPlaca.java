@@ -25,6 +25,7 @@ public class RenovarPlaca extends javax.swing.JFrame {
         control = new ControladorEntidades();
         initComponents();
         cargarDatos(id);
+         this.btnRenovar.setEnabled(false);
     }
 
     /**
@@ -222,6 +223,7 @@ public class RenovarPlaca extends javax.swing.JFrame {
              System.out.println("");
             
         }
+        this.btnRenovar.setEnabled(true);
     }//GEN-LAST:event_btnAceptarDatosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

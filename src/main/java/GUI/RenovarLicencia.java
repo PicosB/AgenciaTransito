@@ -26,6 +26,8 @@ public class RenovarLicencia extends javax.swing.JFrame {
         control = new ControladorEntidades();
         initComponents();
         cargarDatos(id);
+         this.btnRenovar.setEnabled(false);
+        
     }
 
     /**
@@ -289,7 +291,7 @@ public class RenovarLicencia extends javax.swing.JFrame {
 
             this.txtFechaVigencia.setDate(fecha);
         }
-
+        this.btnRenovar.setEnabled(true);
     }//GEN-LAST:event_btnAceptarDatosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

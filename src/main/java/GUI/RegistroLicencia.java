@@ -23,7 +23,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
      */
     public RegistroLicencia() {
         initComponents();
-
+        btnRegistrar.setEnabled(false);
     }
 
     /**
@@ -277,6 +277,12 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+
+
+        if (Float.valueOf(txtPrecio1.getText()) == 0) {
+            JOptionPane.showMessageDialog(null, "Verifique la solicitud e intente de nuevo");
+            this.btnRegistrar.setEnabled(false);
+        } else {
         String RFC = txtRFC.getText();
         String nombre = txtNombre.getText();
         String apellidoP = txtApellidoP.getText();
@@ -310,9 +316,12 @@ public class RegistroLicencia extends javax.swing.JFrame {
         txtFechaExpedicion.setDate(null);
         txtFechaVigencia.setDate(null);
         cmbVigencia.setSelectedIndex(0);
-
+        
+        
         this.setVisible(false);
         new TramiteLicencia().setVisible(true);
+        }
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void cmbDiscapacitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDiscapacitadoActionPerformed
@@ -320,7 +329,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbDiscapacitadoActionPerformed
 
     private void cmbVigenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVigenciaMouseClicked
-  
+
 
     }//GEN-LAST:event_cmbVigenciaMouseClicked
 
@@ -382,6 +391,8 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
             this.txtFechaVigencia.setDate(fecha);
         }
+
+        this.btnRegistrar.setEnabled(true);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
