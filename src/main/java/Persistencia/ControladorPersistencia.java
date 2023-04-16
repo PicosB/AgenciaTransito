@@ -5,6 +5,7 @@
 package Persistencia;
 
 import Entidades.Clientes;
+import Entidades.HistorialTramites;
 import Entidades.Licencia;
 import Entidades.Placa;
 import Entidades.Usuarios;
@@ -24,6 +25,7 @@ public class ControladorPersistencia {
     LicenciaJpaController licJpa = new LicenciaJpaController();
     PlacaJpaController plaJpa = new PlacaJpaController();
     VehiculoJpaController vehJpa = new VehiculoJpaController();
+    HistorialTramitesJpaController ht = new HistorialTramitesJpaController();
     
     //------------ Clientes ----------------------
     public void guardarCliente(Clientes cl) {
@@ -89,8 +91,16 @@ public class ControladorPersistencia {
     public void guardarVehiculo(Vehiculo veh) {
         vehJpa.create(veh);
     }
-
     
+    public boolean validarPorSerie (String numSerie){
+        if(vehJpa.buscarPorSerie(Integer.valueOf(numSerie))!=null){
+            return true;
+        }else{
+            return false;
+        }
+         
+    }
+
     //------------ Placas ----------------------
     
     public void guardarPlaca(Placa pl) {
@@ -113,4 +123,10 @@ public class ControladorPersistencia {
         }
     }
     
+    //------- Historial Tramites
+        public void guardarTramite(HistorialTramites ht) {
+        this.ht.create(ht);
+        
+    }
+
 }

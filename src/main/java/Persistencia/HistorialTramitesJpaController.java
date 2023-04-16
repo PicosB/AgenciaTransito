@@ -4,7 +4,7 @@
  */
 package Persistencia;
 
-import Entidades.Vehiculo;
+import Entidades.HistorialTramites;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -18,16 +18,16 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author PC
+ * @author luis
  */
-public class VehiculoJpaController implements Serializable {
+public class HistorialTramitesJpaController implements Serializable {
 
-    public VehiculoJpaController(EntityManagerFactory emf) {
+    public HistorialTramitesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-    public VehiculoJpaController(){
-        emf = Persistence.createEntityManagerFactory("ConexionPU");
+
+    public HistorialTramitesJpaController() {
+         emf = Persistence.createEntityManagerFactory("ConexionPU");
     }
     
     private EntityManagerFactory emf = null;
@@ -36,12 +36,12 @@ public class VehiculoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Vehiculo vehiculo) {
+    public void create(HistorialTramites historialTramites) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(vehiculo);
+            em.persist(historialTramites);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,19 +50,19 @@ public class VehiculoJpaController implements Serializable {
         }
     }
 
-    public void edit(Vehiculo vehiculo) throws NonexistentEntityException, Exception {
+    public void edit(HistorialTramites historialTramites) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            vehiculo = em.merge(vehiculo);
+            historialTramites = em.merge(historialTramites);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = vehiculo.getId();
-                if (findVehiculo(id) == null) {
-                    throw new NonexistentEntityException("The vehiculo with id " + id + " no longer exists.");
+                Integer id = historialTramites.getId();
+                if (findHistorialTramites(id) == null) {
+                    throw new NonexistentEntityException("The historialTramites with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +78,14 @@ public class VehiculoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Vehiculo vehiculo;
+            HistorialTramites historialTramites;
             try {
-                vehiculo = em.getReference(Vehiculo.class, id);
-                vehiculo.getId();
+                historialTramites = em.getReference(HistorialTramites.class, id);
+                historialTramites.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The vehiculo with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The historialTramites with id " + id + " no longer exists.", enfe);
             }
-            em.remove(vehiculo);
+            em.remove(historialTramites);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +94,19 @@ public class VehiculoJpaController implements Serializable {
         }
     }
 
-    public List<Vehiculo> findVehiculoEntities() {
-        return findVehiculoEntities(true, -1, -1);
+    public List<HistorialTramites> findHistorialTramitesEntities() {
+        return findHistorialTramitesEntities(true, -1, -1);
     }
 
-    public List<Vehiculo> findVehiculoEntities(int maxResults, int firstResult) {
-        return findVehiculoEntities(false, maxResults, firstResult);
+    public List<HistorialTramites> findHistorialTramitesEntities(int maxResults, int firstResult) {
+        return findHistorialTramitesEntities(false, maxResults, firstResult);
     }
 
-    private List<Vehiculo> findVehiculoEntities(boolean all, int maxResults, int firstResult) {
+    private List<HistorialTramites> findHistorialTramitesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Vehiculo.class));
+            cq.select(cq.from(HistorialTramites.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,32 +118,20 @@ public class VehiculoJpaController implements Serializable {
         }
     }
 
-    public Vehiculo findVehiculo(Integer id) {
+    public HistorialTramites findHistorialTramites(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Vehiculo.class, id);
-        } finally {
-            em.close();
-        }
-    }
-    
-        public Vehiculo buscarPorSerie(Integer numSerie) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(Vehiculo.class, numSerie);
+            return em.find(HistorialTramites.class, id);
         } finally {
             em.close();
         }
     }
 
-    
-    
-
-    public int getVehiculoCount() {
+    public int getHistorialTramitesCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Vehiculo> rt = cq.from(Vehiculo.class);
+            Root<HistorialTramites> rt = cq.from(HistorialTramites.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

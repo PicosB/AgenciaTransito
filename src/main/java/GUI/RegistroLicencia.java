@@ -14,12 +14,16 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class RegistroLicencia extends javax.swing.JFrame {
+
     ControladorEntidades control = new ControladorEntidades();
+    Date date = new Date();
+
     /**
      * Creates new form RegistroLicencia
      */
     public RegistroLicencia() {
         initComponents();
+
     }
 
     /**
@@ -55,6 +59,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtFechaExpedicion = new com.toedter.calendar.JDateChooser();
         txtPrecio1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,12 +125,25 @@ public class RegistroLicencia extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Precio de Licencia:");
 
+        txtFechaVigencia.setEnabled(true);
+
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("Fecha Expedición:");
+
+        Date fecha = new Date();
+        txtFechaExpedicion.setDate(fecha);
+        txtFechaExpedicion.setEnabled(false);
 
         txtPrecio1.setEditable(false);
         txtPrecio1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPrecio1.setText("0.0");
+
+        jButton1.setText("Aceptar Datos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,29 +180,36 @@ public class RegistroLicencia extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbDiscapacitado, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(75, 75, 75)
+                                        .addComponent(jLabel9)
+                                        .addGap(170, 170, 170))
+                                    .addComponent(txtFechaVigencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel10)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(cmbVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(txtFechaVigencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFechaExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel11)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(6, 6, 6)
+                                                    .addComponent(cmbVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(txtFechaExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGap(16, 16, 16)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(262, 262, 262)
                         .addComponent(btnCancelar)
                         .addGap(28, 28, 28)
                         .addComponent(btnRegistrar)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -202,12 +227,11 @@ public class RegistroLicencia extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(cmbDiscapacitado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFechaExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtFechaExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -224,21 +248,17 @@ public class RegistroLicencia extends javax.swing.JFrame {
                             .addComponent(cmbVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFechaVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtFechaNac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtFechaNac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
@@ -262,23 +282,23 @@ public class RegistroLicencia extends javax.swing.JFrame {
         String apellidoM = txtApellidoM.getText();
         Date fechaNacimiento = txtFechaNac2.getDate();
         String numTelefono = txtTelefono.getText();
-        
+
         String discapacitado = (String) cmbDiscapacitado.getSelectedItem();
         Date fechaExp = txtFechaExpedicion.getDate();
         Date fechaVig = txtFechaVigencia.getDate();
         String anios = (String) cmbVigencia.getSelectedItem();
         String precio = txtPrecio1.getText();
-        
+
         control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono, discapacitado, fechaExp, fechaVig, anios, precio);
-        
+        // control.guardarEnHistorial("Licencia", Float.parseFloat(precio), date, txtRFC.getText());
         //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
-        
+
         JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
         optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = optionPane.createDialog("Guardado exitoso");
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
-        
+
         txtRFC.setText("");
         txtNombre.setText("");
         txtApellidoP.setText("");
@@ -289,7 +309,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
         txtFechaExpedicion.setDate(null);
         txtFechaVigencia.setDate(null);
         cmbVigencia.setSelectedIndex(0);
-        
+
         this.setVisible(false);
         new TramiteLicencia().setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -299,40 +319,80 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbDiscapacitadoActionPerformed
 
     private void cmbVigenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVigenciaMouseClicked
+  
+
+    }//GEN-LAST:event_cmbVigenciaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
         int discapacitado = cmbDiscapacitado.getSelectedIndex();
         int vigencia = cmbVigencia.getSelectedIndex();
-        
-        if((discapacitado == 1) && (vigencia == 1)){
+
+        if ((discapacitado == 1) && (vigencia == 1)) {
             txtPrecio1.setText("$200");
+
+            Date fecha = this.txtFechaExpedicion.getDate();
+
+            fecha.setYear(fecha.getYear() + 1);
+
+            this.txtFechaVigencia.setDate(fecha);
+
         }
-        
-        if((discapacitado == 1) && (vigencia == 2)){
+
+        if ((discapacitado == 1) && (vigencia == 2)) {
             txtPrecio1.setText("$500");
+            Date fecha = this.txtFechaExpedicion.getDate();
+
+            fecha.setYear(fecha.getYear() + 2);
+
+            this.txtFechaVigencia.setDate(fecha);
         }
-        
-        if((discapacitado == 1) && (vigencia == 3)){
+
+        if ((discapacitado == 1) && (vigencia == 3)) {
             txtPrecio1.setText("$700");
+            Date fecha = this.txtFechaExpedicion.getDate();
+
+            fecha.setYear(fecha.getYear() + 3);
+
+            this.txtFechaVigencia.setDate(fecha);
         }
-        
-        if((discapacitado == 2) && (vigencia == 1)){
+
+        if ((discapacitado == 2) && (vigencia == 1)) {
             txtPrecio1.setText("$600");
+            Date fecha = this.txtFechaExpedicion.getDate();
+
+            fecha.setYear(fecha.getYear() + 1);
+
+            this.txtFechaVigencia.setDate(fecha);
         }
-        
-        if((discapacitado == 2) && (vigencia == 2)){
+
+        if ((discapacitado == 2) && (vigencia == 2)) {
             txtPrecio1.setText("$900");
+            Date fecha = this.txtFechaExpedicion.getDate();
+
+            fecha.setYear(fecha.getYear() + 2);
+
+            this.txtFechaVigencia.setDate(fecha);
         }
-        
-        if((discapacitado == 2) && (vigencia == 3)){
+
+        if ((discapacitado == 2) && (vigencia == 3)) {
             txtPrecio1.setText("$1,100");
+            Date fecha = this.txtFechaExpedicion.getDate();
+
+            fecha.setYear(fecha.getYear() + 3);
+
+            this.txtFechaVigencia.setDate(fecha);
         }
-        
-    }//GEN-LAST:event_cmbVigenciaMouseClicked
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cmbDiscapacitado;
     private javax.swing.JComboBox<String> cmbVigencia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

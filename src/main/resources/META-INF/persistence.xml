@@ -8,11 +8,12 @@
     <class>Entidades.Tramite</class>
     <class>Entidades.Placa</class>
     <class>Entidades.Licencia</class>
+    <class>Entidades.HistorialTramites</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenciatramites?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="Bralamales01"/>
+      <property name="javax.persistence.jdbc.password" value="adminadmin"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
