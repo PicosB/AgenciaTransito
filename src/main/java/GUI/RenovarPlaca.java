@@ -27,6 +27,8 @@ public class RenovarPlaca extends javax.swing.JFrame {
         cargarDatos(id);
          this.btnRenovar.setEnabled(false);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,7 +211,19 @@ public class RenovarPlaca extends javax.swing.JFrame {
         new RenovacionPlaca().setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    
     private void btnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarActionPerformed
+        
+          String precioValidacion = txtPrecio.getText();
+        
+        if(precioValidacion.equalsIgnoreCase("0.0")){
+              JOptionPane.showMessageDialog(null,
+                "Revise su selección de discapacidad y/o vigencia",
+                "Error de información",
+                JOptionPane.ERROR_MESSAGE);
+              btnRenovar.setEnabled(false);
+        }else{
+        
         String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
         String codigo = txtCodigo.getText();
         Date fechaEmision = txtFechaEmision.getDate();
@@ -222,6 +236,8 @@ public class RenovarPlaca extends javax.swing.JFrame {
 
         this.setVisible(false);
         new RenovacionLicencia().setVisible(true);
+        
+        }
     }//GEN-LAST:event_btnRenovarActionPerformed
 
     private void btnAceptarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDatosActionPerformed

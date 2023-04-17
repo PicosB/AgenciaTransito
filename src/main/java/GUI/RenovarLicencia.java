@@ -230,6 +230,17 @@ public class RenovarLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarActionPerformed
+         String precioValidacion = txtPrecio1.getText();
+        
+        if(precioValidacion.equalsIgnoreCase("0.0")){
+              JOptionPane.showMessageDialog(null,
+                "Revise su selección de discapacidad y/o vigencia",
+                "Error de información",
+                JOptionPane.ERROR_MESSAGE);
+              
+              btnRenovar.setEnabled(false);
+        }else{
+        
         String discapacitado = (String) cmbDiscapacitado.getSelectedItem();
         Date fechaExp = txtFechaExpedicion.getDate();
         Date fechaVig = txtFechaVigencia.getDate();
@@ -242,6 +253,7 @@ public class RenovarLicencia extends javax.swing.JFrame {
         
         this.setVisible(false);
         new RenovacionLicencia().setVisible(true);
+        }
     }//GEN-LAST:event_btnRenovarActionPerformed
 
     private void txtPrecio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio1ActionPerformed

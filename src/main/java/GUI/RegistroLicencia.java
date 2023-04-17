@@ -26,6 +26,19 @@ public class RegistroLicencia extends javax.swing.JFrame {
         btnRegistrar.setEnabled(false);
     }
 
+    private boolean validarDatos() {
+        if (txtNombre.getText().isBlank()
+                || txtApellidoM.getText().isBlank()
+                || txtApellidoP.getText().isBlank()
+                || txtRFC.getText().isBlank()
+                || txtTelefono.getText().isBlank()) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -305,49 +318,55 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
+        String precioValidacion = txtPrecio1.getText();
 
-        if (Float.valueOf(txtPrecio1.getText()) == 0) {
-            JOptionPane.showMessageDialog(null, "Verifique la solicitud e intente de nuevo");
-            this.btnRegistrar.setEnabled(false);
+        if (precioValidacion.equalsIgnoreCase("0.0")) {
+            JOptionPane.showMessageDialog(null,
+                    "Revise su selección de discapacidad y/o vigencia",
+                    "Error de información",
+                    JOptionPane.ERROR_MESSAGE);
+
+            btnRegistrar.setEnabled(false);
         } else {
-        String RFC = txtRFC.getText();
-        String nombre = txtNombre.getText();
-        String apellidoP = txtApellidoP.getText();
-        String apellidoM = txtApellidoM.getText();
-        Date fechaNacimiento = txtFechaNac2.getDate();
-        String numTelefono = txtTelefono.getText();
 
-        String discapacitado = (String) cmbDiscapacitado.getSelectedItem();
-        Date fechaExp = txtFechaExpedicion.getDate();
-        Date fechaVig = txtFechaVigencia.getDate();
-        String anios = (String) cmbVigencia.getSelectedItem();
-        String precio = txtPrecio1.getText();
+            String RFC = txtRFC.getText();
+            String nombre = txtNombre.getText();
+            String apellidoP = txtApellidoP.getText();
+            String apellidoM = txtApellidoM.getText();
+            Date fechaNacimiento = txtFechaNac2.getDate();
+            String numTelefono = txtTelefono.getText();
 
-        control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono, discapacitado, fechaExp, fechaVig, anios, precio);
-        // control.guardarEnHistorial("Licencia", Float.parseFloat(precio), date, txtRFC.getText());
-        //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
+            String discapacitado = (String) cmbDiscapacitado.getSelectedItem();
+            Date fechaExp = txtFechaExpedicion.getDate();
+            Date fechaVig = txtFechaVigencia.getDate();
+            String anios = (String) cmbVigencia.getSelectedItem();
+            String precio = txtPrecio1.getText();
 
-        JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
-        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Guardado exitoso");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+            control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono, discapacitado, fechaExp, fechaVig, anios, precio);
+            // control.guardarEnHistorial("Licencia", Float.parseFloat(precio), date, txtRFC.getText());
+            //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
 
-        txtRFC.setText("");
-        txtNombre.setText("");
-        txtApellidoP.setText("");
-        txtApellidoM.setText("");
-        txtFechaNac2.setDate(null);
-        txtTelefono.setText("");
-        cmbDiscapacitado.setSelectedIndex(0);
-        txtFechaExpedicion.setDate(null);
-        txtFechaVigencia.setDate(null);
-        cmbVigencia.setSelectedIndex(0);
-        
-        
-        this.setVisible(false);
-        new TramiteLicencia().setVisible(true);
+            JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+            JDialog dialog = optionPane.createDialog("Guardado exitoso");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+
+            txtRFC.setText("");
+            txtNombre.setText("");
+            txtApellidoP.setText("");
+            txtApellidoM.setText("");
+            txtFechaNac2.setDate(null);
+            txtTelefono.setText("");
+            cmbDiscapacitado.setSelectedIndex(0);
+            txtFechaExpedicion.setDate(null);
+            txtFechaVigencia.setDate(null);
+            cmbVigencia.setSelectedIndex(0);
+
+            this.setVisible(false);
+            new TramiteLicencia().setVisible(true);
         }
+
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -361,67 +380,75 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbVigenciaMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int discapacitado = cmbDiscapacitado.getSelectedIndex();
-        int vigencia = cmbVigencia.getSelectedIndex();
 
-        if ((discapacitado == 1) && (vigencia == 1)) {
-            txtPrecio1.setText("$200");
+        if (validarDatos() == true) {
+            JOptionPane.showMessageDialog(null,
+                    "Hay uno o más campos vacíos",
+                    "Error de información",
+                    JOptionPane.ERROR_MESSAGE);
+            
+        } else if (validarDatos() == false) {
+            int discapacitado = cmbDiscapacitado.getSelectedIndex();
+            int vigencia = cmbVigencia.getSelectedIndex();
 
-            Date fecha = this.txtFechaExpedicion.getDate();
+            if ((discapacitado == 1) && (vigencia == 1)) {
+                txtPrecio1.setText("$200");
 
-            fecha.setYear(fecha.getYear() + 1);
+                Date fecha = this.txtFechaExpedicion.getDate();
 
-            this.txtFechaVigencia.setDate(fecha);
+                fecha.setYear(fecha.getYear() + 1);
+
+                this.txtFechaVigencia.setDate(fecha);
+            }
+
+            if ((discapacitado == 1) && (vigencia == 2)) {
+                txtPrecio1.setText("$500");
+                Date fecha = this.txtFechaExpedicion.getDate();
+
+                fecha.setYear(fecha.getYear() + 2);
+
+                this.txtFechaVigencia.setDate(fecha);
+            }
+
+            if ((discapacitado == 1) && (vigencia == 3)) {
+                txtPrecio1.setText("$700");
+                Date fecha = this.txtFechaExpedicion.getDate();
+
+                fecha.setYear(fecha.getYear() + 3);
+
+                this.txtFechaVigencia.setDate(fecha);
+            }
+
+            if ((discapacitado == 2) && (vigencia == 1)) {
+                txtPrecio1.setText("$600");
+                Date fecha = this.txtFechaExpedicion.getDate();
+
+                fecha.setYear(fecha.getYear() + 1);
+
+                this.txtFechaVigencia.setDate(fecha);
+            }
+
+            if ((discapacitado == 2) && (vigencia == 2)) {
+                txtPrecio1.setText("$900");
+                Date fecha = this.txtFechaExpedicion.getDate();
+
+                fecha.setYear(fecha.getYear() + 2);
+
+                this.txtFechaVigencia.setDate(fecha);
+            }
+
+            if ((discapacitado == 2) && (vigencia == 3)) {
+                txtPrecio1.setText("$1,100");
+                Date fecha = this.txtFechaExpedicion.getDate();
+
+                fecha.setYear(fecha.getYear() + 3);
+
+                this.txtFechaVigencia.setDate(fecha);
+            }
+
+            this.btnRegistrar.setEnabled(true);
+
         }
-
-        if ((discapacitado == 1) && (vigencia == 2)) {
-            txtPrecio1.setText("$500");
-            Date fecha = this.txtFechaExpedicion.getDate();
-
-            fecha.setYear(fecha.getYear() + 2);
-
-            this.txtFechaVigencia.setDate(fecha);
-        }
-
-        if ((discapacitado == 1) && (vigencia == 3)) {
-            txtPrecio1.setText("$700");
-            Date fecha = this.txtFechaExpedicion.getDate();
-
-            fecha.setYear(fecha.getYear() + 3);
-
-            this.txtFechaVigencia.setDate(fecha);
-        }
-
-        if ((discapacitado == 2) && (vigencia == 1)) {
-            txtPrecio1.setText("$600");
-            Date fecha = this.txtFechaExpedicion.getDate();
-
-            fecha.setYear(fecha.getYear() + 1);
-
-            this.txtFechaVigencia.setDate(fecha);
-        }
-
-        if ((discapacitado == 2) && (vigencia == 2)) {
-            txtPrecio1.setText("$900");
-            Date fecha = this.txtFechaExpedicion.getDate();
-
-            fecha.setYear(fecha.getYear() + 2);
-
-            this.txtFechaVigencia.setDate(fecha);
-        }
-
-        if ((discapacitado == 2) && (vigencia == 3)) {
-            txtPrecio1.setText("$1,100");
-            Date fecha = this.txtFechaExpedicion.getDate();
-
-            fecha.setYear(fecha.getYear() + 3);
-
-            this.txtFechaVigencia.setDate(fecha);
-        }
-
-        this.btnRegistrar.setEnabled(true);
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

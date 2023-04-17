@@ -32,6 +32,20 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
     }
 
+    private boolean validarDatos() {
+        if (txtNumSerie.getText().isBlank()
+                || txtCodigo.getText().isBlank()
+                || txtColor.getText().isBlank()
+                || txtLinea.getText().isBlank()
+                || txtMarca.getText().isBlank()
+                || txtModelo.getText().isBlank()) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,7 +78,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         cmbVehiculo = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnConfirmarDatos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,11 +163,11 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Confirmar Datos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmarDatos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConfirmarDatos.setText("Confirmar Datos");
+        btnConfirmarDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmarDatosActionPerformed(evt);
             }
         });
 
@@ -219,7 +233,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnConfirmarDatos)
                                 .addGap(49, 49, 49))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel9)
@@ -249,7 +263,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                                     .addComponent(jLabel10)
                                     .addComponent(txtFechaRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1))
+                                .addComponent(btnConfirmarDatos))
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -294,69 +308,90 @@ public class RegistroVehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
-        String numSerie = txtNumSerie.getText();
-        String marca = txtMarca.getText();
-        String linea = txtLinea.getText();
-        String modelo = txtModelo.getText();
-        String color = txtColor.getText();
 
-        String codigo = txtCodigo.getText();
-        Date fechaEmi = txtFechaEmision.getDate();
-        Date fechaRece = txtFechaRecepcion.getDate();
-        String precio = txtPrecio.getText();
+        String precioValidacion = txtPrecio.getText();
 
-        control.guardarPlaca(tipoVehiculo, numSerie, marca, linea, modelo, color, codigo, fechaEmi, fechaRece, precio);
-        // control.guardarEnHistorial("Placa", Float.parseFloat(precio), date, "RFC DE PRUEBA" );
-        //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
+        if (precioValidacion.equalsIgnoreCase("0.0")) {
+            JOptionPane.showMessageDialog(null,
+                    "Revise su selección de discapacidad y/o vigencia",
+                    "Error de información",
+                    JOptionPane.ERROR_MESSAGE);
+            btnRegistrar.setEnabled(false);
+        } else {
+            String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
+            String numSerie = txtNumSerie.getText();
+            String marca = txtMarca.getText();
+            String linea = txtLinea.getText();
+            String modelo = txtModelo.getText();
+            String color = txtColor.getText();
 
-        JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
-        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Guardado exitoso");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+            String codigo = txtCodigo.getText();
+            Date fechaEmi = txtFechaEmision.getDate();
+            Date fechaRece = txtFechaRecepcion.getDate();
+            String precio = txtPrecio.getText();
 
-        cmbVehiculo.setSelectedIndex(0);
-        txtNumSerie.setText("");
-        txtMarca.setText("");
-        txtLinea.setText("");
-        txtModelo.setText("");
-        txtColor.setText("");
+            control.guardarPlaca(tipoVehiculo, numSerie, marca, linea, modelo, color, codigo, fechaEmi, fechaRece, precio);
+            // control.guardarEnHistorial("Placa", Float.parseFloat(precio), date, "RFC DE PRUEBA" );
+            //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
 
-        txtCodigo.setText("");
-        txtFechaEmision.setDate(null);
-        txtFechaRecepcion.setDate(null);
-        txtPrecio.setText("0.0");
+            JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+            JDialog dialog = optionPane.createDialog("Guardado exitoso");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
 
-        this.setVisible(false);
-        new TramitePlaca().setVisible(true);
+            cmbVehiculo.setSelectedIndex(0);
+            txtNumSerie.setText("");
+            txtMarca.setText("");
+            txtLinea.setText("");
+            txtModelo.setText("");
+            txtColor.setText("");
+
+            txtCodigo.setText("");
+            txtFechaEmision.setDate(null);
+            txtFechaRecepcion.setDate(null);
+            txtPrecio.setText("0.0");
+
+            this.setVisible(false);
+            new TramitePlaca().setVisible(true);
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void cmbVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVehiculoMouseClicked
 
     }//GEN-LAST:event_cmbVehiculoMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarDatosActionPerformed
         // TODO add your handling code here:
-        int vehiculo = cmbVehiculo.getSelectedIndex();
 
-        if (vehiculo == 1) {
-            txtPrecio.setText("$1,500");
+        if (validarDatos() == true) {
+            JOptionPane.showMessageDialog(null,
+                    "Hay uno o más campos vacíos",
+                    "Error de información",
+                    JOptionPane.ERROR_MESSAGE);
+           
+            {
+                int vehiculo = cmbVehiculo.getSelectedIndex();
 
+                if (vehiculo == 1) {
+                    txtPrecio.setText("$1,500");
+
+                }
+                Date fecha = this.txtFechaEmision.getDate();
+
+                fecha.setYear(fecha.getYear() + 1);
+
+                this.txtFechaRecepcion.setDate(fecha);
+                this.btnRegistrar.setEnabled(true);
+            }
         }
-        Date fecha = this.txtFechaEmision.getDate();
-
-        fecha.setYear(fecha.getYear() + 1);
-
-        this.txtFechaRecepcion.setDate(fecha);
-        this.btnRegistrar.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnConfirmarDatosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnConfirmarDatos;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cmbVehiculo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
