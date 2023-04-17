@@ -33,12 +33,12 @@ public class RegistroVehiculo extends javax.swing.JFrame {
     }
 
     private boolean validarDatos() {
-        if (txtNumSerie.getText().isBlank()
-                || txtCodigo.getText().isBlank()
-                || txtColor.getText().isBlank()
-                || txtLinea.getText().isBlank()
-                || txtMarca.getText().isBlank()
-                || txtModelo.getText().isBlank()) {
+        if (txtNumSerie.getText().isEmpty()
+                || txtCodigo.getText().isEmpty()
+                || txtColor.getText().isEmpty()
+                || txtLinea.getText().isEmpty()
+                || txtMarca.getText().isEmpty()
+                || txtModelo.getText().isEmpty()) {
 
             return true;
         } else {

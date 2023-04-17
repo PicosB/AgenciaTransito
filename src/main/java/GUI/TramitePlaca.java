@@ -165,7 +165,8 @@ public class TramitePlaca extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRenovacionActionPerformed
 
     private void btnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosActionPerformed
-        
+        new VerVehiculos().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVehiculosActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed

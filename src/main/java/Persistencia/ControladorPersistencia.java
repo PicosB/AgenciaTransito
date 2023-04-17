@@ -8,6 +8,7 @@ import Entidades.Clientes;
 import Entidades.HistorialTramites;
 import Entidades.Licencia;
 import Entidades.Placa;
+import Entidades.Tramite;
 import Entidades.Usuarios;
 import Entidades.Vehiculo;
 import Persistencia.exceptions.NonexistentEntityException;
@@ -26,6 +27,7 @@ public class ControladorPersistencia {
     PlacaJpaController plaJpa = new PlacaJpaController();
     VehiculoJpaController vehJpa = new VehiculoJpaController();
     HistorialTramitesJpaController ht = new HistorialTramitesJpaController();
+    TramiteJpaController trJpa = new TramiteJpaController();
     
     //------------ Clientes ----------------------
     public void guardarCliente(Clientes cl) {
@@ -100,6 +102,18 @@ public class ControladorPersistencia {
         }
          
     }
+    
+    public List<Vehiculo> traerVehiculos() {
+        return vehJpa.findVehiculoEntities();
+    }
+
+    public void borrarVehiculo(int id) {
+        try {
+            vehJpa.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     //------------ Placas ----------------------
     
@@ -124,9 +138,9 @@ public class ControladorPersistencia {
     }
     
     //------- Historial Tramites
-        public void guardarTramite(HistorialTramites ht) {
+    public void guardarTramite(HistorialTramites ht) {
         this.ht.create(ht);
         
     }
-
+    
 }

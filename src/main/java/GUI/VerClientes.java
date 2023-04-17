@@ -242,7 +242,6 @@ public class VerClientes extends javax.swing.JFrame {
                 tabla.addRow(objeto);
             }
         }
-        
         tablaClientes.setModel(tabla);
     }
     

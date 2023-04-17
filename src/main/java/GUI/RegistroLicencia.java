@@ -27,11 +27,11 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }
 
     private boolean validarDatos() {
-        if (txtNombre.getText().isBlank()
-                || txtApellidoM.getText().isBlank()
-                || txtApellidoP.getText().isBlank()
-                || txtRFC.getText().isBlank()
-                || txtTelefono.getText().isBlank()) {
+        if (txtNombre.getText().isEmpty()
+                || txtApellidoM.getText().isEmpty()
+                || txtApellidoP.getText().isEmpty()
+                || txtRFC.getText().isEmpty()
+                || txtTelefono.getText().isEmpty()) {
 
             return true;
         } else {

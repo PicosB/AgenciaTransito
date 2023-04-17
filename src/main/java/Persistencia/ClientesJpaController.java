@@ -5,16 +5,18 @@
 package Persistencia;
 
 import Entidades.Clientes;
-import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import Entidades.Tramite;
+import Persistencia.exceptions.NonexistentEntityException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -37,11 +39,29 @@ public class ClientesJpaController implements Serializable {
     }
 
     public void create(Clientes clientes) {
+        if (clientes.getListaTramites() == null) {
+            clientes.setListaTramites(new ArrayList<Tramite>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Tramite> attachedListaTramites = new ArrayList<Tramite>();
+            for (Tramite listaTramitesTramiteToAttach : clientes.getListaTramites()) {
+                listaTramitesTramiteToAttach = em.getReference(listaTramitesTramiteToAttach.getClass(), listaTramitesTramiteToAttach.getId());
+                attachedListaTramites.add(listaTramitesTramiteToAttach);
+            }
+            clientes.setListaTramites(attachedListaTramites);
             em.persist(clientes);
+            for (Tramite listaTramitesTramite : clientes.getListaTramites()) {
+                Clientes oldCliOfListaTramitesTramite = listaTramitesTramite.getCli();
+                listaTramitesTramite.setCli(clientes);
+                listaTramitesTramite = em.merge(listaTramitesTramite);
+                if (oldCliOfListaTramitesTramite != null) {
+                    oldCliOfListaTramitesTramite.getListaTramites().remove(listaTramitesTramite);
+                    oldCliOfListaTramitesTramite = em.merge(oldCliOfListaTramitesTramite);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -55,7 +75,34 @@ public class ClientesJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Clientes persistentClientes = em.find(Clientes.class, clientes.getId());
+            List<Tramite> listaTramitesOld = persistentClientes.getListaTramites();
+            List<Tramite> listaTramitesNew = clientes.getListaTramites();
+            List<Tramite> attachedListaTramitesNew = new ArrayList<Tramite>();
+            for (Tramite listaTramitesNewTramiteToAttach : listaTramitesNew) {
+                listaTramitesNewTramiteToAttach = em.getReference(listaTramitesNewTramiteToAttach.getClass(), listaTramitesNewTramiteToAttach.getId());
+                attachedListaTramitesNew.add(listaTramitesNewTramiteToAttach);
+            }
+            listaTramitesNew = attachedListaTramitesNew;
+            clientes.setListaTramites(listaTramitesNew);
             clientes = em.merge(clientes);
+            for (Tramite listaTramitesOldTramite : listaTramitesOld) {
+                if (!listaTramitesNew.contains(listaTramitesOldTramite)) {
+                    listaTramitesOldTramite.setCli(null);
+                    listaTramitesOldTramite = em.merge(listaTramitesOldTramite);
+                }
+            }
+            for (Tramite listaTramitesNewTramite : listaTramitesNew) {
+                if (!listaTramitesOld.contains(listaTramitesNewTramite)) {
+                    Clientes oldCliOfListaTramitesNewTramite = listaTramitesNewTramite.getCli();
+                    listaTramitesNewTramite.setCli(clientes);
+                    listaTramitesNewTramite = em.merge(listaTramitesNewTramite);
+                    if (oldCliOfListaTramitesNewTramite != null && !oldCliOfListaTramitesNewTramite.equals(clientes)) {
+                        oldCliOfListaTramitesNewTramite.getListaTramites().remove(listaTramitesNewTramite);
+                        oldCliOfListaTramitesNewTramite = em.merge(oldCliOfListaTramitesNewTramite);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -84,6 +131,11 @@ public class ClientesJpaController implements Serializable {
                 clientes.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The clientes with id " + id + " no longer exists.", enfe);
+            }
+            List<Tramite> listaTramites = clientes.getListaTramites();
+            for (Tramite listaTramitesTramite : listaTramites) {
+                listaTramitesTramite.setCli(null);
+                listaTramitesTramite = em.merge(listaTramitesTramite);
             }
             em.remove(clientes);
             em.getTransaction().commit();
