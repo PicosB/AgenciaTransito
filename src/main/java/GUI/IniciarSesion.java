@@ -238,6 +238,9 @@ public class IniciarSesion extends javax.swing.JFrame {
 
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
         // TODO add your handling code here:
+        
+        this.txtUsuario.setText("");
+        this.txtContrasena.setText("");
     }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
