@@ -72,15 +72,12 @@ public class IniciarSesion extends javax.swing.JFrame {
         jLabel3.setText("Contraseña: ");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, -1));
 
-        txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtUsuario.setFont(new java.awt.Font("Adelle Sans Devanagari", 1, 13)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         txtUsuario.setBorder(null);
         jPanel3.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 19, 163, 20));
 
         btnIniciar.setBackground(new java.awt.Color(189, 74, 54));
         btnIniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnIniciar.setForeground(new java.awt.Color(0, 0, 0));
         btnIniciar.setText("Iniciar");
         btnIniciar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +89,6 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         btnLimpiar.setBackground(new java.awt.Color(189, 74, 54));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         btnLimpiar.setText("Atrás");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,9 +98,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         });
         jPanel3.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 80, 30));
 
-        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
         txtContrasena.setFont(new java.awt.Font("Adelle Sans Devanagari", 1, 13)); // NOI18N
-        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
         txtContrasena.setBorder(null);
         jPanel3.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 190, 30));
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 190, 20));
@@ -112,7 +106,6 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         btnLimpiar1.setBackground(new java.awt.Color(189, 74, 54));
         btnLimpiar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnLimpiar1.setForeground(new java.awt.Color(0, 0, 0));
         btnLimpiar1.setText("Limpiar");
         btnLimpiar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +126,6 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         btnRegistrarse.setBackground(new java.awt.Color(189, 74, 54));
         btnRegistrarse.setFont(new java.awt.Font("Adelle Sans Devanagari", 1, 13)); // NOI18N
-        btnRegistrarse.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrarse.setText("Registrar una nueva cuenta");
         btnRegistrarse.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +214,7 @@ public class IniciarSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-      this.setVisible(false);
+        this.setVisible(false);
         new InicioAplicacion().setVisible(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -231,10 +223,9 @@ public class IniciarSesion extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String contrasena = txtContrasena.getText();
         String mensaje = control.validarUsuario(usuario,contrasena);
-        this.setVisible(false);
+        
         txtMensaje.setText(mensaje);
-        new Tramites().setVisible(true);
-        //this.setVisible(false);
+
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
