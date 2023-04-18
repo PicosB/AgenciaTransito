@@ -6,7 +6,7 @@ package GUI;
 
 import javax.swing.JOptionPane;
 
-import reports.Conexion;
+
 
 /**
  *
@@ -110,21 +110,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        // TODO add your handling code here:
-        /*
-        try {
-            JasperReport archivo = JasperCompileManager.compileReport("historial_tramites.jrxml");
-           Conexion con  = new Conexion("jdbc:mysql://localhost/agenciatramites");
-            JasperPrint prin = JasperFillManager.fillReport(archivo, null, con.getConnection());
-            JasperExportManager.exportReportToPdfFile(prin, "reporte.pdf");
-            
-            
-          
-            
-        } catch (Exception e) {
- 
-        }   
-*/
+  
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

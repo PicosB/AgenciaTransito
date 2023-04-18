@@ -26,6 +26,7 @@ GUI/TramitePlaca$1.class
 Main/AgenciaTransito.class
 Entidades/exceptions/NonexistentEntityException.class
 GUI/RegistroLicencia$1.class
+GUI/InicioAplicacion$3.class
 GUI/VerClientes$5.class
 Entidades/Clientes_.class
 Persistencia/exceptions/NonexistentEntityException.class
@@ -99,6 +100,7 @@ GUI/TramiteLicencia.class
 GUI/TramitePlaca.class
 Entidades/Usuarios_.class
 GUI/RenovarPlaca$1.class
+GUI/InicioAplicacion$4.class
 GUI/RenovacionLicencia$1.class
 GUI/VerClientes$1.class
 GUI/ReportePlaca.class

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 8.1.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historialTramites" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c0b91fd-3d25-4212-8dd5-44f8e500936f">
+	<subDataset name="tramitesRealizados" uuid="9d6461d3-651a-40e7-9056-211adcc013e8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="idTramite" class="java.lang.Integer"/>
+		<field name="tipoTramite" class="java.lang.String"/>
+		<field name="precioTramite" class="java.lang.Float"/>
+		<field name="fechaTramite" class="java.util.Date"/>
+		<field name="rfcCliente" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="logoEmpresa" class="java.io.InputStream"/>
+	<parameter name="ds" class="net.sf.jasperreports.engine.data.JRBeanArrayDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="108" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="40" y="0" width="80" height="80" uuid="67a8f606-80d2-4b73-b349-c24448805f9c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logoEmpresa}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="140" y="10" width="160" height="20" uuid="c0318fb2-07c7-4837-80f6-3eea7fc4d810"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gobierno Del Estado de Sonora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="30" width="150" height="20" uuid="7c1d1d59-dbe2-426c-a2fb-31f9ec671ed2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secretaría de Hacienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="50" width="210" height="30" uuid="ba8cae04-9a5c-445e-9e27-1826d265019a"/>
+				<text><![CDATA[Blvd. Miguel Hidalgo 35, El Centenario, 83000 Hermosillo, Son.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="20" width="70" height="30" uuid="ea25bb00-ce3d-4f26-88d8-b314752c60da"/>
+				<text><![CDATA[Fecha y hora de impresión:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="430" y="28" width="100" height="14" uuid="e25ab3ba-e51c-4f72-8a4c-1741dc07b3ce"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="107" width="595" height="1" uuid="0508eb6b-af83-4d58-96f9-63bb0f8f5542"/>
+			</line>
+			<textField pattern="HH:mm">
+				<reportElement x="503" y="28" width="100" height="14" uuid="84ce928c-c19d-4e24-b52a-9717f67cd0f6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-20" y="0" width="594" height="28" backcolor="#F2AE55" uuid="1f5c80b9-17a7-4756-b05a-186ac901deda"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Trámites Realizados]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="226" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="103" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="17" width="436" height="36" uuid="0adb8034-437b-472b-94c7-0fbb0a79cdbf"/>
+				<text><![CDATA[Representación impresa de reportes de trámites de la aplicación del estado de Sonora.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="43" width="346" height="30" uuid="f10f4132-40a3-4aec-8fe6-bdf7ee1a1296"/>
+				<text><![CDATA[Para más información, visite el sitio web: www.sonora.gob.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="73" width="196" height="30" uuid="80fa303d-6add-4edb-ab21-8fca8ff5f885"/>
+				<text><![CDATA[2023 Todos los derechos reservados]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

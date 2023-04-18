@@ -33,7 +33,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         this.btnRegistrar.setEnabled(false);
         this.cli = cli;
         lblRFC.setText(cli.getRFC());
-        
 
     }
 
@@ -351,7 +350,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             Date fechaRece = txtFechaRecepcion.getDate();
             String precio = txtPrecio.getText();
 
-            control.guardarPlaca(tipoVehiculo, numSerie, marca, linea, modelo, color, codigo, fechaEmi, fechaRece, precio,cli);
+            control.guardarPlaca(tipoVehiculo, numSerie, marca, linea, modelo, color, codigo, fechaEmi, fechaRece, precio, cli);
             // control.guardarEnHistorial("Placa", Float.parseFloat(precio), date, "RFC DE PRUEBA" );
             //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
 
@@ -390,21 +389,20 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                     "Hay uno o más campos vacíos",
                     "Error de información",
                     JOptionPane.ERROR_MESSAGE);
-           
-            {
-                int vehiculo = cmbVehiculo.getSelectedIndex();
 
-                if (vehiculo == 1) {
-                    txtPrecio.setText("$1,500");
+        } else {
+            int vehiculo = cmbVehiculo.getSelectedIndex();
 
-                }
-                Date fecha = this.txtFechaEmision.getDate();
+            if (vehiculo == 1) {
+                txtPrecio.setText("$1,500");
 
-                fecha.setYear(fecha.getYear() + 1);
-
-                this.txtFechaRecepcion.setDate(fecha);
-                this.btnRegistrar.setEnabled(true);
             }
+            Date fecha = this.txtFechaEmision.getDate();
+
+            fecha.setYear(fecha.getYear() + 1);
+
+            this.txtFechaRecepcion.setDate(fecha);
+            this.btnRegistrar.setEnabled(true);
         }
     }//GEN-LAST:event_btnConfirmarDatosActionPerformed
 
