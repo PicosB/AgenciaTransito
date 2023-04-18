@@ -4,16 +4,20 @@
  */
 package GUI;
 
+import Entidades.ControladorEntidades;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC
  */
 public class TramitePlaca extends javax.swing.JFrame {
-
+    ControladorEntidades control = null;
     /**
      * Creates new form TramitePlaca
      */
     public TramitePlaca() {
+        control = new ControladorEntidades();
         initComponents();
     }
 
@@ -155,7 +159,11 @@ public class TramitePlaca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        new RegistroVehiculo().setVisible(true);
+        String RFC = JOptionPane.showInputDialog(this,"Favor de ingresar el RFC del Cliente:");
+        
+        if(!RFC.isEmpty()){
+            control.validarCliente(RFC);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed
 

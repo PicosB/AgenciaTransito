@@ -5,6 +5,7 @@
 package Entidades;
 
 import GUI.IniciarSesion;
+import GUI.RegistroVehiculo;
 import GUI.Tramites;
 import Persistencia.ControladorPersistencia;
 import java.util.Date;
@@ -68,6 +69,18 @@ public class ControladorEntidades {
         return controlPersis.traerCliente(id);
     }
     
+    public String validarCliente(String RFC){
+        List<Clientes> listaClientes = controlPersis.traerClientes();
+        for (Clientes cli : listaClientes){
+            if(cli.getRFC().equals(RFC)){
+                RegistroVehiculo regVe = new RegistroVehiculo(listaClientes.get(0));
+                regVe.setVisible(true);
+                
+            }
+        }
+        return RFC;
+    }
+    
     //---------------------------- Usuario -----------------------------
     public String validarUsuario(String usuario, String contrasena) {
         String mensaje="";
@@ -119,7 +132,7 @@ public class ControladorEntidades {
     }
     
     //---------------------------- Placa -----------------------------
-    public void guardarPlaca(String tipoVehiculo, String numSerie, String marca, String linea, String modelo, String color, String codigo, Date fechaEmi, Date fechaRece, String precio) {
+    public void guardarPlaca(String tipoVehiculo, String numSerie, String marca, String linea, String modelo, String color, String codigo, Date fechaEmi, Date fechaRece, String precio,Clientes cli) {
         Vehiculo veh = new Vehiculo();
         veh.setTipoVehiculo(tipoVehiculo);
         veh.setNumSerie(numSerie);
@@ -127,6 +140,7 @@ public class ControladorEntidades {
         veh.setLinea(linea);
         veh.setModelo(modelo);
         veh.setColor(color);
+        veh.setCli(cli);
     
         Placa pl = new Placa();
         pl.setCodigo(codigo);
@@ -163,6 +177,10 @@ public class ControladorEntidades {
 
     public void borrarVehiculo(int id) {
         controlPersis.borrarVehiculo(id);    
+    }
+
+    public void buscarRFC(String RFC) {
+        controlPersis.buscarRFC(RFC);
     }
 
 

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -60,6 +61,9 @@ public class Clientes implements Serializable {
     @OneToMany (mappedBy = "cli")
     private List<Tramite> listaTramites;
     
+    @OneToMany (mappedBy = "cli", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Vehiculo> listaVehiculos;
+    
     public Clientes() {
     }
 
@@ -84,6 +88,18 @@ public class Clientes implements Serializable {
         this.listaTramites = listaTramites;
     }
 
+    public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento, List<Tramite> listaTramites, List<Vehiculo> listaVehiculos) {
+        this.id = id;
+        this.RFC = RFC;
+        this.nombres = nombres;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.numTelefono = numTelefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.listaTramites = listaTramites;
+        this.listaVehiculos = listaVehiculos;
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -146,5 +162,13 @@ public class Clientes implements Serializable {
 
     public void setListaTramites(List<Tramite> listaTramites) {
         this.listaTramites = listaTramites;
+    }
+
+    public List<Vehiculo> getListaVehiculos() {
+        return listaVehiculos;
+    }
+
+    public void setListaVehiculos(List<Vehiculo> listaVehiculos) {
+        this.listaVehiculos = listaVehiculos;
     }
 }

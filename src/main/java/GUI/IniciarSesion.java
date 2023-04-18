@@ -231,7 +231,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String contrasena = txtContrasena.getText();
         String mensaje = control.validarUsuario(usuario,contrasena);
-
+        this.setVisible(false);
         txtMensaje.setText(mensaje);
         //this.setVisible(false);
     }//GEN-LAST:event_btnIniciarActionPerformed

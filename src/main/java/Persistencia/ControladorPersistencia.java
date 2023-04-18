@@ -142,5 +142,9 @@ public class ControladorPersistencia {
         this.ht.create(ht);
         
     }
+
+    public void buscarRFC(String RFC) {
+        cliJpa.findClientes(RFC);
+    }
     
 }

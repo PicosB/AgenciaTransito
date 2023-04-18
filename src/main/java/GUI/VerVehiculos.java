@@ -182,14 +182,14 @@ public class VerVehiculos extends javax.swing.JFrame {
             
         };
         
-        String titulos [] = {"Id Vehiculo","NumSerie", "Marca", "Linea", "Modelo", "Color", "Tipo Vehiculo"};
+        String titulos [] = {"Id Vehiculo","NumSerie", "Marca", "Linea", "Modelo", "Color", "Tipo Vehiculo","Cliente"};
         tabla.setColumnIdentifiers(titulos);
         
         List<Vehiculo> listaVehiculos = control.traerVehiculos();
         
         if(listaVehiculos != null){
             for(Vehiculo veh : listaVehiculos){
-                Object[] objeto = {veh.getId(),veh.getNumSerie(),veh.getMarca(),veh.getLinea(),veh.getModelo(),veh.getColor(),veh.getTipoVehiculo()};
+                Object[] objeto = {veh.getId(),veh.getNumSerie(),veh.getMarca(),veh.getLinea(),veh.getModelo(),veh.getColor(),veh.getTipoVehiculo(),veh.getCli().getRFC()};
                 tabla.addRow(objeto);
             }
         }

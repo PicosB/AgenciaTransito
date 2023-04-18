@@ -52,7 +52,11 @@ public class Vehiculo implements Serializable {
     @Basic
     @Column (name = "TipoVehiculo")
     private String tipoVehiculo;
-      
+    
+    @ManyToOne
+    @JoinColumn (name = "IdCliente")
+    private Clientes cli;
+    
     public Vehiculo() {
     }
 
@@ -66,6 +70,17 @@ public class Vehiculo implements Serializable {
         this.tipoVehiculo = tipoVehiculo;
     }
 
+    public Vehiculo(Integer id, String numSerie, String marca, String linea, String modelo, String color, String tipoVehiculo, Clientes cli) {
+        this.id = id;
+        this.numSerie = numSerie;
+        this.marca = marca;
+        this.linea = linea;
+        this.modelo = modelo;
+        this.color = color;
+        this.tipoVehiculo = tipoVehiculo;
+        this.cli = cli;
+    }
+    
     public String getNumSerie() {
         return numSerie;
     }
@@ -120,5 +135,13 @@ public class Vehiculo implements Serializable {
 
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
+    }
+
+    public Clientes getCli() {
+        return cli;
+    }
+
+    public void setCli(Clientes cli) {
+        this.cli = cli;
     }
 }

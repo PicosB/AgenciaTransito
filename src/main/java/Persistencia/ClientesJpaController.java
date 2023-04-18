@@ -178,6 +178,15 @@ public class ClientesJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public Clientes findClientes(String RFC) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Clientes.class, RFC);
+        } finally {
+            em.close();
+        }
+    }
 
     public int getClientesCount() {
         EntityManager em = getEntityManager();
