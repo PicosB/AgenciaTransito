@@ -72,9 +72,11 @@ public class IniciarSesion extends javax.swing.JFrame {
         jLabel3.setText("Contraseña: ");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, -1));
 
+        txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtUsuario.setFont(new java.awt.Font("Adelle Sans Devanagari", 1, 13)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(189, 74, 54));
         txtUsuario.setBorder(null);
-        jPanel3.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 19, 163, 20));
+        jPanel3.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 180, 30));
 
         btnIniciar.setBackground(new java.awt.Color(189, 74, 54));
         btnIniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -98,7 +100,9 @@ public class IniciarSesion extends javax.swing.JFrame {
         });
         jPanel3.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 80, 30));
 
+        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
         txtContrasena.setFont(new java.awt.Font("Adelle Sans Devanagari", 1, 13)); // NOI18N
+        txtContrasena.setForeground(new java.awt.Color(189, 74, 54));
         txtContrasena.setBorder(null);
         jPanel3.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 190, 30));
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 190, 20));
