@@ -567,7 +567,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             String precio = txtPrecio.getText();
 
             control.guardarPlaca(tipoVehiculo, numSerie, marca, linea, modelo, color, codigo, fechaEmi, fechaRece, precio, cli);
-            control.guardarEnHistorial("Licencia", precio, date, cli.getRFC());  
+            control.guardarEnHistorial("Placa", precio, date, cli.getRFC());  
           
             JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
