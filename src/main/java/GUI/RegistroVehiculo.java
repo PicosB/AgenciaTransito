@@ -7,6 +7,7 @@ package GUI;
 import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Vehiculo;
+import java.awt.Color;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -49,6 +50,41 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         } else {
             return false;
         }
+    }
+
+    public static boolean validarNumeros(String datos) {
+        return datos.matches("[0-9]");
+
+    }
+
+    public boolean validarSoloLetras(String dato) {
+        return dato.matches("[a-zA-Z]*");
+    }
+
+        public boolean validarNumSerie(String numSerie) {
+
+        for (int i = 0; i < numSerie.length(); i++) {
+            char caracter = numSerie.charAt(i);
+            if (caracter == '0'
+                    || caracter == '1'
+                    || caracter == '2'
+                    || caracter == '3'
+                    || caracter == '4'
+                    || caracter == '5'
+                    || caracter == '6'
+                    || caracter == '7'
+                    || caracter == '8'
+                    || caracter == '9'
+                    && validarSoloLetras(String.valueOf(caracter)) == false) {
+                return true;
+            }else{
+                return false;
+            
+        }
+          
+          
+    }
+        return true;
     }
 
     /**
@@ -427,10 +463,34 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         if (validarDatos() == true) {
             JOptionPane.showMessageDialog(null,
-                "Hay uno o más campos vacíos",
-                "Error de información",
-                JOptionPane.ERROR_MESSAGE);
+                    "Hay uno o más campos vacíos",
+                    "Error de información",
+                    JOptionPane.ERROR_MESSAGE);
 
+        }  else if (validarNumSerie(this.txtNumSerie.getText())==false) {
+            JOptionPane.showMessageDialog(null, "Solo se permiten valores numéricos en Número de serie a ");
+            this.txtNumSerie.setBackground(Color.YELLOW);
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtMarca.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Marca ");
+            this.txtNumSerie.setBackground(Color.WHITE);
+            this.txtMarca.setBackground(Color.YELLOW);
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtLinea.getText().trim()) == false) {
+            this.txtMarca.setBackground(Color.WHITE);
+            this.txtLinea.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Línea");
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtModelo.getText().trim()) == false) {
+            this.txtLinea.setBackground(Color.WHITE);
+            this.txtModelo.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Modelo ");
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtColor.getText().trim()) == false) {
+            this.txtModelo.setBackground(Color.WHITE);
+            this.txtColor.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Color ");
+            this.btnRegistrar.setEnabled(false);
         } else {
             int vehiculo = cmbVehiculo.getSelectedIndex();
 
@@ -446,6 +506,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             this.btnRegistrar.setEnabled(true);
             this.jLabel14.setVisible(true);
         }
+        this.btnRegistrar.setEnabled(true);
     }//GEN-LAST:event_btnConfirmarDatosActionPerformed
 
     private void cmbVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVehiculoMouseClicked
@@ -458,11 +519,41 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         if (precioValidacion.equalsIgnoreCase("0.0")) {
             JOptionPane.showMessageDialog(null,
-                "Revise su selección de discapacidad y/o vigencia",
-                "Error de información",
-                JOptionPane.ERROR_MESSAGE);
+                    "Revise su selección de discapacidad y/o vigencia",
+                    "Error de información",
+                    JOptionPane.ERROR_MESSAGE);
             btnRegistrar.setEnabled(false);
-        } else {
+        } else if (validarNumSerie(txtNumSerie.getText()) == false) {
+            JOptionPane.showMessageDialog(null, "Solo se permiten valores numéricos en Número de serie ");
+            this.txtNumSerie.setBackground(Color.YELLOW);
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtMarca.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Marca ");
+            this.txtNumSerie.setBackground(Color.WHITE);
+            this.txtMarca.setBackground(Color.YELLOW);
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtLinea.getText().trim()) == false) {
+            this.txtMarca.setBackground(Color.WHITE);
+            this.txtLinea.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Línea");
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtModelo.getText().trim()) == false) {
+            this.txtLinea.setBackground(Color.WHITE);
+            this.txtModelo.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Modelo ");
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtColor.getText().trim()) == false) {
+            this.txtModelo.setBackground(Color.WHITE);
+            this.txtColor.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Color ");
+            this.btnRegistrar.setEnabled(false);
+        } else if (validarSoloLetras(this.txtColor.getText().trim()) == true
+                && validarSoloLetras(this.txtModelo.getText().trim()) == true
+                && validarSoloLetras(this.txtModelo.getText().trim()) == true
+                && validarSoloLetras(this.txtLinea.getText().trim()) == true
+                && validarSoloLetras(this.txtMarca.getText().trim()) == true
+                && validarNumSerie(txtNumSerie.getText()) == true) {
+
             String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
             String numSerie = txtNumSerie.getText();
             String marca = txtMarca.getText();
@@ -476,8 +567,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             String precio = txtPrecio.getText();
 
             control.guardarPlaca(tipoVehiculo, numSerie, marca, linea, modelo, color, codigo, fechaEmi, fechaRece, precio, cli);
-            // control.guardarEnHistorial("Placa", Float.parseFloat(precio), date, "RFC DE PRUEBA" );
-            //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
 
             JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
