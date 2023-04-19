@@ -40,6 +40,14 @@ public class RegistroLicencia extends javax.swing.JFrame {
         }
     }
 
+    public boolean validarCadenas (String input) {
+        if (input.matches("^[a-zA-Z ]*$")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean validarNumeros(String datos) {
         return datos.matches("[0-9]");
 
@@ -48,20 +56,21 @@ public class RegistroLicencia extends javax.swing.JFrame {
     public boolean validarSoloLetras(String dato) {
         return dato.matches("[a-zA-Z]*");
     }
-    public boolean validarTelefono (String telefono){
-     
-        for (int i =0 ; i<telefono.length(); i++){
+
+    public boolean validarTelefono(String telefono) {
+
+        for (int i = 0; i < telefono.length(); i++) {
             char caracter = telefono.charAt(i);
-            if(caracter == 0 
-                    ||caracter == 1
-                    ||caracter == 2 
-                    ||caracter == 3
-                    ||caracter == 4 
-                    ||caracter == 5 
-                    ||caracter == 6 
-                    ||caracter == 7 
-                    ||caracter == 8 
-                    ||caracter == 9){
+            if (caracter == 0
+                    || caracter == 1
+                    || caracter == 2
+                    || caracter == 3
+                    || caracter == 4
+                    || caracter == 5
+                    || caracter == 6
+                    || caracter == 7
+                    || caracter == 8
+                    || caracter == 9) {
             }
         }
         return true;
@@ -211,22 +220,27 @@ public class RegistroLicencia extends javax.swing.JFrame {
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(189, 74, 54));
+        txtNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtRFC.setBackground(new java.awt.Color(255, 255, 255));
         txtRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtRFC.setForeground(new java.awt.Color(189, 74, 54));
+        txtRFC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
         txtTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(189, 74, 54));
+        txtTelefono.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtApellidoP.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidoP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtApellidoP.setForeground(new java.awt.Color(189, 74, 54));
+        txtApellidoP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtApellidoM.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidoM.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtApellidoM.setForeground(new java.awt.Color(189, 74, 54));
+        txtApellidoM.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(189, 74, 54));
@@ -267,24 +281,22 @@ public class RegistroLicencia extends javax.swing.JFrame {
                                             .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(6, 6, 6)))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtTelefono)
                                             .addComponent(txtFechaNac2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(39, 39, 39)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(39, 39, 39)
-                                                .addComponent(labelErrorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(39, 39, 39)
-                                                .addComponent(labelErrorApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(39, 39, 39)
-                                                .addComponent(labelErrorApellidoMat, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(labelErrorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(labelErrorApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(labelErrorApellidoMat, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,14 +322,13 @@ public class RegistroLicencia extends javax.swing.JFrame {
                                                     .addComponent(txtFechaVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(162, 162, 162)
-                                        .addComponent(jLabel12)
-                                        .addGap(145, 145, 145))))
+                                        .addComponent(jLabel12))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(242, 242, 242)
                                 .addComponent(btnCancelar)
                                 .addGap(28, 28, 28)
                                 .addComponent(btnRegistrar)))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,25 +371,26 @@ public class RegistroLicencia extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtFechaVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtFechaNac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtFechaNac2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(26, 26, 26)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnCancelar))
@@ -391,8 +403,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,32 +430,32 @@ public class RegistroLicencia extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
 
             btnRegistrar.setEnabled(false);
-        } else if (validarTelefono(this.txtTelefono.getText())==false) {
+        } else if (validarTelefono(this.txtTelefono.getText()) == false) {
 
             JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el teléfono a ");
             txtTelefono.setBackground(Color.YELLOW);
-            
-        }else if(txtTelefono.getText().length() !=10){
+
+        } else if (txtTelefono.getText().length() != 10) {
             JOptionPane.showMessageDialog(null, "El teléfono debe contener 10 dígitos");
             txtTelefono.setBackground(Color.YELLOW);
-        } else if (validarSoloLetras(this.txtNombre.getText().trim())==false) {
+        } else if (validarCadenas(this.txtNombre.getText()) == false) {
             txtTelefono.setBackground(Color.WHITE);
             JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el nombre ");
             txtNombre.setBackground(Color.YELLOW);
-            
-        }else if(validarSoloLetras(this.txtApellidoP.getText().trim())==false){
+
+        } else if (validarCadenas(this.txtApellidoP.getText().trim()) == false) {
             txtNombre.setBackground(Color.WHITE);
-             JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido paterno ");
-             txtApellidoP.setBackground(Color.YELLOW);
-             
-        } else if (validarSoloLetras(this.txtApellidoM.getText().trim())==false){
+            JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido paterno ");
+            txtApellidoP.setBackground(Color.YELLOW);
+
+        } else if (validarCadenas(this.txtApellidoM.getText().trim()) == false) {
             txtApellidoP.setBackground(Color.WHITE);
-             JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido materno ");
-             txtApellidoM.setBackground(Color.YELLOW);
-        } else if(validarSoloLetras(this.txtApellidoM.getText().trim())==true &&
-                validarSoloLetras(this.txtApellidoP.getText().trim())==true &&
-               validarSoloLetras(this.txtNombre.getText().trim())==true &&
-               validarTelefono(this.txtTelefono.getText())==true)  {
+            JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido materno ");
+            txtApellidoM.setBackground(Color.YELLOW);
+        } else if ( validarCadenas(this.txtApellidoM.getText().trim()) == true
+                && validarCadenas(this.txtApellidoP.getText().trim()) == true
+                && validarCadenas(this.txtNombre.getText()) == true
+                && validarTelefono(this.txtTelefono.getText()) == true) {
 
             String RFC = txtRFC.getText();
             String nombre = txtNombre.getText();
@@ -461,7 +472,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
             control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono, discapacitado, fechaExp, fechaVig, anios, precio);
             control.guardarEnHistorial("Licencia", precio, date, RFC);
-            //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
+            
 
             JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
@@ -504,30 +515,29 @@ public class RegistroLicencia extends javax.swing.JFrame {
                     "Error de información",
                     JOptionPane.ERROR_MESSAGE);
 
-        } else if (validarTelefono(this.txtTelefono.getText())== false) {
+        } else if (validarTelefono(this.txtTelefono.getText()) == false) {
 
             JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el teléfono ");
             txtTelefono.setBackground(Color.YELLOW);
-            
-        }else if (validarSoloLetras(this.txtNombre.getText().trim())==false) {
+
+        } else if (validarCadenas(this.txtNombre.getText()) == false) {
             txtTelefono.setBackground(Color.WHITE);
             JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el nombre ");
             txtNombre.setBackground(Color.YELLOW);
-            
-        }else if(validarSoloLetras(this.txtApellidoP.getText().trim())==false){
+
+        } else if (validarSoloLetras(this.txtApellidoP.getText().trim()) == false) {
             txtNombre.setBackground(Color.WHITE);
-             JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido paterno ");
-             txtApellidoP.setBackground(Color.YELLOW);
-             
-        } else if (validarSoloLetras(this.txtApellidoM.getText().trim())==false){
+            JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido paterno ");
+            txtApellidoP.setBackground(Color.YELLOW);
+
+        } else if (validarSoloLetras(this.txtApellidoM.getText().trim()) == false) {
             txtApellidoP.setBackground(Color.WHITE);
-             JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido materno ");
-             txtApellidoM.setBackground(Color.YELLOW);
-        }else if(txtTelefono.getText().length() !=10){
+            JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido materno ");
+            txtApellidoM.setBackground(Color.YELLOW);
+        } else if (txtTelefono.getText().length() != 10) {
             JOptionPane.showMessageDialog(null, "El teléfono debe contener 10 dígitos");
             txtTelefono.setBackground(Color.YELLOW);
-        }
-        else {
+        } else {
             int discapacitado = cmbDiscapacitado.getSelectedIndex();
             int vigencia = cmbVigencia.getSelectedIndex();
 

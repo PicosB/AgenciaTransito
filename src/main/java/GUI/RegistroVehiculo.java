@@ -467,7 +467,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                     "Error de información",
                     JOptionPane.ERROR_MESSAGE);
 
-        }  else if (validarNumSerie(this.txtNumSerie.getText())==false) {
+        }  else if (validarSoloLetras(this.txtNumSerie.getText())==true) {
             JOptionPane.showMessageDialog(null, "Solo se permiten valores numéricos en Número de serie a ");
             this.txtNumSerie.setBackground(Color.YELLOW);
             this.btnRegistrar.setEnabled(false);
@@ -523,7 +523,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                     "Error de información",
                     JOptionPane.ERROR_MESSAGE);
             btnRegistrar.setEnabled(false);
-        } else if (validarNumSerie(txtNumSerie.getText()) == false) {
+        } else if (validarSoloLetras(txtNumSerie.getText()) == true) {
             JOptionPane.showMessageDialog(null, "Solo se permiten valores numéricos en Número de serie ");
             this.txtNumSerie.setBackground(Color.YELLOW);
             this.btnRegistrar.setEnabled(false);
@@ -552,7 +552,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                 && validarSoloLetras(this.txtModelo.getText().trim()) == true
                 && validarSoloLetras(this.txtLinea.getText().trim()) == true
                 && validarSoloLetras(this.txtMarca.getText().trim()) == true
-                && validarNumSerie(txtNumSerie.getText()) == true) {
+                && validarSoloLetras(txtNumSerie.getText()) == false) {
 
             String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
             String numSerie = txtNumSerie.getText();
