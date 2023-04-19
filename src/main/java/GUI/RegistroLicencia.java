@@ -460,7 +460,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
             String precio = txtPrecio1.getText();
 
             control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono, discapacitado, fechaExp, fechaVig, anios, precio);
-            // control.guardarEnHistorial("Licencia", Float.parseFloat(precio), date, txtRFC.getText());
+            control.guardarEnHistorial("Licencia", precio, date, RFC);
             //JOptionPane.showMessageDialog(null, "¡Se a agregado el cliente Correctamente!");
 
             JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");

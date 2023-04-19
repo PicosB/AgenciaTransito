@@ -182,6 +182,20 @@ public class ControladorEntidades {
     public void buscarRFC(String RFC) {
         controlPersis.buscarRFC(RFC);
     }
+    
+    public void guardarEnHistorial(String tipoTramite, String precioTramite, Date fechaTramite, String rfcCliente){
+        HistorialTramites objTramite = new HistorialTramites();
+        objTramite.setTipoTramite(tipoTramite);
+        objTramite.setPrecio(precioTramite);
+        objTramite.setFechaTramite(fechaTramite);
+        objTramite.setRfcCliente(rfcCliente);
+        
+        controlPersis.guardarTramite(objTramite);
+    }
+    
+    public List<HistorialTramites> traerTraamites(){
+        return controlPersis.traerTramites();
+    }
 
     public List<Tramite> traerTramites() {
         return controlPersis.traerTramites();

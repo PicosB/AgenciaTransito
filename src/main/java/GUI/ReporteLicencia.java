@@ -4,16 +4,32 @@
  */
 package GUI;
 
-import javax.swing.JOptionPane;
-
-
+import Entidades.ControladorEntidades;
+import Entidades.HistorialTramites;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author luis
  */
 public class ReporteLicencia extends javax.swing.JFrame {
-
+ ControladorEntidades control = new ControladorEntidades();
     /**
      * Creates new form ReporteLicencia
      */
@@ -110,7 +126,52 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+
+        String reportPath = getClass().getClassLoader().getResource("agenciaTramite.jrxml").getPath();
+        
+        List<HistorialTramites> tramites = new ArrayList<>();
+
+        tramites = control.traerTraamites();
+        
   
+       
+  
+/*
+        tramite1.setRfcCliente("AES");
+        tramite1.setPrecio("200.00");
+        tramite1.setTipoTramite("Placa");
+        tramite1.setFechaTramite(new Date());
+        
+         tramite2.setRfcCliente("AES");
+        tramite2.setPrecio("200.00");
+        tramite2.setTipoTramite("Placa");
+        tramite2.setFechaTramite(new Date());
+        
+     */   
+            
+            
+        
+
+        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(tramites);
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("CollectionBeanDataSource", itemsJRBean);
+        try {
+
+            InputStream input = getClass().getClassLoader().getResourceAsStream("agenciaTramite.jrxml");
+
+            JasperDesign japerdesign = JRXmlLoader.load(input);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(japerdesign);
+
+            JasperPrint jasperprint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+            JasperViewer.viewReport(jasperprint);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

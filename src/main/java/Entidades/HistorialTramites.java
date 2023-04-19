@@ -33,7 +33,7 @@ public class HistorialTramites implements Serializable {
     private String tipoTramite; 
     @Basic
     @Column (name = "precio")
-    private Float precioTramite;
+    private String precioTramite;
     @Temporal (TemporalType.DATE)
     @Column (name = "fechaTramite")
     private Date fechaTramite;
@@ -45,7 +45,7 @@ public class HistorialTramites implements Serializable {
     public HistorialTramites() {
     }
 
-    public HistorialTramites(String tipoTramite, Float precioTramite, Date fechaTramite, String rfcCliente) {
+    public HistorialTramites(String tipoTramite, String precioTramite, Date fechaTramite, String rfcCliente) {
         this.tipoTramite = tipoTramite;
         this.precioTramite = precioTramite;
         this.fechaTramite = fechaTramite;
@@ -79,11 +79,11 @@ public class HistorialTramites implements Serializable {
         this.tipoTramite = tipoTramite;
     }
 
-    public Float getPrecio() {
+    public String getPrecio() {
         return precioTramite;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(String precio) {
         this.precioTramite = precio;
     }
 
