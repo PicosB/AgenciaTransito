@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC
@@ -141,8 +143,21 @@ public class Tramites extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        new Consultar().setVisible(true);
-        this.dispose();
+        String respuesta = JOptionPane.showInputDialog(this,"Ingresa si quieres consultar 'Licencias' o 'Placas'");
+        
+        if((!respuesta.isEmpty() && respuesta.equalsIgnoreCase("Licencias")) || (!respuesta.isEmpty() && respuesta.equalsIgnoreCase("Placas"))){
+            if(respuesta.equalsIgnoreCase("Licencias")){
+                new ConsultarLicencia().setVisible(true);
+                this.setVisible(false);
+            }
+            else if(respuesta.equalsIgnoreCase("Placas")){
+                new ConsultarPlaca().setVisible(true);
+                this.setVisible(false);
+            }
+        }else {
+            JOptionPane.showMessageDialog(this, "Favor de ingresar el tramite a consultar correctamente...");
+
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

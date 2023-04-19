@@ -148,7 +148,7 @@ public class ControladorPersistencia {
     }
 
     public List<Tramite> traerTramites() {
-        return trJpa.obtenerTramites();
+        return trJpa.findTramiteEntities();
     }
     
 }

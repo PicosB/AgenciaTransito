@@ -183,6 +183,7 @@ public class Consultar extends javax.swing.JFrame {
             for (Tramite tr : listaTramites){
                     
                     String precio = tr.getPrecio();
+                    String RFC = tr.getCli().getRFC();
 
                 
                     if (tr instanceof Placa){
@@ -191,7 +192,7 @@ public class Consultar extends javax.swing.JFrame {
                         tramite = "Licencia";
                     }
   
-                Object[] objeto = {tramite, precio};
+                Object[] objeto = {tramite, precio,RFC};
                 tabla.addRow(objeto);
             }
         }
