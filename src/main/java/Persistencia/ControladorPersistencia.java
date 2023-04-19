@@ -147,8 +147,13 @@ public class ControladorPersistencia {
         cliJpa.findClientes(RFC);
     }
 
-    public List<Tramite> traerTramites() {
+    public List<Tramite> traerTramite() {
         return trJpa.findTramiteEntities();
     }
+    public List<HistorialTramites> traerTramites() {
+        return ht.findHistorialTramitesEntities();
+    }
+    
+    
     
 }
