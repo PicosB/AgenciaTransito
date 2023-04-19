@@ -61,7 +61,7 @@ public class ModuloReportes extends javax.swing.JFrame {
             }
         });
 
-        cbTramites.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Placa", "Licencia", "Todos" }));
+        cbTramites.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tramites" }));
         cbTramites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTramitesActionPerformed(evt);
@@ -115,15 +115,10 @@ public class ModuloReportes extends javax.swing.JFrame {
         
         String tramite = (String) cbTramites.getSelectedItem();
         
-        if (tramite.equals("Placa")){
+        if (tramite.equals("Tramites")){
             
-            new ReportePlaca().setVisible(true);
+            new ReporteLicencia().setVisible(true);
             this.setVisible(false);
-        }else if (tramite.equals("Licencia")){
-             new ReporteLicencia().setVisible(true);
-            this.setVisible(false);
-        }else if(tramite.equals("Todos")){
-            
         }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 

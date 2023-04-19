@@ -35,6 +35,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
      */
     public ReporteLicencia() {
         initComponents();
+      
     }
 
     /**
@@ -49,7 +50,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnGenerar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -58,6 +59,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/home-ceeav.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Reporte Trámites");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -65,12 +67,12 @@ public class ReporteLicencia extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(189, 74, 54));
         jLabel2.setText("Reporte Trámites");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(189, 74, 54));
-        jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtRFC.setBackground(new java.awt.Color(255, 255, 255));
+        txtRFC.setForeground(new java.awt.Color(189, 74, 54));
+        txtRFC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtRFCActionPerformed(evt);
             }
         });
 
@@ -121,7 +123,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
                             .addGap(93, 93, 93)
                             .addComponent(jLabel3)
                             .addGap(32, 32, 32)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(jLabel4)))
@@ -136,7 +138,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,27 +161,29 @@ public class ReporteLicencia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtRFCActionPerformed
 
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         
-        String reportPath = getClass().getClassLoader().getResource("agenciaTramite.jrxml").getPath();
+        String reportPath = getClass().getClassLoader().getResource("agenciaTramites.jrxml").getPath();
         
          List<HistorialTramites> tramites = new ArrayList<>();
 
-          tramites = control.filtrarHistorialLicencias(this.jTextField1.getText());
+          tramites = control.filtrarHistorialLicencias(this.txtRFC.getText());
+         
+        
         
 
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(tramites);
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("CollectionBeanDataSource", itemsJRBean);
+        parameters.put("CollectionBeanParam", itemsJRBean);
         try {
-
-            InputStream input = getClass().getClassLoader().getResourceAsStream("agenciaTramite.jrxml");
+            
+            InputStream input = getClass().getClassLoader().getResourceAsStream("agenciaTramites.jrxml");
 
             JasperDesign japerdesign = JRXmlLoader.load(input);
 
@@ -244,6 +248,6 @@ public class ReporteLicencia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

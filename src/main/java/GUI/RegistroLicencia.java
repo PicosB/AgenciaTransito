@@ -5,6 +5,7 @@
 package GUI;
 
 import Entidades.ControladorEntidades;
+import Persistencia.ClientesJpaController;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JDialog;
@@ -18,6 +19,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
     ControladorEntidades control = new ControladorEntidades();
     Date date = new Date();
+    ClientesJpaController cliJpa = new ClientesJpaController();
 
     /**
      * Creates new form RegistroLicencia
@@ -452,10 +454,14 @@ public class RegistroLicencia extends javax.swing.JFrame {
             txtApellidoP.setBackground(Color.WHITE);
             JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido materno ");
             txtApellidoM.setBackground(Color.YELLOW);
-        } else if ( validarCadenas(this.txtApellidoM.getText().trim()) == true
+        }else if(control.validarClienteExistente(this.txtRFC.getText()) == false){
+            JOptionPane.showMessageDialog(null, "Ya hay un usuario con este RFC");
+            txtRFC.setBackground(Color.YELLOW);
+        }else if ( validarCadenas(this.txtApellidoM.getText().trim()) == true
                 && validarCadenas(this.txtApellidoP.getText().trim()) == true
                 && validarCadenas(this.txtNombre.getText()) == true
-                && validarTelefono(this.txtTelefono.getText()) == true) {
+                && validarTelefono(this.txtTelefono.getText()) == true
+                && control.validarClienteExistente(this.txtRFC.getText()) == true) {
 
             String RFC = txtRFC.getText();
             String nombre = txtNombre.getText();

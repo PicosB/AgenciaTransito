@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -208,21 +209,34 @@ public class ControladorEntidades {
     }
 
     public List<Tramite> traerTramites() {
-        return controlPersis.traerTramiteEntidades();
+        return controlPersis.traerTramite();
     }
 
     public List<HistorialTramites> filtrarHistorialLicencias(String RFC) {
         List<HistorialTramites> listaTramites = controlPersis.traerTramites();
-        for (HistorialTramites ht : listaTramites) {
-            if (ht.getRfcCliente().equals(RFC)) {
+        
+        List<HistorialTramites> listaUsuarioRfc = new ArrayList<HistorialTramites>();
+        for (int i = 0; i < listaTramites.size(); i++) {
+            
+            if (listaTramites.get(i).getRfcCliente().equalsIgnoreCase(RFC)) {
 
-                List<HistorialTramites> listaUsuarioRfc = new ArrayList<HistorialTramites>();
-                 
-                listaUsuarioRfc.add(ht);
-                return listaUsuarioRfc;
+                listaUsuarioRfc.add(listaTramites.get(i));
+               
+               
             }
-
+            
         }
-       return null;
+        return listaUsuarioRfc;
+    }
+    
+    public boolean validarClienteExistente(String rfc){
+      List<Clientes> clientes =  controlPersis.traerClientes();
+      
+      for (int i=0; i<clientes.size(); i++){
+          if(clientes.get(i).getRFC().equalsIgnoreCase(rfc)){
+              return false;
+          }
+      }
+      return true;
     }
 }
