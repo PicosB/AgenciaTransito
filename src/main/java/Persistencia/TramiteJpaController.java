@@ -16,6 +16,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -171,4 +172,21 @@ public class TramiteJpaController implements Serializable {
         }
     }
     
+    public List<Tramite> obtenerTramites(){
+        try{
+            EntityManager emf = getEntityManager();
+            emf.getTransaction().begin();
+            
+            TypedQuery<Tramite> query = emf.createQuery("SELECT t FROM Tramite t", Tramite.class);
+            List<Tramite> Tramites = query.getResultList();
+            
+            emf.getTransaction().commit();
+            emf.close();
+            
+            return Tramites;
+        } catch(Exception ex){
+            System.out.println(ex);
+            return null;
+        }
+    }
 }

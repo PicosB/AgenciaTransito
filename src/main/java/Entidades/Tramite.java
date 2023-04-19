@@ -7,20 +7,25 @@ package Entidades;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author PC
  */
 @Entity
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance (strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "Tipo")
+@Table (name = "Tramite")
 public class Tramite implements Serializable {
 
     @Id
@@ -32,6 +37,7 @@ public class Tramite implements Serializable {
     private String precio;
 
     @ManyToOne
+    @JoinColumn(name = "idCliente")
     private Clientes cli;
     
     public Tramite() {
@@ -41,7 +47,7 @@ public class Tramite implements Serializable {
         this.precio = precio;
         this.cli = cli;
     }
-
+    
     public Integer getId() {
         return id;
     }

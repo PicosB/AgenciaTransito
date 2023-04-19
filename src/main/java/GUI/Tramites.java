@@ -45,13 +45,11 @@ public class Tramites extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Tramites");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         btnLicencia.setBackground(new java.awt.Color(189, 74, 54));
         btnLicencia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLicencia.setForeground(new java.awt.Color(0, 0, 0));
         btnLicencia.setText("Licencia");
         btnLicencia.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnLicencia.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +61,6 @@ public class Tramites extends javax.swing.JFrame {
 
         btnPlacas.setBackground(new java.awt.Color(189, 74, 54));
         btnPlacas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnPlacas.setForeground(new java.awt.Color(0, 0, 0));
         btnPlacas.setText("Placas");
         btnPlacas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
@@ -75,14 +72,17 @@ public class Tramites extends javax.swing.JFrame {
 
         btnConsultar.setBackground(new java.awt.Color(189, 74, 54));
         btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnConsultar.setForeground(new java.awt.Color(0, 0, 0));
         btnConsultar.setText("Consultar");
         btnConsultar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 165, 50));
 
         btnReporte.setBackground(new java.awt.Color(189, 74, 54));
         btnReporte.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnReporte.setForeground(new java.awt.Color(0, 0, 0));
         btnReporte.setText("Reporte");
         btnReporte.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +139,11 @@ public class Tramites extends javax.swing.JFrame {
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        new Consultar().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;

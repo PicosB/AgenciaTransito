@@ -146,5 +146,9 @@ public class ControladorPersistencia {
     public void buscarRFC(String RFC) {
         cliJpa.findClientes(RFC);
     }
+
+    public List<Tramite> traerTramites() {
+        return trJpa.obtenerTramites();
+    }
     
 }

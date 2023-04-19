@@ -6,7 +6,10 @@ package GUI;
 
 import Entidades.Clientes;
 import Entidades.ControladorEntidades;
+import Entidades.Licencia;
+import Entidades.Placa;
 import Entidades.Tramite;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,13 +19,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Consultar extends javax.swing.JFrame {
     ControladorEntidades control = null;
-    Clientes cli;
+    private String tramite = " ";
+
     /**
      * Creates new form Consultar
      */
     public Consultar() {
         control = new ControladorEntidades();
         initComponents();
+        cargarTabla();
     }
 
     /**
@@ -146,7 +151,7 @@ public class Consultar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        cargarTabla();
+    
     }//GEN-LAST:event_formWindowOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -162,12 +167,34 @@ public class Consultar extends javax.swing.JFrame {
 
     private void cargarTabla() {
         DefaultTableModel tabla = new DefaultTableModel(){
-            
+        
             @Override
             public boolean isCellEditable (int row, int column){
                 return false;
             }
-            
         };
+        
+        String titulos[] = {"Tramite","Precio","Nombres"};
+        tabla.setColumnIdentifiers(titulos);
+        List<Tramite> listaTramites = control.traerTramites();
+        
+        if(listaTramites != null){
+
+            for (Tramite tr : listaTramites){
+                    
+                    String precio = tr.getPrecio();
+
+                
+                    if (tr instanceof Placa){
+                        tramite = "Placa";
+                    }else if(tr instanceof Licencia){
+                        tramite = "Licencia";
+                    }
+  
+                Object[] objeto = {tramite, precio};
+                tabla.addRow(objeto);
+            }
+        }
+        tablaConsultas.setModel(tabla);
     }
 }

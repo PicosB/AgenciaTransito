@@ -58,7 +58,7 @@ public class Clientes implements Serializable {
     @Column (name = "FechaNacimiento")
     private Date fechaNacimiento;
     
-    @OneToMany (mappedBy = "cli")
+    @OneToMany (mappedBy = "cli", cascade = CascadeType.ALL)
     private List<Tramite> listaTramites;
     
     @OneToMany (mappedBy = "cli", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})

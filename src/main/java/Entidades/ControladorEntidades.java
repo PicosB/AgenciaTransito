@@ -183,5 +183,9 @@ public class ControladorEntidades {
         controlPersis.buscarRFC(RFC);
     }
 
+    public List<Tramite> traerTramites() {
+        return controlPersis.traerTramites();
+    }
+
 
 }
