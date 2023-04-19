@@ -8,22 +8,34 @@ import GUI.IniciarSesion;
 import GUI.RegistroVehiculo;
 import GUI.Tramites;
 import Persistencia.ControladorPersistencia;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author PC
  */
 public class ControladorEntidades {
+
     ControladorPersistencia controlPersis;
 
     public ControladorEntidades() {
-        controlPersis  = new ControladorPersistencia();
+        controlPersis = new ControladorPersistencia();
     }
-    
-    
-    
+
     //---------------------------- Cliente-----------------------------
     public void guardarCliente(String RFC, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String numTelefono, String discapacitado, Date fechaExp, Date fechaVig, String anios, String precio) {
         Clientes cl = new Clientes();
@@ -33,7 +45,7 @@ public class ControladorEntidades {
         cl.setApellidoM(apellidoM);
         cl.setFechaNacimiento(fechaNacimiento);
         cl.setNumTelefono(numTelefono);
-        
+
         Licencia lic = new Licencia();
         lic.setDiscapacitado(discapacitado);
         lic.setFechaExpedicion(fechaExp);
@@ -41,7 +53,7 @@ public class ControladorEntidades {
         lic.setAnios(anios);
         lic.setPrecio(precio);
         lic.setCli(cl);
-        
+
         controlPersis.guardarCliente(cl);
         controlPersis.guardarLicencia(lic);
     }
@@ -61,41 +73,41 @@ public class ControladorEntidades {
         cli.setApellidoM(apellidoM);
         cli.setFechaNacimiento(fechaNacimiento);
         cli.setNumTelefono(numTelefono);
-        
+
         controlPersis.modificarCliente(cli);
     }
 
     public Clientes traerCliente(int id) {
         return controlPersis.traerCliente(id);
     }
-    
-    public String validarCliente(String RFC){
+
+    public String validarCliente(String RFC) {
         List<Clientes> listaClientes = controlPersis.traerClientes();
-        for (Clientes cli : listaClientes){
-            if(cli.getRFC().equals(RFC)){
+        for (Clientes cli : listaClientes) {
+            if (cli.getRFC().equals(RFC)) {
                 RegistroVehiculo regVe = new RegistroVehiculo(listaClientes.get(0));
                 regVe.setVisible(true);
-                
+
             }
         }
         return RFC;
     }
-    
+
     //---------------------------- Usuario -----------------------------
     public String validarUsuario(String usuario, String contrasena) {
-        String mensaje="";
+        String mensaje = "";
         List<Usuarios> listaUsuarios = controlPersis.traerUsuarios();
-        for (Usuarios usu : listaUsuarios){
-            if (usu.getNomUsuario().equals(usuario)){
-                if (usu.getContrasena().equals(contrasena)){
-                    mensaje = "Usuario y Contraseña correctos. Bienvenido/a!"; 
+        for (Usuarios usu : listaUsuarios) {
+            if (usu.getNomUsuario().equals(usuario)) {
+                if (usu.getContrasena().equals(contrasena)) {
+                    mensaje = "Usuario y Contraseña correctos. Bienvenido/a!";
                     new Tramites().setVisible(true);
                     return mensaje;
-                }else{
+                } else {
                     mensaje = "Contraseña incorrecta, favor de ingresarla de nuevo";
                     return mensaje;
                 }
-            }else{
+            } else {
                 mensaje = "Usuario incorrecto/no se a encontrado...";
             }
         }
@@ -104,15 +116,14 @@ public class ControladorEntidades {
 
     public void guardarUsuario(String Usuario, String Contrasena) {
         Usuarios usu = new Usuarios();
-        
+
         usu.setNomUsuario(Usuario);
         usu.setContrasena(Contrasena);
-        
+
         controlPersis.guardarUsuario(usu);
     }
 
     //---------------------------- Licencia -----------------------------
-
     public List<Licencia> traerLicencias() {
         return controlPersis.traerLicencias();
     }
@@ -127,12 +138,12 @@ public class ControladorEntidades {
         lic.setVigencia(fechaVig);
         lic.setAnios(anios);
         lic.setPrecio(precio);
-        
+
         controlPersis.renovarLicencia(lic);
     }
-    
+
     //---------------------------- Placa -----------------------------
-    public void guardarPlaca(String tipoVehiculo, String numSerie, String marca, String linea, String modelo, String color, String codigo, Date fechaEmi, Date fechaRece, String precio,Clientes cli) {
+    public void guardarPlaca(String tipoVehiculo, String numSerie, String marca, String linea, String modelo, String color, String codigo, Date fechaEmi, Date fechaRece, String precio, Clientes cli) {
         Vehiculo veh = new Vehiculo();
         veh.setTipoVehiculo(tipoVehiculo);
         veh.setNumSerie(numSerie);
@@ -141,14 +152,14 @@ public class ControladorEntidades {
         veh.setModelo(modelo);
         veh.setColor(color);
         veh.setCli(cli);
-    
+
         Placa pl = new Placa();
         pl.setCodigo(codigo);
         pl.setFechaEmision(fechaEmi);
         pl.setFechaRecepcion(fechaRece);
         pl.setPrecio(precio);
         pl.setVeh(veh);
-        
+
         controlPersis.guardarVehiculo(veh);
         controlPersis.guardarPlaca(pl);
     }
@@ -165,41 +176,53 @@ public class ControladorEntidades {
         pl.setFechaEmision(fechaEmision);
         pl.setFechaRecepcion(fechaRecepcion);
         pl.setPrecio(precio);
-        
+
         controlPersis.renovarPlaca(pl);
     }
 
     //---------------------------- Vehiculo -----------------------------
-
     public List<Vehiculo> traerVehiculos() {
         return controlPersis.traerVehiculos();
     }
 
     public void borrarVehiculo(int id) {
-        controlPersis.borrarVehiculo(id);    
+        controlPersis.borrarVehiculo(id);
     }
 
     public void buscarRFC(String RFC) {
         controlPersis.buscarRFC(RFC);
     }
-    
-    public void guardarEnHistorial(String tipoTramite, String precioTramite, Date fechaTramite, String rfcCliente){
+
+    public void guardarEnHistorial(String tipoTramite, String precioTramite, Date fechaTramite, String rfcCliente) {
         HistorialTramites objTramite = new HistorialTramites();
         objTramite.setTipoTramite(tipoTramite);
         objTramite.setPrecio(precioTramite);
         objTramite.setFechaTramite(fechaTramite);
         objTramite.setRfcCliente(rfcCliente);
-        
+
         controlPersis.guardarTramite(objTramite);
     }
-    
-    public List<HistorialTramites> traerTraamites(){
+
+    public List<HistorialTramites> traerTraamites() {
         return controlPersis.traerTramites();
     }
 
     public List<Tramite> traerTramites() {
-        return controlPersis.traerTramites();
+        return controlPersis.traerTramiteEntidades();
     }
 
+    public List<HistorialTramites> filtrarHistorialLicencias(String RFC) {
+        List<HistorialTramites> listaTramites = controlPersis.traerTramites();
+        for (HistorialTramites ht : listaTramites) {
+            if (ht.getRfcCliente().equals(RFC)) {
 
+                List<HistorialTramites> listaUsuarioRfc = new ArrayList<HistorialTramites>();
+                 
+                listaUsuarioRfc.add(ht);
+                return listaUsuarioRfc;
+            }
+
+        }
+       return null;
+    }
 }

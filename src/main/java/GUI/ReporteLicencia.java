@@ -55,7 +55,7 @@ public class ReporteLicencia extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jLabel2.setText("Reporte de licencias");
+        jLabel2.setText("Reporte Trámites");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel3.setText("RFC");
@@ -84,22 +84,23 @@ public class ReporteLicencia extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel3)
-                .addGap(28, 28, 28)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(89, 89, 89))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(btnCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(btnGenerar)
                 .addGap(91, 91, 91))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel3)
+                        .addGap(28, 28, 28)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,30 +127,12 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-
+        
         String reportPath = getClass().getClassLoader().getResource("agenciaTramite.jrxml").getPath();
         
-        List<HistorialTramites> tramites = new ArrayList<>();
+         List<HistorialTramites> tramites = new ArrayList<>();
 
-        tramites = control.traerTraamites();
-        
-  
-       
-  
-/*
-        tramite1.setRfcCliente("AES");
-        tramite1.setPrecio("200.00");
-        tramite1.setTipoTramite("Placa");
-        tramite1.setFechaTramite(new Date());
-        
-         tramite2.setRfcCliente("AES");
-        tramite2.setPrecio("200.00");
-        tramite2.setTipoTramite("Placa");
-        tramite2.setFechaTramite(new Date());
-        
-     */   
-            
-            
+          tramites = control.filtrarHistorialLicencias(this.jTextField1.getText());
         
 
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(tramites);

@@ -3,6 +3,7 @@
 /Users/luis/AgenciaTransito/src/main/java/Entidades/Clientes.java
 /Users/luis/AgenciaTransito/src/main/java/Persistencia/TramiteJpaController.java
 /Users/luis/AgenciaTransito/src/main/java/Persistencia/UsuariosJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ConsultarPlaca.java
 /Users/luis/AgenciaTransito/src/main/java/GUI/RenovacionLicencia.java
 /Users/luis/AgenciaTransito/src/main/java/Persistencia/HistorialTramitesJpaController.java
 /Users/luis/AgenciaTransito/src/main/java/Persistencia/PlacaJpaController.java
@@ -23,6 +24,7 @@
 /Users/luis/AgenciaTransito/src/main/java/GUI/RenovacionPlaca.java
 /Users/luis/AgenciaTransito/src/main/java/GUI/RegistroUsuario.java
 /Users/luis/AgenciaTransito/src/main/java/Persistencia/exceptions/NonexistentEntityException.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ConsultarLicencia.java
 /Users/luis/AgenciaTransito/src/main/java/Entidades/ControladorEntidades.java
 /Users/luis/AgenciaTransito/src/main/java/GUI/VerClientes.java
 /Users/luis/AgenciaTransito/src/main/java/GUI/Consultar.java
