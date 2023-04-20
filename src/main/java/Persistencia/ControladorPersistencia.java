@@ -141,7 +141,7 @@ public class ControladorPersistencia {
 
     /**
      * Metodo para guardar Vehiculo
-     * @param veh 
+     * @param veh vehiculo a guardar
      */
     public void guardarVehiculo(Vehiculo veh) {
         vehJpa.create(veh);
@@ -149,8 +149,8 @@ public class ControladorPersistencia {
     
     /**
      * Metodo para validar por numero de serie el vehiculo
-     * @param numSerie
-     * @return 
+     * @param numSerie numSerie con el que se validará el vehículo
+     * @return boolean que define si es valido o no
      */
     public boolean validarPorSerie (String numSerie){
         if(vehJpa.buscarPorSerie(Integer.valueOf(numSerie))!=null){
@@ -163,7 +163,7 @@ public class ControladorPersistencia {
     
     /**
      * Metodo para traer lista de vehiculos
-     * @return 
+     * @return lista de vehículos
      */
     public List<Vehiculo> traerVehiculos() {
         return vehJpa.findVehiculoEntities();
@@ -171,7 +171,7 @@ public class ControladorPersistencia {
 
     /**
      * Metodo para borrar vehiculos
-     * @param id 
+     * @param id id del vehículo a borrar
      */
     public void borrarVehiculo(int id) {
         try {
@@ -201,7 +201,7 @@ public class ControladorPersistencia {
 
     /**
      * Metodo para traer una placa
-     * @param id
+     * @param id id con el que se buscará la placa
      * @return 
      */
     public Placa traerPlaca(int id) {
@@ -210,7 +210,7 @@ public class ControladorPersistencia {
 
     /**
      * Metodo para renovar una placa
-     * @param pl 
+     * @param pl atributo de placa
      */
     public void renovarPlaca(Placa pl) {
         try {
@@ -223,7 +223,7 @@ public class ControladorPersistencia {
     //------- Historial Tramites
     /**
      * Metodo para guardar un tramite
-     * @param ht 
+     * @param ht atributo de historial de tramites
      */
     public void guardarTramite(HistorialTramites ht) {
         this.ht.create(ht);
@@ -232,7 +232,7 @@ public class ControladorPersistencia {
 
     /**
      * Metodo para traer una lista de tramites
-     * @return 
+     * @return  lista de trámites
      */
     public List<Tramite> traerTramite() {
         return trJpa.findTramiteEntities();
@@ -240,7 +240,7 @@ public class ControladorPersistencia {
     
     /**
      * Metodo para traer una lista de Historial de tramites
-     * @return 
+     * @return  lista de historial de trámites
      */
     public List<HistorialTramites> traerTramites() {
         return ht.findHistorialTramitesEntities();

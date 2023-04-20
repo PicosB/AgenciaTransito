@@ -77,10 +77,10 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo para validar Numeros
+     * Metodo para validar Numeros mediante expresiones regulares
      *
-     * @param datos
-     * @return
+     * @param datos cadena a validar
+     * @return boolean true o false dependiendo la validez
      */
     public static boolean validarNumeros(String datos) {
         return datos.matches("[0-9]");
@@ -88,9 +88,9 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo para validar Letras
+     * Metodo para validar Letras mediante expresiones regulares
      *
-     * @param dato
+     * @param dato cadena a validar
      * @return
      */
     public boolean validarSoloLetras(String dato) {
@@ -98,10 +98,10 @@ public class RegistroLicencia extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo para validar Telefono
+     * Metodo para validar Telefono mediante expresiones regulares
      *
      * @param telefono el Telefono del Cliente
-     * @return true
+     * @return valor boolean dependiente de la validez
      */
     public boolean validarTelefono(String telefono) {
 

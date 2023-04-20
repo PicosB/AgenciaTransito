@@ -164,7 +164,9 @@ public class Consultar extends javax.swing.JFrame {
     private javax.swing.JTable tablaConsultas;
     private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Metodo que nos ayuda a cargar datos en la tabla en la cual se muestran las consultas
+     */
     private void cargarTabla() {
         DefaultTableModel tabla = new DefaultTableModel(){
         
