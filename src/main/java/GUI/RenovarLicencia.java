@@ -15,10 +15,12 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class RenovarLicencia extends javax.swing.JFrame {
+
     ControladorEntidades control = null;
     int id;
     Licencia lic;
-    Date fecha =  new Date();
+    Date fecha = new Date();
+
     /**
      * Creates new form RenovarLicencia
      */
@@ -26,8 +28,8 @@ public class RenovarLicencia extends javax.swing.JFrame {
         control = new ControladorEntidades();
         initComponents();
         cargarDatos(id);
-         this.btnRenovar.setEnabled(false);
-        
+        this.btnRenovar.setEnabled(false);
+
     }
 
     /**
@@ -273,29 +275,37 @@ public class RenovarLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarActionPerformed
-         String precioValidacion = txtPrecio1.getText();
-        
-        if(precioValidacion.equalsIgnoreCase("0.0")){
-              JOptionPane.showMessageDialog(null,
-                "Revise su selección de discapacidad y/o vigencia",
-                "Error de información",
-                JOptionPane.ERROR_MESSAGE);
-              
-              btnRenovar.setEnabled(false);
+        String precioValidacion = txtPrecio1.getText();
+        if (control.validarLicenciaVencida(lic, lic.getVigencia()) == true) {
+            if (precioValidacion.equalsIgnoreCase("0.0")) {
+                JOptionPane.showMessageDialog(null,
+                        "Revise su selección de discapacidad y/o vigencia",
+                        "Error de información",
+                        JOptionPane.ERROR_MESSAGE);
+
+                btnRenovar.setEnabled(false);
+            } else {
+
+                String discapacitado = (String) cmbDiscapacitado.getSelectedItem();
+                Date fechaExp;
+                Date fechaVig;
+
+                fechaExp = new Date(txtFechaExpedicion.getDate().getYear() + 1, txtFechaExpedicion.getDate().getMonth(), txtFechaExpedicion.getDate().getDate());
+                fechaVig = new Date(txtFechaVigencia.getDate().getYear() + 1, txtFechaVigencia.getDate().getMonth(), txtFechaVigencia.getDate().getDate());
+                String anios = (String) cmbVigencia.getSelectedItem();
+                String precio = txtPrecio1.getText();
+
+                control.RenovarLicencia(lic, discapacitado, fechaExp, fechaVig, anios, precio);
+
+                mostrarMensaje("Renovacion realizada correctamente", "Info", "Renovacion Correcta");
+
+                this.setVisible(false);
+                new RenovacionLicencia().setVisible(true);
+            }
+                    
+                  
         }else{
-        
-        String discapacitado = (String) cmbDiscapacitado.getSelectedItem();
-        Date fechaExp = txtFechaExpedicion.getDate();
-        Date fechaVig = txtFechaVigencia.getDate();
-        String anios = (String) cmbVigencia.getSelectedItem();
-        String precio = txtPrecio1.getText();
-        
-        control.RenovarLicencia(lic, discapacitado,fechaExp, fechaVig, anios,precio);
-        
-        mostrarMensaje("Renovacion realizada correctamente", "Info", "Renovacion Correcta");
-        
-        this.setVisible(false);
-        new RenovacionLicencia().setVisible(true);
+            JOptionPane.showMessageDialog(null, "La licencia no está vencida");
         }
     }//GEN-LAST:event_btnRenovarActionPerformed
 
@@ -305,10 +315,10 @@ public class RenovarLicencia extends javax.swing.JFrame {
 
     private void btnAceptarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDatosActionPerformed
         // TODO add your handling code here:
-                int discapacitado = cmbDiscapacitado.getSelectedIndex();
+        int discapacitado = cmbDiscapacitado.getSelectedIndex();
         int vigencia = cmbVigencia.getSelectedIndex();
 
-        if((discapacitado == 1) && (vigencia == 1)){
+        if ((discapacitado == 1) && (vigencia == 1)) {
             txtPrecio1.setText("$200");
             Date fecha = this.txtFechaExpedicion.getDate();
 
@@ -317,7 +327,7 @@ public class RenovarLicencia extends javax.swing.JFrame {
             this.txtFechaVigencia.setDate(fecha);
         }
 
-        if((discapacitado == 1) && (vigencia == 2)){
+        if ((discapacitado == 1) && (vigencia == 2)) {
             txtPrecio1.setText("$500");
             Date fecha = this.txtFechaExpedicion.getDate();
 
@@ -326,7 +336,7 @@ public class RenovarLicencia extends javax.swing.JFrame {
             this.txtFechaVigencia.setDate(fecha);
         }
 
-        if((discapacitado == 1) && (vigencia == 3)){
+        if ((discapacitado == 1) && (vigencia == 3)) {
             txtPrecio1.setText("$700");
             Date fecha = this.txtFechaExpedicion.getDate();
 
@@ -335,7 +345,7 @@ public class RenovarLicencia extends javax.swing.JFrame {
             this.txtFechaVigencia.setDate(fecha);
         }
 
-        if((discapacitado == 2) && (vigencia == 1)){
+        if ((discapacitado == 2) && (vigencia == 1)) {
             txtPrecio1.setText("$600");
             Date fecha = this.txtFechaExpedicion.getDate();
 
@@ -344,17 +354,17 @@ public class RenovarLicencia extends javax.swing.JFrame {
             this.txtFechaVigencia.setDate(fecha);
         }
 
-        if((discapacitado == 2) && (vigencia == 2)){
+        if ((discapacitado == 2) && (vigencia == 2)) {
             txtPrecio1.setText("$900");
             Date fecha = this.txtFechaExpedicion.getDate();
 
             fecha.setYear(fecha.getYear() + 2);
 
             this.txtFechaVigencia.setDate(fecha);
-             System.out.println("");
+            System.out.println("");
         }
 
-        if((discapacitado == 2) && (vigencia == 3)){
+        if ((discapacitado == 2) && (vigencia == 3)) {
             txtPrecio1.setText("$1,100");
             Date fecha = this.txtFechaExpedicion.getDate();
 
@@ -386,37 +396,37 @@ public class RenovarLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo para cargar datos automaticamente del Cliente
+     *
      * @param id El del Cliente a Renovar
      */
     private void cargarDatos(int id) {
         this.lic = control.traerLicencia(id);
-        
+
         cmbDiscapacitado.setSelectedItem(lic.getDiscapacitado());
         txtFechaExpedicion.setDate(lic.getFechaExpedicion());
         cmbVigencia.setSelectedItem(lic.getAnios());
         txtFechaVigencia.setDate(lic.getVigencia());
         txtPrecio1.setText(lic.getPrecio());
-        
+
     }
-    
+
     /**
      * Metodo que Muestra mensajes
+     *
      * @param mensaje El mensaje de la Tabla
      * @param tipo El tipo del mensaje
      * @param titulo El titulo del Mensaje
      */
-    public void mostrarMensaje (String mensaje, String tipo, String titulo){
+    public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
-        if(tipo.equals("Info")){
+        if (tipo.equals("Info")) {
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if(tipo.equals("Error")){
+        } else if (tipo.equals("Error")) {
             optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
         }
         JDialog dialog = optionPane.createDialog(titulo);
         dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);      
+        dialog.setVisible(true);
     }
 
 }
-

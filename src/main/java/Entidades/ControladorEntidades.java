@@ -4,8 +4,8 @@
  */
 package Entidades;
 
+import static Entidades.Placa_.veh;
 import GUI.RegistroVehiculo;
-import GUI.TramitePlaca;
 import GUI.Tramites;
 import Persistencia.ControladorPersistencia;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class ControladorEntidades {
     //---------------------------- Cliente-----------------------------
     /**
      * Metodo para guardar Cliente y Licencia
+     *
      * @param RFC RFC del cliente
      * @param nombre Nombre del cliente
      * @param apellidoP Apellido Paterno del Cliente
@@ -60,9 +61,9 @@ public class ControladorEntidades {
         controlPersis.guardarLicencia(lic);
     }
 
-    
     /**
      * Metodo para guardar Clientes masivos
+     *
      * @param RFC RFC del cliente
      * @param nombre Nombre del cliente
      * @param apellidoP Apellido Paterno del Cliente
@@ -70,7 +71,6 @@ public class ControladorEntidades {
      * @param numTelefono Numero Telefono del Cliente
      * @param fechaNacimiento Fecha Nacimiento del Cliente
      */
-    
     public void guardarClienteParaMasivo(String RFC, String nombre, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento) {
 
         Clientes cl = new Clientes();
@@ -87,6 +87,7 @@ public class ControladorEntidades {
 
     /**
      * Regresa lista de Clientes
+     *
      * @return Lista clientes
      */
     public List<Clientes> traerClientes() {
@@ -95,6 +96,7 @@ public class ControladorEntidades {
 
     /**
      * Metodo para borrar Cliente
+     *
      * @param id El Id del Cliente a eliminar
      */
     public void borrarCliente(int id) {
@@ -103,6 +105,7 @@ public class ControladorEntidades {
 
     /**
      * Metodo para modificar Clientes
+     *
      * @param cli Cliente a modificar
      * @param RFC RFC del cliente
      * @param nombre Nombre del cliente
@@ -124,6 +127,7 @@ public class ControladorEntidades {
 
     /**
      * Metodo para traer un Cliente
+     *
      * @param id El cliente a traer
      * @return Cliente encontrado
      */
@@ -133,6 +137,7 @@ public class ControladorEntidades {
 
     /**
      * Metodo Validar Cliente
+     *
      * @param RFC RFC del cliente a validar
      * @return El RFC del cliente validado
      */
@@ -143,7 +148,6 @@ public class ControladorEntidades {
 
             if (cli.getRFC().equals(RFC)) {
 
-
                 RegistroVehiculo regVe = new RegistroVehiculo(cli);
                 regVe.setVisible(true);
             }
@@ -151,7 +155,6 @@ public class ControladorEntidades {
         return RFC;
 
     }
-    
 
     public Clientes traerClienteRFC(String RFC) {
         List<Clientes> listaClientes = controlPersis.traerClientes();
@@ -171,9 +174,10 @@ public class ControladorEntidades {
     //---------------------------- Usuario -----------------------------
     /**
      * Metodo para validar Usuario
+     *
      * @param usuario
      * @param contrasena
-     * @return 
+     * @return
      */
     public String validarUsuario(String usuario, String contrasena) {
         String mensaje = "";
@@ -188,7 +192,7 @@ public class ControladorEntidades {
                     mensaje = "Contraseña incorrecta, favor de ingresarla de nuevo";
                     return mensaje;
                 }
-            } else if(listaUsuarios.size()== 0){
+            } else if (listaUsuarios.size() == 0) {
                 mensaje = "La lista de usuarios esta vacia...";
             } else {
                 mensaje = "Usuario incorrecto/no se a encontrado...";
@@ -199,8 +203,9 @@ public class ControladorEntidades {
 
     /**
      * Metodo para guardar al Usuario
+     *
      * @param Usuario
-     * @param Contrasena 
+     * @param Contrasena
      */
     public void guardarUsuario(String Usuario, String Contrasena) {
         Usuarios usu = new Usuarios();
@@ -214,7 +219,8 @@ public class ControladorEntidades {
     //---------------------------- Licencia -----------------------------
     /**
      * Metodo para traer una lista de las Licencias
-     * @return 
+     *
+     * @return
      */
     public List<Licencia> traerLicencias() {
         return controlPersis.traerLicencias();
@@ -222,8 +228,9 @@ public class ControladorEntidades {
 
     /**
      * Metodo para traer una Licencia
+     *
      * @param id
-     * @return 
+     * @return
      */
     public Licencia traerLicencia(int id) {
         return controlPersis.traerLicencia(id);
@@ -231,12 +238,13 @@ public class ControladorEntidades {
 
     /**
      * Metodo para renovar Licencias
+     *
      * @param lic
      * @param discapacitado
      * @param fechaExp
      * @param fechaVig
      * @param anios
-     * @param precio 
+     * @param precio
      */
     public void RenovarLicencia(Licencia lic, String discapacitado, Date fechaExp, Date fechaVig, String anios, String precio) {
         lic.setDiscapacitado(discapacitado);
@@ -251,6 +259,7 @@ public class ControladorEntidades {
     //---------------------------- Placa -----------------------------
     /**
      * Metodo para guardar Placas
+     *
      * @param tipoVehiculo
      * @param numSerie
      * @param marca
@@ -261,7 +270,7 @@ public class ControladorEntidades {
      * @param fechaEmi
      * @param fechaRece
      * @param precio
-     * @param cli 
+     * @param cli
      */
     public void guardarPlaca(String tipoVehiculo, String numSerie, String marca, String linea, String modelo, String color, String codigo, Date fechaEmi, Date fechaRece, String precio, Clientes cli) {
         Vehiculo veh = new Vehiculo();
@@ -286,7 +295,8 @@ public class ControladorEntidades {
 
     /**
      * Metodo para traer una lista de placas
-     * @return 
+     *
+     * @return
      */
     public List<Placa> traerPlacas() {
         return controlPersis.traerPlacas();
@@ -294,8 +304,9 @@ public class ControladorEntidades {
 
     /**
      * Metodo para traer una placa
+     *
      * @param id
-     * @return 
+     * @return
      */
     public Placa traerPlaca(int id) {
         return controlPersis.traerPlaca(id);
@@ -303,10 +314,11 @@ public class ControladorEntidades {
 
     /**
      * Metodo para renovar placas
+     *
      * @param pl
      * @param fechaEmision
      * @param fechaRecepcion
-     * @param precio 
+     * @param precio
      */
     public void RenovarPlaca(Placa pl, Date fechaEmision, Date fechaRecepcion, String precio) {
         pl.setFechaEmision(fechaEmision);
@@ -319,7 +331,8 @@ public class ControladorEntidades {
     //---------------------------- Vehiculo -----------------------------
     /**
      * Metodo para traer lista de Vehiculos
-     * @return 
+     *
+     * @return
      */
     public List<Vehiculo> traerVehiculos() {
         return controlPersis.traerVehiculos();
@@ -327,7 +340,8 @@ public class ControladorEntidades {
 
     /**
      * Metodo para borrar un Vehiculo
-     * @param id 
+     *
+     * @param id
      */
     public void borrarVehiculo(int id) {
         controlPersis.borrarVehiculo(id);
@@ -335,7 +349,8 @@ public class ControladorEntidades {
 
     /**
      * Metodo para buscar un RFC
-     * @param RFC 
+     *
+     * @param RFC
      */
     public void buscarRFC(String RFC) {
         controlPersis.buscarRFC(RFC);
@@ -343,10 +358,11 @@ public class ControladorEntidades {
 
     /**
      * Metodo para guardar Infromacion en el Historial
+     *
      * @param tipoTramite
      * @param precioTramite
      * @param fechaTramite
-     * @param rfcCliente 
+     * @param rfcCliente
      */
     public void guardarEnHistorial(String tipoTramite, String precioTramite, Date fechaTramite, String rfcCliente) {
         HistorialTramites objTramite = new HistorialTramites();
@@ -360,7 +376,8 @@ public class ControladorEntidades {
 
     /**
      * Metodo para traer lista de historial de tramites
-     * @return 
+     *
+     * @return
      */
     public List<HistorialTramites> traerTraamites() {
         return controlPersis.traerTramites();
@@ -368,20 +385,19 @@ public class ControladorEntidades {
 
     /**
      * Metodo para traer tramites
-     * @return 
+     *
+     * @return
      */
     public List<Tramite> traerTramites() {
         return controlPersis.traerTramite();
     }
 
-
     /**
      * Metodo para filtrar historial de licencias por RFC
+     *
      * @param RFC
-     * @return 
+     * @return
      */
-  
-
     public List<HistorialTramites> filtrarHistorialTodos(String RFC) {
 
         List<HistorialTramites> listaTramites = controlPersis.traerTramites();
@@ -399,29 +415,32 @@ public class ControladorEntidades {
         return listaUsuarioRfc;
     }
 
-    
     /**
      * Metodo para validar clientes existentes por RFC
+     *
      * @param rfc
-     * @return 
+     * @return
      */
-    public boolean validarClienteExistente(String rfc){
-      List<Clientes> clientes =  controlPersis.traerClientes();
-      
-      for (int i=0; i<clientes.size(); i++){
-          if(clientes.get(i).getRFC().equalsIgnoreCase(rfc)){
-              return false;
-          }
-      }
-      return true;
-    } 
+    public boolean validarClienteExistente(String rfc) {
+        List<Clientes> clientes = controlPersis.traerClientes();
 
-/**
- * Método que nos ayuda a filtrar una lista del historial de trámites por su tipo y el rfc
- * @param tipoTramite tipo de trámite que se realizó, puede ser placa o licencia
- * @param RFC
- * @return 
- */
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getRFC().equalsIgnoreCase(rfc)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Método que nos ayuda a filtrar una lista del historial de trámites por su
+     * tipo y el rfc
+     *
+     * @param tipoTramite tipo de trámite que se realizó, puede ser placa o
+     * licencia
+     * @param RFC
+     * @return
+     */
     public List<HistorialTramites> filtrarHistorialParametro(String tipoTramite, String RFC) {
         List<HistorialTramites> listaTramites = controlPersis.traerTramites();
 
@@ -438,8 +457,9 @@ public class ControladorEntidades {
         }
         return listaUsuarioRfc;
     }
+
     /**
-     * 
+     *
      * @param rfc rfc con el cual se validará la existencia del cliente
      * @return boolean dependiente de la validez
      */
@@ -454,12 +474,14 @@ public class ControladorEntidades {
         }
         return true;
     }
+
     /**
      * Método que nos ayuda a validar la existencia de un automóvil
+     *
      * @param numSerie número de serie mediante el cuál se buscará el auto
-     * @return 
+     * @return
      */
-       public boolean validarAuto(String numSerie) {
+    public boolean validarAuto(String numSerie) {
         List<Vehiculo> vehiculos = controlPersis.traerVehiculos();
 
         for (int i = 0; i < vehiculos.size(); i++) {
@@ -468,17 +490,34 @@ public class ControladorEntidades {
             }
         }
         return false;
+
+    }
     
-      }
-               
     /**
-     * 
+     * Método que nos ayuda a validar la existencia de un automóvil
+     *
+     * @param numSerie número de serie mediante el cuál se buscará el auto
+     * @return
+     */
+    public Vehiculo buscarAuto(String numSerie) {
+        List<Vehiculo> vehiculos = controlPersis.traerVehiculos();
+
+        for (int i = 0; i < vehiculos.size(); i++) {
+            if (vehiculos.get(i).getNumSerie().equalsIgnoreCase(numSerie)) {
+                return vehiculos.get(i);
+            }
+        }
+        return null;
+
+    }
+
+    /**
+     *
      * @param fechainicial fecha de inicio del periodo
      * @param fechaFinal fecha fin del periodo
      * @param Rfc rfc del que solicitó el trámite
-     * @return 
+     * @return
      */
-
     public List<HistorialTramites> filtrarHistorialPeriodoRfc(Date fechainicial, Date fechaFinal, String Rfc) {
         List<HistorialTramites> listaTramites = controlPersis.traerTramites();
 
@@ -498,18 +537,15 @@ public class ControladorEntidades {
         return listaUsuarioRfc;
     }
 
-/**
- * Método que nos ayuda a buscar los trámites de una persona mediante sus nombres
- * @param nombre nombre de la persona
- * @param apellido apellido de la persona
- * @param apellidoMat apellido materno de la persona
- * @return regresa una lista con el historial de trámites de la persona
- */
-    
-    
-   
-    
-    
+    /**
+     * Método que nos ayuda a buscar los trámites de una persona mediante sus
+     * nombres
+     *
+     * @param nombre nombre de la persona
+     * @param apellido apellido de la persona
+     * @param apellidoMat apellido materno de la persona
+     * @return regresa una lista con el historial de trámites de la persona
+     */
     public List<HistorialTramites> filtrarHistorialPorNombre(String nombre, String apellido, String apellidoMat) {
         List<Clientes> listaClientes = controlPersis.traerClientes();
 
@@ -520,10 +556,54 @@ public class ControladorEntidades {
                     && cli.getApellidoM().equalsIgnoreCase(apellidoMat)) {
                 return filtrarHistorialTodos(cli.getRFC());
             }
-            
+
         }
         return null;
 
-}
-
+    }
+    
+    
+    public boolean validarPlacaVencida (Vehiculo veh, Date date){
+        
+        List<Placa> listaPlacas = controlPersis.traerPlacas();
+        
+        for (Placa pla: listaPlacas){
+      
+            if(pla.getVeh().getNumSerie().equals(veh.getNumSerie())){
+          
+                if (date.after(pla.getFechaRecepcion())){
+                 
+                    return true;
+                }else if (date.before(pla.getFechaRecepcion())){
+                    
+                    return false;
+                   
+                }
+            }
+        }
+        return false;
+    }
+    
+       public boolean validarLicenciaVencida (Licencia lic, Date date){
+        
+        List<Licencia> listaLicencias = controlPersis.traerLicencias();
+        
+        for (Licencia li: listaLicencias){
+      
+            if(li.getId().equals(lic.getId())){
+          
+                if (date.after(lic.getVigencia())){
+                 
+                    return true;
+                }else if (date.before(lic.getVigencia())){
+                    
+                    return false;
+                   
+                }
+            }
+        }
+        return false;
+    }
+    
+    
 }

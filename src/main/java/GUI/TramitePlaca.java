@@ -160,11 +160,15 @@ public class TramitePlaca extends javax.swing.JFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         String RFC = JOptionPane.showInputDialog(this,"Favor de ingresar el RFC del Cliente:");
-        
-        if(!RFC.isEmpty()){
+        try{
+            if(!RFC.isEmpty()){
             control.validarCliente(RFC);
             this.setVisible(false);
         }
+        }catch(Exception e){
+            
+        }
+        
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnRenovacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovacionActionPerformed

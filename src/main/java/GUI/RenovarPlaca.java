@@ -15,9 +15,11 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class RenovarPlaca extends javax.swing.JFrame {
+
     ControladorEntidades control = null;
     int id;
     Placa pl;
+
     /**
      * Creates new form RenovarPlaca
      */
@@ -25,10 +27,8 @@ public class RenovarPlaca extends javax.swing.JFrame {
         control = new ControladorEntidades();
         initComponents();
         cargarDatos(id);
-         this.btnRenovar.setEnabled(false);
+        this.btnRenovar.setEnabled(false);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -261,7 +261,7 @@ public class RenovarPlaca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVehiculoMouseClicked
-  
+
     }//GEN-LAST:event_cmbVehiculoMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -269,43 +269,53 @@ public class RenovarPlaca extends javax.swing.JFrame {
         new RenovacionPlaca().setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    
+
     private void btnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarActionPerformed
-        
-          String precioValidacion = txtPrecio.getText();
-        
-        if(precioValidacion.equalsIgnoreCase("0.0")){
-              JOptionPane.showMessageDialog(null,
-                "Revise su selección de discapacidad y/o vigencia",
-                "Error de información",
-                JOptionPane.ERROR_MESSAGE);
-              btnRenovar.setEnabled(false);
+
+        String precioValidacion = txtPrecio.getText();
+       
+       
+        if (control.validarPlacaVencida(pl.getVeh(), pl.getFechaRecepcion() ) == true) {
+            if (precioValidacion.equalsIgnoreCase("0.0")) {
+                JOptionPane.showMessageDialog(null,
+                        "Revise su selección de discapacidad y/o vigencia",
+                        "Error de información",
+                        JOptionPane.ERROR_MESSAGE);
+                btnRenovar.setEnabled(false);
+            } else {
+
+                String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
+                String codigo = txtCodigo.getText();
+                Date fechaEmision;
+                fechaEmision = new Date(txtFechaRecepcion.getDate().getYear()+1, txtFechaRecepcion.getDate().getMonth(), txtFechaRecepcion.getDate().getDate());
+                Date fechaRecepcion;
+                fechaRecepcion = new Date(txtFechaRecepcion.getDate().getYear()+1, txtFechaRecepcion.getDate().getMonth(), txtFechaRecepcion.getDate().getDate());
+                String precio = txtPrecio.getText();
+
+                control.RenovarPlaca(pl, fechaEmision, fechaRecepcion, precio);
+
+                mostrarMensaje("Renovacion realizada correctamente", "Info", "Renovacion Correcta");
+
+                this.setVisible(false);
+                new RenovacionPlaca().setVisible(true);
+
+            }
         }else{
-        
-        String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
-        String codigo = txtCodigo.getText();
-        Date fechaEmision = txtFechaEmision.getDate();
-        Date fechaRecepcion = txtFechaRecepcion.getDate();
-        String precio = txtPrecio.getText();
-
-        control.RenovarPlaca(pl, fechaEmision, fechaRecepcion, precio);
-
-        mostrarMensaje("Renovacion realizada correctamente", "Info", "Renovacion Correcta");
-
-        this.setVisible(false);
-        new RenovacionLicencia().setVisible(true);
-        
+            JOptionPane.showMessageDialog(null, "La placa no está vencida");
         }
+                
+
+
     }//GEN-LAST:event_btnRenovarActionPerformed
 
     private void btnAceptarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDatosActionPerformed
         // TODO add your handling code here:
-              int vehiculo = cmbVehiculo.getSelectedIndex();
+        int vehiculo = cmbVehiculo.getSelectedIndex();
 
-        if(vehiculo == 1){
+        if (vehiculo == 1) {
             txtPrecio.setText("$1,000");
-             System.out.println("");
-            
+            System.out.println("");
+
         }
         this.btnRenovar.setEnabled(true);
     }//GEN-LAST:event_btnAceptarDatosActionPerformed
@@ -331,34 +341,35 @@ public class RenovarPlaca extends javax.swing.JFrame {
 
     /**
      * Metodo para cargar datos automaticamente del Cliente
+     *
      * @param id El Id del Cliente a renovar
      */
     private void cargarDatos(int id) {
         this.pl = control.traerPlaca(id);
-        
+
         cmbVehiculo.setSelectedItem(pl.getVeh().getTipoVehiculo());
         txtCodigo.setText(pl.getCodigo());
         txtFechaEmision.setDate(pl.getFechaEmision());
         txtFechaRecepcion.setDate(pl.getFechaRecepcion());
 
     }
-    
+
     /**
      * Metodo que Muestra mensajes
+     *
      * @param mensaje El mensaje de la Tabla
      * @param tipo El tipo del mensaje
      * @param titulo El titulo del Mensaje
      */
-    public void mostrarMensaje (String mensaje, String tipo, String titulo){
+    public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
-        if(tipo.equals("Info")){
+        if (tipo.equals("Info")) {
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if(tipo.equals("Error")){
+        } else if (tipo.equals("Error")) {
             optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
         }
         JDialog dialog = optionPane.createDialog(titulo);
         dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);      
+        dialog.setVisible(true);
     }
 }
