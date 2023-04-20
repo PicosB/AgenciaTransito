@@ -47,6 +47,8 @@ public class ConsultarPlaca extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtRFC = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -78,7 +80,7 @@ public class ConsultarPlaca extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -107,6 +109,16 @@ public class ConsultarPlaca extends javax.swing.JFrame {
             }
         });
 
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Buscar por Nombre:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -125,7 +137,11 @@ public class ConsultarPlaca extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -136,7 +152,10 @@ public class ConsultarPlaca extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -174,14 +193,20 @@ public class ConsultarPlaca extends javax.swing.JFrame {
         cargarTablaRFC();
     }//GEN-LAST:event_txtRFCKeyReleased
 
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        CargarTablaNombre();
+    }//GEN-LAST:event_txtNombreKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaPlacas;
+    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 
@@ -227,6 +252,34 @@ public class ConsultarPlaca extends javax.swing.JFrame {
                     String RFC = cli.getRFC();
                     
                     if(RFC.toUpperCase().contains(txtRFC.getText().toUpperCase())){
+                        aux.add(pl);
+                    }
+                }
+                listaTabla = aux;
+            }
+            tabla.setRowCount(0);
+            for(Placa pl : listaTabla){
+                Object[] objeto = {pl.getId(),pl.getCodigo(),pl.getPrecio(),pl.getFechaEmision(),pl.getFechaRecepcion(),pl.getVeh().getNumSerie(),pl.getVeh().getCli().getRFC()};
+                tabla.addRow(objeto);
+            }
+            tablaPlacas.setModel(tabla);
+        }
+    }
+    
+    public void CargarTablaNombre(){
+        DefaultTableModel tabla = (DefaultTableModel) tablaPlacas.getModel();
+        String titulos [] = {"id_Placa","Codigo","Precio","FechaEmision","FechaRecepcion","NumSerieVehiculo","RFC Cliente"};
+        tabla.setColumnIdentifiers(titulos);
+        
+        listaTabla = control.traerPlacas();
+        List<Placa> aux = new ArrayList<>();
+        if(listaTabla !=null){
+            if(!txtNombre.getText().equalsIgnoreCase("")){
+                for(Placa pl : listaTabla){
+                    Clientes cli = pl.getCli();
+                    String nombre = cli.getNombres()+" "+cli.getApellidoP()+" "+cli.getApellidoM();
+                    
+                    if(nombre.toLowerCase().contains(txtNombre.getText().toLowerCase())){
                         aux.add(pl);
                     }
                 }

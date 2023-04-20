@@ -8,6 +8,7 @@ import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Licencia;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -46,8 +47,10 @@ public class ConsultarLicencia extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaLicencias = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
-        txtRFC = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtRFC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -86,7 +89,7 @@ public class ConsultarLicencia extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -98,15 +101,25 @@ public class ConsultarLicencia extends javax.swing.JFrame {
             }
         });
 
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Buscar por Nombre:");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Buscar por RFC:");
+
         txtRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtRFCKeyReleased(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Buscar por RFC:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,9 +138,13 @@ public class ConsultarLicencia extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel2)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -135,12 +152,14 @@ public class ConsultarLicencia extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegresar)
                 .addContainerGap())
@@ -175,6 +194,10 @@ public class ConsultarLicencia extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        CargarTablaNombre();
+    }//GEN-LAST:event_txtNombreKeyReleased
+
     private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
         cargarTablaRFC();
     }//GEN-LAST:event_txtRFCKeyReleased
@@ -183,10 +206,12 @@ public class ConsultarLicencia extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaLicencias;
+    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 
@@ -247,6 +272,36 @@ public class ConsultarLicencia extends javax.swing.JFrame {
         }
     }
     
+    public void CargarTablaNombre(){
+        DefaultTableModel tabla = (DefaultTableModel) tablaLicencias.getModel();
+        
+        String titulos[] = {"NumeroLicencia","Fecha Expedicion","Fecha Vigencia", "Años", "Discapacitado","Precio","RFC Cliente"};
+        tabla.setColumnIdentifiers(titulos);
+        
+        listaTabla = control.traerLicencias();
+        List<Licencia> aux = new ArrayList<>();
+        if(listaTabla != null){
+            if(!txtNombre.getText().equalsIgnoreCase("")){
+                for(Licencia lic : listaTabla){
+                    Clientes cli = lic.getCli();
+                    String nombre = cli.getNombres()+" "+cli.getApellidoP()+" "+cli.getApellidoM();
+                    
+                    if(nombre.toLowerCase().contains(txtNombre.getText().toLowerCase())){
+                        aux.add(lic);
+                    }
+                }
+                listaTabla = aux;
+            }
+            tabla.setRowCount(0);
+            for(Licencia lic : listaTabla){
+                Object[] objeto = {lic.getId(),lic.getFechaExpedicion(),lic.getVigencia(),lic.getAnios(),lic.getDiscapacitado(),lic.getPrecio(),lic.getCli().getRFC()};
+                tabla.addRow(objeto);
+            }
+            tablaLicencias.setModel(tabla);
+        }
+        
+    }
+    
     /**
      * Metodo que Muestra mensajes
      * @param mensaje El mensaje de la Tabla
@@ -265,4 +320,6 @@ public class ConsultarLicencia extends javax.swing.JFrame {
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);      
     }
+
+    
 }
