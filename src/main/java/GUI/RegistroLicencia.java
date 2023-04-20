@@ -8,6 +8,8 @@ import Entidades.ControladorEntidades;
 import Persistencia.ClientesJpaController;
 import java.awt.Color;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -27,17 +29,19 @@ public class RegistroLicencia extends javax.swing.JFrame {
     public RegistroLicencia() {
         initComponents();
         btnRegistrar.setEnabled(false);
+
     }
 
     /**
      * Metodo para validar datos en blanco
-     * @return 
+     *
+     * @return
      */
     private boolean validarDatos() {
         if (txtNombre.getText().isEmpty()
                 || txtApellidoM.getText().isEmpty()
                 || txtApellidoP.getText().isEmpty()
-                || txtRFC.getText().isEmpty()
+                //                || txtRFC.getText().isEmpty()
                 || txtTelefono.getText().isEmpty()) {
 
             return true;
@@ -46,12 +50,25 @@ public class RegistroLicencia extends javax.swing.JFrame {
         }
     }
 
+    public boolean validarFormatoRfc(String str) {
+        String pattern = "\\w{13}";
+
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(str);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Metodo para validar Cadenas
+     *
      * @param input
-     * @return 
+     * @return
      */
-    public boolean validarCadenas (String input) {
+    public boolean validarCadenas(String input) {
         if (input.matches("^[a-zA-Z ]*$")) {
             return true;
         } else {
@@ -61,8 +78,9 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo para validar Numeros
+     *
      * @param datos
-     * @return 
+     * @return
      */
     public static boolean validarNumeros(String datos) {
         return datos.matches("[0-9]");
@@ -71,8 +89,9 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo para validar Letras
+     *
      * @param dato
-     * @return 
+     * @return
      */
     public boolean validarSoloLetras(String dato) {
         return dato.matches("[a-zA-Z]*");
@@ -80,26 +99,20 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo para validar Telefono
+     *
      * @param telefono el Telefono del Cliente
      * @return true
      */
     public boolean validarTelefono(String telefono) {
 
-        for (int i = 0; i < telefono.length(); i++) {
-            char caracter = telefono.charAt(i);
-            if (caracter == 0
-                    || caracter == 1
-                    || caracter == 2
-                    || caracter == 3
-                    || caracter == 4
-                    || caracter == 5
-                    || caracter == 6
-                    || caracter == 7
-                    || caracter == 8
-                    || caracter == 9) {
-            }
+        String pattern = "\\d{10}";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(telefono);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 
     /**
@@ -450,9 +463,12 @@ public class RegistroLicencia extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
 
             btnRegistrar.setEnabled(false);
+        } else if (validarFormatoRfc(this.txtRFC.getText()) == false) {
+            JOptionPane.showMessageDialog(null, "El RFC debe contener 13 dígitos.");
+            txtRFC.setBackground(Color.YELLOW);
         } else if (validarTelefono(this.txtTelefono.getText()) == false) {
 
-            JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el teléfono a ");
+            JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el teléfono ");
             txtTelefono.setBackground(Color.YELLOW);
 
         } else if (txtTelefono.getText().length() != 10) {
@@ -472,16 +488,15 @@ public class RegistroLicencia extends javax.swing.JFrame {
             txtApellidoP.setBackground(Color.WHITE);
             JOptionPane.showMessageDialog(null, "No se aceptan valores numericos en el apellido materno ");
             txtApellidoM.setBackground(Color.YELLOW);
-        }else if(control.validarClienteExistente(this.txtRFC.getText()) == false){
+        } else if (control.validarClienteExistente(this.txtRFC.getText()) == false) {
             JOptionPane.showMessageDialog(null, "Ya hay un usuario con este RFC");
             txtRFC.setBackground(Color.YELLOW);
-        }else if ( validarCadenas(this.txtApellidoM.getText().trim()) == true
+        } else if (validarCadenas(this.txtApellidoM.getText().trim()) == true
                 && validarCadenas(this.txtApellidoP.getText().trim()) == true
                 && validarCadenas(this.txtNombre.getText()) == true
-                && validarTelefono(this.txtTelefono.getText()) == true
-                && control.validarClienteExistente(this.txtRFC.getText()) == true) {
+                && validarTelefono(this.txtTelefono.getText()) == true) {
 
-            String RFC = txtRFC.getText();
+            String RFC = txtRFC.getText().toUpperCase();
             String nombre = txtNombre.getText();
             String apellidoP = txtApellidoP.getText();
             String apellidoM = txtApellidoM.getText();
@@ -496,7 +511,6 @@ public class RegistroLicencia extends javax.swing.JFrame {
 
             control.guardarCliente(RFC, nombre, apellidoP, apellidoM, fechaNacimiento, numTelefono, discapacitado, fechaExp, fechaVig, anios, precio);
             control.guardarEnHistorial("Licencia", precio, date, RFC);
-            
 
             JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
@@ -539,11 +553,14 @@ public class RegistroLicencia extends javax.swing.JFrame {
                     "Error de información",
                     JOptionPane.ERROR_MESSAGE);
 
+        } else if (validarFormatoRfc(this.txtRFC.getText()) == false) {
+            JOptionPane.showMessageDialog(null, "El RFC debe contener 13 dígitos");
+            txtRFC.setBackground(Color.YELLOW);
         } else if (validarTelefono(this.txtTelefono.getText()) == false) {
 
             JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el teléfono ");
             txtTelefono.setBackground(Color.YELLOW);
-
+            txtRFC.setBackground(Color.WHITE);
         } else if (validarCadenas(this.txtNombre.getText()) == false) {
             txtTelefono.setBackground(Color.WHITE);
             JOptionPane.showMessageDialog(null, "Los datos son incorrectos en el nombre ");
@@ -657,4 +674,16 @@ public class RegistroLicencia extends javax.swing.JFrame {
     private javax.swing.JTextField txtRFC;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+//    public String generaRfc(){
+//        String rfc = this.txtApellidoP.getText().substring(0, 2)+
+//                this.txtApellidoM.getText().charAt(0)+
+//                this.txtNombre.getText().charAt(0)+
+//                this.txtFechaNac2.getDate().toString().substring(26, 28)+
+//                this.txtFechaNac2.getDate().getMonth()+
+//                this.txtFechaNac2.getDate().toString().substring(8, 10)+
+//                "1HO";
+//       
+//        return rfc.toUpperCase();
+//    }
 }

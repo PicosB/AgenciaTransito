@@ -87,7 +87,6 @@ public class RenovarPlaca extends javax.swing.JFrame {
 
         btnCancelar.setBackground(new java.awt.Color(189, 74, 54));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +101,6 @@ public class RenovarPlaca extends javax.swing.JFrame {
 
         btnRenovar.setBackground(new java.awt.Color(189, 74, 54));
         btnRenovar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRenovar.setForeground(new java.awt.Color(0, 0, 0));
         btnRenovar.setText("Renovar");
         btnRenovar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +108,6 @@ public class RenovarPlaca extends javax.swing.JFrame {
             }
         });
 
-        cmbVehiculo.setBackground(new java.awt.Color(255, 255, 255));
         cmbVehiculo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automovil" }));
         cmbVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,7 +118,6 @@ public class RenovarPlaca extends javax.swing.JFrame {
 
         btnAceptarDatos.setBackground(new java.awt.Color(189, 74, 54));
         btnAceptarDatos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAceptarDatos.setForeground(new java.awt.Color(0, 0, 0));
         btnAceptarDatos.setText("Aceptar Datos");
         btnAceptarDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -7,6 +7,7 @@ package GUI;
 import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Licencia;
+import Entidades.Tramite;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ public class Tramites extends javax.swing.JFrame {
      * Creates new form Tramites
      */
     ControladorEntidades control = new ControladorEntidades();
+    RegistroLicencia reg;
 
     public Tramites() {
         initComponents();
@@ -104,7 +106,7 @@ public class Tramites extends javax.swing.JFrame {
                 btnAgregarMasivoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarMasivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 165, 50));
+        jPanel1.add(btnAgregarMasivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 170, 50));
 
         btnReporte1.setBackground(new java.awt.Color(189, 74, 54));
         btnReporte1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -161,27 +163,27 @@ public class Tramites extends javax.swing.JFrame {
 
     private void btnAgregarMasivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMasivoActionPerformed
 
-        Clientes p1 = new Clientes("AES-324", "Juan", "Toledo", "Navarro", "6442327211", new Date(103, 6, 23));
-        Clientes p2 = new Clientes("AEM-777", "Andres", "Ezqueiel", "Montaño", "6441578355", new Date(67, 7, 12));
-        Clientes p3 = new Clientes("MAN-324", "Salvador", "Cruz", "Murillo", "6442327211", new Date(56, 5, 14));
-        Clientes p4 = new Clientes("ERT-456", "Luis", "Enrique", "Contreras", "6442327211", new Date(57, 3, 15));
-        Clientes p21 = new Clientes("BRG-345", "Brayan", "García", "Picos", "6442327211", new Date(87, 8, 13));
-        Clientes p5 = new Clientes("SAD-879", "Raul", "Luna", "Bringas", "6442327211", new Date(65, 7, 23));
-        Clientes p6 = new Clientes("FDF-345", "Andrea", "Valenzuela", "Campas", "6442327211", new Date(78, 6, 24));
-        Clientes p7 = new Clientes("SAS-678", "Samantha", "Zazueta", "Montero", "6442327211", new Date(90, 2, 25));
-        Clientes p8 = new Clientes("SAF-123", "Martin", "Hernando", "Lopez", "6442327211", new Date(100, 4, 14));
-        Clientes p9 = new Clientes("ZSD-556", "Travis", "J", "Scoott", "6442327211", new Date(98, 5, 12));
-        Clientes p10 = new Clientes("ASE-789", "Lionel", "Andres", "Messi", "6442327211", new Date(65, 3, 11));
-        Clientes p11 = new Clientes("AZD-432", "Cristiano", "Ronaldo", "Dos Santos", "6442327211", new Date(45, 2, 9));
-        Clientes p12 = new Clientes("SDR-123", "Homer", "J", "Simpson", "6442327211", new Date(34, 1, 23));
-        Clientes p13 = new Clientes("FGY-567", "Jorge", "García", "Romero", "6371019988", new Date(34, 11, 15));
-        Clientes p14 = new Clientes("YUH-213", "Duki", "SS", "J", "6542298722", new Date(45, 9, 3));
-        Clientes p15 = new Clientes("IJK-213", "Silvia", "Pinal", "Lóez", "6202213433", new Date(34, 6, 4));
-        Clientes p16 = new Clientes("FGH-232", "Jesus", "Jorge", "Rodriguez", "6153471122", new Date(56, 6, 7));
-        Clientes p17 = new Clientes("TGY-124", "Omar", "Contreras", "Peraza", "6442327211", new Date(65, 7, 8));
-        Clientes p18 = new Clientes("DAE-567", "Santiago", "Gimenez", "Gonzalez", "6220918583", new Date(76, 6, 12));
-        Clientes p19 = new Clientes("XSA-323", "Andres", "Lopez", "Obrador", "6892048982", new Date(87, 5, 22));
-        Clientes p20 = new Clientes("SAD-467", "Samuel", "Garcia", "Castro", "6365083221", new Date(88, 4, 30));
+        Clientes p1 = new Clientes("COPL233131HOS", "Juan", "Toledo", "Navarro", "6442327211", new Date(103, 6, 23));
+        Clientes p2 = new Clientes("SSASA89SA9SAS", "Andres", "Ezqueiel", "Montaño", "6441578355", new Date(67, 7, 12));
+        Clientes p3 = new Clientes("ASADS4556644A", "Salvador", "Cruz", "Murillo", "6442327211", new Date(56, 5, 14));
+        Clientes p4 = new Clientes("AS986SSASWAS3", "Luis", "Enrique", "Contreras", "6442327211", new Date(57, 3, 15));
+        Clientes p21 = new Clientes("ASD34HMSO234", "Brayan", "García", "Picos", "6442327211", new Date(87, 8, 13));
+        Clientes p5 = new Clientes("BNXS45XZNDDDD", "Raul", "Luna", "Bringas", "6442327211", new Date(65, 7, 23));
+        Clientes p6 = new Clientes("MOCL23344SWWA", "Andrea", "Valenzuela", "Campas", "6442327211", new Date(78, 6, 24));
+        Clientes p7 = new Clientes("A23KJL56HGT78", "Samantha", "Zazueta", "Montero", "6442327211", new Date(90, 2, 25));
+        Clientes p8 = new Clientes("D67FRT45MNB12", "Martin", "Hernando", "Lopez", "6442327211", new Date(100, 4, 14));
+        Clientes p9 = new Clientes("T78WER56HGF43", "Travis", "J", "Scoott", "6442327211", new Date(98, 5, 12));
+        Clientes p10 = new Clientes("COPASA3131HO", "Lionel", "Andres", "Messi", "6442327211", new Date(65, 3, 11));
+        Clientes p11 = new Clientes("COPL2ERX31HO", "Cristiano", "Ronaldo", "Dos Santos", "6442327211", new Date(45, 2, 9));
+        Clientes p12 = new Clientes("COPL233131HO", "Homer", "J", "Simpson", "6442327211", new Date(34, 1, 23));
+        Clientes p13 = new Clientes("G89KLO12NBV67", "Jorge", "García", "Romero", "6371019988", new Date(34, 11, 15));
+        Clientes p14 = new Clientes("S87POI90LKJ23", "Duki", "SS", "J", "6542298722", new Date(45, 9, 3));
+        Clientes p15 = new Clientes("V43HJU56NMB21", "Silvia", "Pinal", "Lóez", "6202213433", new Date(34, 6, 4));
+        Clientes p16 = new Clientes("COPL2SDDF31HO", "Jesus", "Jorge", "Rodriguez", "6153471122", new Date(56, 6, 7));
+        Clientes p17 = new Clientes("R54BVC21MNB78", "Omar", "Contreras", "Peraza", "6442327211", new Date(65, 7, 8));
+        Clientes p18 = new Clientes("U67REW34TYH12", "Santiago", "Gimenez", "Gonzalez", "6220918583", new Date(76, 6, 12));
+        Clientes p19 = new Clientes("I90KJL43HGT56", "Andres", "Lopez", "Obrador", "6892048982", new Date(87, 5, 22));
+        Clientes p20 = new Clientes("I90KJLESHGT56", "Samuel", "Garcia", "Castro", "6365083221", new Date(88, 4, 30));
 
         Licencia l1 = new Licencia(new Date(), new Date(new Date().getYear() + 1, new Date().getMonth(), new Date().getDate()), "1", "Si", "200.00", p1);
         Licencia l2 = new Licencia(new Date(), new Date(new Date().getYear() + 2, new Date().getMonth(), new Date().getDate()), "2", "No", "900.00", p2);
@@ -243,30 +245,43 @@ public class Tramites extends javax.swing.JFrame {
                 l18,
                 l19,
                 l20));
-        try {
-            Collections.shuffle(personas);
-            for (int i = 0; i < personas.size(); i++) {
+        for (int a = 0; a < personas.size(); a++) {
+        if (control.validarClienteExistente(personas.get(a).getRFC()) == false) {
+        
+        } else {
+            try {
+                //    Collections.shuffle(personas);
+                for (int i = 0; i < personas.size(); i++) {
 
-                control.guardarCliente(personas.get(i).getRFC(),
-                        personas.get(i).getNombres(),
-                        personas.get(i).getApellidoP(),
-                        personas.get(i).getApellidoM(),
-                        personas.get(i).getFechaNacimiento(),
-                        personas.get(i).getNumTelefono(),
-                        licencia.get(i).getDiscapacitado(),
-                        licencia.get(i).getFechaExpedicion(),
-                        licencia.get(i).getVigencia(),
-                        licencia.get(i).getAnios(),
-                        licencia.get(i).getPrecio()
-                );
+                    control.guardarCliente(personas.get(i).getRFC(),
+                            personas.get(i).getNombres(),
+                            personas.get(i).getApellidoP(),
+                            personas.get(i).getApellidoM(),
+                            personas.get(i).getFechaNacimiento(),
+                            personas.get(i).getNumTelefono(),
+                            licencia.get(i).getDiscapacitado(),
+                            licencia.get(i).getFechaExpedicion(),
+                            licencia.get(i).getVigencia(),
+                            licencia.get(i).getAnios(),
+                            licencia.get(i).getPrecio()
+                    );
 
+                    control.guardarEnHistorial("Licencia", licencia.get(i).getPrecio(), new Date(), personas.get(i).getRFC());
+                    
+                }
+                JOptionPane.showMessageDialog(null, "Se añadieron 20 registros de forma exitosa");
+                btnAgregarMasivo.setEnabled(false);
+
+                this.setVisible(false);
+                new Tramites().setVisible(true);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error al procesar su solicitud");
             }
-            JOptionPane.showMessageDialog(null, "Se añadieron 20 registros de forma exitosa");
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al procesar su solicitud");
-        }
 
+        }
+        }
+        JOptionPane.showMessageDialog(null, "Nota: Solo puedes realizar la carga masiva una vez. Por tu comprensión, muchas gracias.");
 
     }//GEN-LAST:event_btnAgregarMasivoActionPerformed
 
@@ -290,7 +305,9 @@ public class Tramites extends javax.swing.JFrame {
     private void btnReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte1ActionPerformed
         new ModuloReportes().setVisible(true);
         this.setVisible(false);
+
     }//GEN-LAST:event_btnReporte1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarMasivo;

@@ -5,16 +5,39 @@
 package GUI;
 
 import Entidades.ControladorEntidades;
+import Entidades.HistorialTramites;
 
 import java.awt.HeadlessException;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.export.ExporterInput;
+import net.sf.jasperreports.export.OutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -44,15 +67,16 @@ public class ReportePlaca extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNumSerie = new javax.swing.JTextField();
+        txtRfc = new javax.swing.JTextField();
         btnGenerar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnGenerar1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(189, 74, 54));
         btnCancelar.setText("Cancelar");
@@ -68,22 +92,20 @@ public class ReportePlaca extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(189, 74, 54));
-        jLabel3.setText("Número de serie auto");
+        jLabel3.setText("RFC del cliente");
 
-        txtNumSerie.setBackground(new java.awt.Color(255, 255, 255));
-        txtNumSerie.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        txtNumSerie.setForeground(new java.awt.Color(189, 74, 54));
-        txtNumSerie.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtNumSerie.addActionListener(new java.awt.event.ActionListener() {
+        txtRfc.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        txtRfc.setForeground(new java.awt.Color(189, 74, 54));
+        txtRfc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtRfc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumSerieActionPerformed(evt);
+                txtRfcActionPerformed(evt);
             }
         });
 
-        btnGenerar.setBackground(new java.awt.Color(255, 255, 255));
         btnGenerar.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         btnGenerar.setForeground(new java.awt.Color(189, 74, 54));
-        btnGenerar.setText("Generar");
+        btnGenerar.setText("Generar PDF");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarActionPerformed(evt);
@@ -91,6 +113,19 @@ public class ReportePlaca extends javax.swing.JFrame {
         });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/images.png"))); // NOI18N
+
+        btnGenerar1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        btnGenerar1.setForeground(new java.awt.Color(189, 74, 54));
+        btnGenerar1.setText("Imprimir");
+        btnGenerar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(189, 74, 54));
+        jLabel5.setText("*Imprimir cerrará la aplicación");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,23 +135,29 @@ public class ReportePlaca extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(95, 95, 95)
                                 .addComponent(jLabel2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(btnCancelar)
-                                .addGap(79, 79, 79)
-                                .addComponent(btnGenerar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 28, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnCancelar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnGenerar1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnGenerar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel5)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -128,13 +169,16 @@ public class ReportePlaca extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGenerar)
-                    .addComponent(btnCancelar))
-                .addGap(95, 95, 95))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnGenerar1))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel5)
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,63 +189,62 @@ public class ReportePlaca extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNumSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumSerieActionPerformed
+    private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumSerieActionPerformed
+    }//GEN-LAST:event_txtRfcActionPerformed
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        // TODO add your handling code here:
-        /*
-        Document documento = new Document();
+        String reportPath = getClass().getClassLoader().getResource("agenciaTramites.jrxml").getPath();
 
-        try {
-            String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/reporte_tramites.pdf"));
-            documento.open();
+        List<HistorialTramites> tramites = new ArrayList<>();
 
-            PdfPTable tabla = new PdfPTable(6);
-            tabla.addCell("id_tramite");
-            tabla.addCell("codigo");
-            tabla.addCell("fechaEmision");
-            tabla.addCell("fechaRecepcion");
-            tabla.addCell("precio");
-            tabla.addCell("id_vehiculo");
+        tramites = control.filtrarHistorialParametro("Placa", this.txtRfc.getText());
+
+        if (tramites.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se han encontrado registros del usuario en este tipo de trámite");
+        } else {
+
+            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(tramites);
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", itemsJRBean);
             try {
 
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/agenciatramites ", "root", "adminadmin");
-          
-                PreparedStatement ps = cn.prepareStatement("SELECT * FROM PLACA PL INNER JOIN VEHICULO V ON PL.VEH_id_vehiculo = v.id_vehiculo WHERE NUMSERIE = " + txtNumSerie.getText() + ";");
-                 ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
+                InputStream input = getClass().getClassLoader().getResourceAsStream("agenciaTramites.jrxml");
 
-                    do {
-                        tabla.addCell(rs.getString(1));
-                        tabla.addCell(rs.getString(2));
-                        tabla.addCell(rs.getString(3));
-                        tabla.addCell(rs.getString(4));
-                        tabla.addCell(rs.getString(5));
-                        tabla.addCell(rs.getString(6));
+                JasperDesign japerdesign = JRXmlLoader.load(input);
 
-                    } while (rs.next());
-                    documento.add(tabla);
-                }
-                    
-            } catch (DocumentException | SQLException e) {
-                JOptionPane.showMessageDialog(null, "Los datos ingresados no son validos");
+                JasperReport jasperReport = JasperCompileManager.compileReport(japerdesign);
+
+                JasperPrint jasperprint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+                //JasperViewer.viewReport(jasperprint);
+                File pdfFile = new File("reportes/reportePlaca.pdf");
+                OutputStream outputStream = new FileOutputStream(pdfFile);
+                JRPdfExporter exporter = new JRPdfExporter();
+                ExporterInput exporterInput = new SimpleExporterInput(jasperprint);
+                exporter.setExporterInput(exporterInput);
+
+                OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(outputStream);
+                exporter.setExporterOutput(exporterOutput);
+
+                SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+                exporter.setConfiguration(configuration);
+
+                exporter.exportReport();
+            JOptionPane.showMessageDialog(null, "Su reporte ha sido generado exitosamente y se encuentra en la carpeta 'reportes' del proyecto");
+
+            } catch (Exception e) {
+                System.out.println(e);
             }
-            documento.close();
-            JOptionPane.showMessageDialog(null, "reporte creado");
-        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Los datos ingresados no son validos");
         }
-        */
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -211,13 +254,48 @@ public class ReportePlaca extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnGenerar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerar1ActionPerformed
+        String reportPath = getClass().getClassLoader().getResource("agenciaTramites.jrxml").getPath();
+
+        List<HistorialTramites> tramites = new ArrayList<>();
+
+        tramites = control.filtrarHistorialParametro("Placa", this.txtRfc.getText());
+
+        if (tramites.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se han encontrado registros del usuario en este tipo de trámite");
+        } else {
+
+            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(tramites);
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", itemsJRBean);
+            try {
+
+                InputStream input = getClass().getClassLoader().getResourceAsStream("agenciaTramites.jrxml");
+
+                JasperDesign japerdesign = JRXmlLoader.load(input);
+
+                JasperReport jasperReport = JasperCompileManager.compileReport(japerdesign);
+
+                JasperPrint jasperprint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+                JasperViewer.viewReport(jasperprint);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_btnGenerar1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnGenerar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtNumSerie;
+    private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 }

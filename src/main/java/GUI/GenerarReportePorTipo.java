@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
  *
  * @author luis
  */
-public class ModuloReportes extends javax.swing.JFrame {
+public class GenerarReportePorTipo extends javax.swing.JFrame {
 
     /**
      * Creates new form ModuloReportes
      */
-    public ModuloReportes() {
+    public GenerarReportePorTipo() {
         initComponents();
     }
 
@@ -49,7 +49,7 @@ public class ModuloReportes extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cbTramites.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los trámites", "Por tipo de trámite", "Por periodo", "Por nombre" }));
+        cbTramites.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Placa", "Licencia" }));
         cbTramites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTramitesActionPerformed(evt);
@@ -67,6 +67,7 @@ public class ModuloReportes extends javax.swing.JFrame {
         jLabel1.setText("Solicitud de reporte de trámites");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
+        btnGenerarReporte.setBackground(new java.awt.Color(255, 255, 255));
         btnGenerarReporte.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         btnGenerarReporte.setForeground(new java.awt.Color(189, 74, 54));
         btnGenerarReporte.setText("Aceptar");
@@ -77,6 +78,7 @@ public class ModuloReportes extends javax.swing.JFrame {
         });
         jPanel1.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 110, 30));
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(189, 74, 54));
         jButton1.setText("Cancelar");
@@ -94,9 +96,7 @@ public class ModuloReportes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,18 +111,12 @@ public class ModuloReportes extends javax.swing.JFrame {
         
         String tramite = (String) cbTramites.getSelectedItem();
         
-        if (tramite.equals("Todos los trámites")){
+        if (tramite.equals("Licencia")){
             
-            new ReporteTodos().setVisible(true);
+            new ReporteLicencia().setVisible(true);
             this.setVisible(false);
-        }else if(tramite.equals("Por tipo de trámite")){
-         new GenerarReportePorTipo().setVisible(true);
-         this.setVisible(false);
-        }else if(tramite.equals("Por periodo")){
-          new ReportePeriodo().setVisible(true);
-          this.setVisible(false);
-        }else if(tramite.equals("Por nombre")){
-            new ReportePorNombre().setVisible(true);
+        }else if(tramite.equals("Placa")){
+            new ReportePlaca().setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed

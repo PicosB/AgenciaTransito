@@ -60,6 +60,14 @@ public class RegistroVehiculo extends javax.swing.JFrame {
     public boolean validarSoloLetras(String dato) {
         return dato.matches("[a-zA-Z]*");
     }
+    
+          public boolean validarNumericos (String input) {
+        if (input.matches("^[0-9]*$")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
         public boolean validarNumSerie(String numSerie) {
 
@@ -154,18 +162,23 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(189, 74, 54));
         jLabel8.setText("Modelo:");
 
+        txtNumSerie.setBackground(new java.awt.Color(255, 255, 255));
         txtNumSerie.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNumSerie.setForeground(new java.awt.Color(189, 74, 54));
 
+        txtColor.setBackground(new java.awt.Color(255, 255, 255));
         txtColor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtColor.setForeground(new java.awt.Color(189, 74, 54));
 
+        txtModelo.setBackground(new java.awt.Color(255, 255, 255));
         txtModelo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtModelo.setForeground(new java.awt.Color(189, 74, 54));
 
+        txtMarca.setBackground(new java.awt.Color(255, 255, 255));
         txtMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMarca.setForeground(new java.awt.Color(189, 74, 54));
 
+        txtLinea.setBackground(new java.awt.Color(255, 255, 255));
         txtLinea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtLinea.setForeground(new java.awt.Color(189, 74, 54));
 
@@ -185,11 +198,13 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(189, 74, 54));
         jLabel10.setText("Fecha ");
 
+        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(189, 74, 54));
         txtCodigo.setBorder(null);
 
         txtPrecio.setEditable(false);
+        txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
         txtPrecio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPrecio.setForeground(new java.awt.Color(189, 74, 54));
         txtPrecio.setText("0.0");
@@ -206,6 +221,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         txtFechaRecepcion.setForeground(new java.awt.Color(189, 74, 54));
         txtFechaRecepcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(189, 74, 54));
         btnCancelar.setText("Cancelar");
@@ -216,6 +232,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             }
         });
 
+        btnRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(189, 74, 54));
         btnRegistrar.setText("Registrar");
@@ -238,6 +255,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             }
         });
 
+        btnConfirmarDatos.setBackground(new java.awt.Color(255, 255, 255));
         btnConfirmarDatos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConfirmarDatos.setForeground(new java.awt.Color(189, 74, 54));
         btnConfirmarDatos.setText("Confirmar Datos");
@@ -471,10 +489,10 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             this.txtLinea.setBackground(Color.YELLOW);
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Línea");
             this.btnRegistrar.setEnabled(false);
-        } else if (validarSoloLetras(this.txtModelo.getText().trim()) == false) {
+        } else if (validarNumericos(this.txtModelo.getText())==false) {
             this.txtLinea.setBackground(Color.WHITE);
             this.txtModelo.setBackground(Color.YELLOW);
-            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Modelo ");
+            JOptionPane.showMessageDialog(null, "Solo se permiten datos numéricos en modelo. ");
             this.btnRegistrar.setEnabled(false);
         } else if (validarSoloLetras(this.txtColor.getText().trim()) == false) {
             this.txtModelo.setBackground(Color.WHITE);
@@ -513,10 +531,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                     "Error de información",
                     JOptionPane.ERROR_MESSAGE);
             btnRegistrar.setEnabled(false);
-        } else if (validarSoloLetras(txtNumSerie.getText()) == true) {
-            JOptionPane.showMessageDialog(null, "Solo se permiten valores numéricos en Número de serie ");
-            this.txtNumSerie.setBackground(Color.YELLOW);
-            this.btnRegistrar.setEnabled(false);
         } else if (validarSoloLetras(this.txtMarca.getText().trim()) == false) {
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Marca ");
             this.txtNumSerie.setBackground(Color.WHITE);
@@ -527,22 +541,18 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             this.txtLinea.setBackground(Color.YELLOW);
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Línea");
             this.btnRegistrar.setEnabled(false);
-        } else if (validarSoloLetras(this.txtModelo.getText().trim()) == false) {
+        } else if (validarNumericos(this.txtModelo.getText().trim()) == false) {
             this.txtLinea.setBackground(Color.WHITE);
             this.txtModelo.setBackground(Color.YELLOW);
-            JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Modelo ");
+            JOptionPane.showMessageDialog(null, "Solo se permiten datos numéricos en Modelo. "
+                    + "Intente de nuevo ");
             this.btnRegistrar.setEnabled(false);
         } else if (validarSoloLetras(this.txtColor.getText().trim()) == false) {
             this.txtModelo.setBackground(Color.WHITE);
             this.txtColor.setBackground(Color.YELLOW);
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Color ");
             this.btnRegistrar.setEnabled(false);
-        } else if (validarSoloLetras(this.txtColor.getText().trim()) == true
-                && validarSoloLetras(this.txtModelo.getText().trim()) == true
-                && validarSoloLetras(this.txtModelo.getText().trim()) == true
-                && validarSoloLetras(this.txtLinea.getText().trim()) == true
-                && validarSoloLetras(this.txtMarca.getText().trim()) == true
-                && validarSoloLetras(txtNumSerie.getText()) == false) {
+        } else  {
 
             String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
             String numSerie = txtNumSerie.getText();

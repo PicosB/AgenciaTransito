@@ -1,44 +1,47 @@
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\ConsultarLicencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\IniciarSesion.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\ControladorEntidades.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\ModuloReportes.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\exceptions\IllegalOrphanException.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\PlacaJpaController.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\Usuarios.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\VerVehiculos.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\ControladorPersistencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\TramiteLicencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\ClientesJpaController.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\InicioAplicacion.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\RenovacionLicencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\exceptions\NonexistentEntityException.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\exceptions\PreexistingEntityException.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\RegistroVehiculo.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\RenovacionPlaca.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\RenovarPlaca.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\Tramites.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\Licencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\ReporteLicencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\exceptions\IllegalOrphanException.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\ReportePlaca.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\Placa.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\TramitePlaca.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\UsuariosJpaController.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\RenovarLicencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\Clientes.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\ModificarCliente.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\RegistroUsuario.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\ConsultarPlaca.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\exceptions\PreexistingEntityException.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\HistorialTramitesJpaController.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\Tramite.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\Vehiculo.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\VerClientes.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\exceptions\NonexistentEntityException.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Entidades\HistorialTramites.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\LicenciaJpaController.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\Consultar.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\TramiteJpaController.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\GUI\RegistroLicencia.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Persistencia\VehiculoJpaController.java
-C:\Users\PC\Desktop\Trabajos ITSON 4to semestre\Base de Datos Avanzadas\Proyecto UCII\src\main\java\Main\AgenciaTransito.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/RenovarLicencia.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/exceptions/IllegalOrphanException.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/Clientes.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/TramiteJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/UsuariosJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ReportePeriodo.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ConsultarPlaca.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/RenovacionLicencia.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/HistorialTramitesJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/PlacaJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/TramitePlaca.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ModificarCliente.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/Licencia.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/RegistroVehiculo.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/LicenciaJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/TramiteLicencia.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/VehiculoJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/RenovarPlaca.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/VerVehiculos.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/exceptions/IllegalOrphanException.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ReportePlaca.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/Usuarios.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/exceptions/NonexistentEntityException.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ModuloReportes.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/RenovacionPlaca.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/RegistroUsuario.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/exceptions/NonexistentEntityException.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ConsultarLicencia.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/ControladorEntidades.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/VerClientes.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/Consultar.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/exceptions/PreexistingEntityException.java
+/Users/luis/AgenciaTransito/src/main/java/Main/AgenciaTransito.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/HistorialTramites.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ReporteLicencia.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ReporteTodos.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/InicioAplicacion.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/exceptions/PreexistingEntityException.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/ClientesJpaController.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/Tramite.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/Tramites.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/Placa.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/ReportePorNombre.java
+/Users/luis/AgenciaTransito/src/main/java/Persistencia/ControladorPersistencia.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/IniciarSesion.java
+/Users/luis/AgenciaTransito/src/main/java/Entidades/Vehiculo.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/RegistroLicencia.java

@@ -4,27 +4,13 @@
  */
 package Entidades;
 
-import GUI.IniciarSesion;
 import GUI.RegistroVehiculo;
 import GUI.TramitePlaca;
 import GUI.Tramites;
 import Persistencia.ControladorPersistencia;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -73,6 +59,7 @@ public class ControladorEntidades {
         controlPersis.guardarCliente(cl);
         controlPersis.guardarLicencia(lic);
     }
+
     
     /**
      * Metodo para guardar Clientes masivos
@@ -83,7 +70,9 @@ public class ControladorEntidades {
      * @param numTelefono Numero Telefono del Cliente
      * @param fechaNacimiento Fecha Nacimiento del Cliente
      */
-    public void guardarClienteParaMasivo(String RFC, String nombre, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento ) {
+    
+    public void guardarClienteParaMasivo(String RFC, String nombre, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento) {
+
         Clientes cl = new Clientes();
         cl.setRFC(RFC);
         cl.setNombres(nombre);
@@ -93,6 +82,7 @@ public class ControladorEntidades {
         cl.setNumTelefono(numTelefono);
 
         controlPersis.guardarCliente(cl);
+
     }
 
     /**
@@ -148,13 +138,34 @@ public class ControladorEntidades {
      */
     public String validarCliente(String RFC) {
         List<Clientes> listaClientes = controlPersis.traerClientes();
+
         for (Clientes cli : listaClientes) {
+
             if (cli.getRFC().equals(RFC)) {
+
+
                 RegistroVehiculo regVe = new RegistroVehiculo(cli);
                 regVe.setVisible(true);
             }
         }
         return RFC;
+
+    }
+    
+
+    public Clientes traerClienteRFC(String RFC) {
+        List<Clientes> listaClientes = controlPersis.traerClientes();
+
+        for (Clientes cli : listaClientes) {
+
+            if (cli.getRFC().equals(RFC)) {
+
+                return cli;
+
+            }
+        }
+        return null;
+
     }
 
     //---------------------------- Usuario -----------------------------
@@ -363,27 +374,31 @@ public class ControladorEntidades {
         return controlPersis.traerTramite();
     }
 
+
     /**
      * Metodo para filtrar historial de licencias por RFC
      * @param RFC
      * @return 
      */
-    public List<HistorialTramites> filtrarHistorialLicencias(String RFC) {
+  
+
+    public List<HistorialTramites> filtrarHistorialTodos(String RFC) {
+
         List<HistorialTramites> listaTramites = controlPersis.traerTramites();
-        
+
         List<HistorialTramites> listaUsuarioRfc = new ArrayList<HistorialTramites>();
         for (int i = 0; i < listaTramites.size(); i++) {
-            
+
             if (listaTramites.get(i).getRfcCliente().equalsIgnoreCase(RFC)) {
 
                 listaUsuarioRfc.add(listaTramites.get(i));
-               
-               
+
             }
-            
+
         }
         return listaUsuarioRfc;
     }
+
     
     /**
      * Metodo para validar clientes existentes por RFC
@@ -400,4 +415,71 @@ public class ControladorEntidades {
       }
       return true;
     } 
+
+
+    public List<HistorialTramites> filtrarHistorialParametro(String tipoTramite, String RFC) {
+        List<HistorialTramites> listaTramites = controlPersis.traerTramites();
+
+        List<HistorialTramites> listaUsuarioRfc = new ArrayList<HistorialTramites>();
+        for (int i = 0; i < listaTramites.size(); i++) {
+
+            if (listaTramites.get(i).getTipoTramite().equalsIgnoreCase(tipoTramite)
+                    && listaTramites.get(i).getRfcCliente().equalsIgnoreCase(RFC)) {
+
+                listaUsuarioRfc.add(listaTramites.get(i));
+
+            }
+
+        }
+        return listaUsuarioRfc;
+    }
+
+    public boolean validarClienteExistenteRfc(String rfc) {
+        List<Clientes> clientes = controlPersis.traerClientes();
+
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getRFC().equalsIgnoreCase(rfc)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public List<HistorialTramites> filtrarHistorialPeriodoRfc(Date fechainicial, Date fechaFinal, String Rfc) {
+        List<HistorialTramites> listaTramites = controlPersis.traerTramites();
+
+        List<HistorialTramites> listaUsuarioRfc = new ArrayList<HistorialTramites>();
+
+        for (int i = 0; i < listaTramites.size(); i++) {
+
+            if (listaTramites.get(i).getFechaTramite().before(fechaFinal)
+                    && (listaTramites.get(i).getFechaTramite().before(fechainicial))
+                    && listaTramites.get(i).getRfcCliente().equals(Rfc)) {
+
+                listaUsuarioRfc.add(listaTramites.get(i));
+
+            }
+
+        }
+        return listaUsuarioRfc;
+    }
+
+
+    
+    public List<HistorialTramites> filtrarHistorialPorNombre(String nombre, String apellido, String apellidoMat) {
+        List<Clientes> listaClientes = controlPersis.traerClientes();
+
+        for (Clientes cli : listaClientes) {
+
+            if (cli.getNombres().equalsIgnoreCase(nombre)
+                    && cli.getApellidoP().equalsIgnoreCase(apellido)
+                    && cli.getApellidoM().equalsIgnoreCase(apellidoMat)) {
+                return filtrarHistorialTodos(cli.getRFC());
+            }
+            
+        }
+        return null;
+
+}
+
 }

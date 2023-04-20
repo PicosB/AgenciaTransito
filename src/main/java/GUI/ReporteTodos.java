@@ -37,14 +37,16 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author luis
  */
-public class ReporteLicencia extends javax.swing.JFrame {
- ControladorEntidades control = new ControladorEntidades();
+public class ReporteTodos extends javax.swing.JFrame {
+
+    ControladorEntidades control = new ControladorEntidades();
+
     /**
      * Creates new form ReporteLicencia
      */
-    public ReporteLicencia() {
+    public ReporteTodos() {
         initComponents();
-      
+
     }
 
     /**
@@ -61,10 +63,10 @@ public class ReporteLicencia extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtRFC = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        btnGenerarCarpeta = new javax.swing.JButton();
+        btnGenerar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        btnGenerarVistaPrevia = new javax.swing.JButton();
+        btnGenerar1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/home-ceeav.png"))); // NOI18N
@@ -76,8 +78,9 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(189, 74, 54));
-        jLabel2.setText("Reporte Trámites");
+        jLabel2.setText("Todos tus trámites");
 
+        txtRFC.setBackground(new java.awt.Color(255, 255, 255));
         txtRFC.setForeground(new java.awt.Color(189, 74, 54));
         txtRFC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
@@ -90,17 +93,19 @@ public class ReporteLicencia extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(189, 74, 54));
         jLabel3.setText("RFC");
 
-        btnGenerarCarpeta.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        btnGenerarCarpeta.setForeground(new java.awt.Color(189, 74, 54));
-        btnGenerarCarpeta.setText("Generar en Carpeta");
-        btnGenerarCarpeta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnGenerarCarpeta.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGenerar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btnGenerar.setForeground(new java.awt.Color(189, 74, 54));
+        btnGenerar.setText("Generar PDF");
+        btnGenerar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarCarpetaActionPerformed(evt);
+                btnGenerarActionPerformed(evt);
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(189, 74, 54));
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -112,13 +117,14 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/sonora3.png"))); // NOI18N
 
-        btnGenerarVistaPrevia.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        btnGenerarVistaPrevia.setForeground(new java.awt.Color(189, 74, 54));
-        btnGenerarVistaPrevia.setText("Imprimir");
-        btnGenerarVistaPrevia.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnGenerarVistaPrevia.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar1.setBackground(new java.awt.Color(255, 255, 255));
+        btnGenerar1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btnGenerar1.setForeground(new java.awt.Color(189, 74, 54));
+        btnGenerar1.setText("Imprimir");
+        btnGenerar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnGenerar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarVistaPreviaActionPerformed(evt);
+                btnGenerar1ActionPerformed(evt);
             }
         });
 
@@ -133,28 +139,27 @@ public class ReporteLicencia extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(btnGenerarVistaPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGenerarCarpeta))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(26, 26, 26)
-                                .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)))
+                        .addGap(93, 93, 93)
+                        .addComponent(jLabel3)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5))
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel4))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel4)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGenerar1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel5)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,21 +172,21 @@ public class ReporteLicencia extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(27, 27, 27)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerarCarpeta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerarVistaPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGenerar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,21 +202,20 @@ public class ReporteLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRFCActionPerformed
 
 
-    private void btnGenerarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCarpetaActionPerformed
-        
-        String reportPath = getClass().getClassLoader().getResource("agenciaTramites.jrxml").getPath();
-        
-         List<HistorialTramites> tramites = new ArrayList<>();
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
 
-         tramites = control.filtrarHistorialParametro("Licencia", txtRFC.getText());
-      
+        String reportPath = getClass().getClassLoader().getResource("agenciaTramites.jrxml").getPath();
+
+        List<HistorialTramites> tramites = new ArrayList<>();
+
+        tramites = control.filtrarHistorialTodos(this.txtRFC.getText());
+
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(tramites);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("CollectionBeanParam", itemsJRBean);
-     
         try {
-            
+
             InputStream input = getClass().getClassLoader().getResourceAsStream("agenciaTramites.jrxml");
 
             JasperDesign japerdesign = JRXmlLoader.load(input);
@@ -220,9 +224,10 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
             JasperPrint jasperprint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
 
-          //  JasperViewer.viewReport(jasperprint);
+           // JasperViewer.viewReport(jasperprint);
+
             
-            File pdfFile = new File("reportes/reporteLicencia.pdf");
+            File pdfFile = new File("reportes/reporteTodosLosTramites.pdf");
             OutputStream outputStream = new FileOutputStream(pdfFile);
             JRPdfExporter exporter = new JRPdfExporter();
             ExporterInput exporterInput = new SimpleExporterInput(jasperprint);
@@ -235,14 +240,13 @@ public class ReporteLicencia extends javax.swing.JFrame {
             exporter.setConfiguration(configuration);
 
             exporter.exportReport();
-            
-            JOptionPane.showMessageDialog(null, "Su reporte ha sido generado exitosamente y se encuentra en la carpeta del proyecto");
+            JOptionPane.showMessageDialog(null, "Su reporte ha sido generado exitosamente y se encuentra en la carpeta 'reportes' del proyecto");
 
         } catch (Exception e) {
             System.out.println(e);
         }
-         
-    }//GEN-LAST:event_btnGenerarCarpetaActionPerformed
+
+    }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -250,21 +254,19 @@ public class ReporteLicencia extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnGenerarVistaPreviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVistaPreviaActionPerformed
-        String reportPath = getClass().getClassLoader().getResource("agenciaTramites.jrxml").getPath();
-        
-         List<HistorialTramites> tramites = new ArrayList<>();
+    private void btnGenerar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerar1ActionPerformed
+           String reportPath = getClass().getClassLoader().getResource("agenciaTramites.jrxml").getPath();
 
-         tramites = control.filtrarHistorialParametro("Licencia", txtRFC.getText());
-        
-       
+        List<HistorialTramites> tramites = new ArrayList<>();
+
+        tramites = control.filtrarHistorialTodos(this.txtRFC.getText());
 
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(tramites);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("CollectionBeanParam", itemsJRBean);
         try {
-            
+
             InputStream input = getClass().getClassLoader().getResourceAsStream("agenciaTramites.jrxml");
 
             JasperDesign japerdesign = JRXmlLoader.load(input);
@@ -275,16 +277,21 @@ public class ReporteLicencia extends javax.swing.JFrame {
 
             JasperViewer.viewReport(jasperprint);
 
+            
+     
+
         } catch (Exception e) {
             System.out.println(e);
         }
-         
-    }//GEN-LAST:event_btnGenerarVistaPreviaActionPerformed
+    }//GEN-LAST:event_btnGenerar1ActionPerformed
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGenerarCarpeta;
-    private javax.swing.JButton btnGenerarVistaPrevia;
+    private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnGenerar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
