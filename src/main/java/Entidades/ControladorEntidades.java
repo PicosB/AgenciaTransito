@@ -416,7 +416,12 @@ public class ControladorEntidades {
       return true;
     } 
 
-
+/**
+ * Método que nos ayuda a filtrar una lista del historial de trámites por su tipo y el rfc
+ * @param tipoTramite tipo de trámite que se realizó, puede ser placa o licencia
+ * @param RFC
+ * @return 
+ */
     public List<HistorialTramites> filtrarHistorialParametro(String tipoTramite, String RFC) {
         List<HistorialTramites> listaTramites = controlPersis.traerTramites();
 
@@ -433,6 +438,11 @@ public class ControladorEntidades {
         }
         return listaUsuarioRfc;
     }
+    /**
+     * 
+     * @param rfc rfc con el cual se validará la existencia del cliente
+     * @return boolean dependiente de la validez
+     */
 
     public boolean validarClienteExistenteRfc(String rfc) {
         List<Clientes> clientes = controlPersis.traerClientes();
@@ -444,6 +454,30 @@ public class ControladorEntidades {
         }
         return true;
     }
+    /**
+     * Método que nos ayuda a validar la existencia de un automóvil
+     * @param numSerie número de serie mediante el cuál se buscará el auto
+     * @return 
+     */
+       public boolean validarAuto(String numSerie) {
+        List<Vehiculo> vehiculos = controlPersis.traerVehiculos();
+
+        for (int i = 0; i < vehiculos.size(); i++) {
+            if (vehiculos.get(i).getNumSerie().equalsIgnoreCase(numSerie)) {
+                return true;
+            }
+        }
+        return false;
+    
+      }
+               
+    /**
+     * 
+     * @param fechainicial fecha de inicio del periodo
+     * @param fechaFinal fecha fin del periodo
+     * @param Rfc rfc del que solicitó el trámite
+     * @return 
+     */
 
     public List<HistorialTramites> filtrarHistorialPeriodoRfc(Date fechainicial, Date fechaFinal, String Rfc) {
         List<HistorialTramites> listaTramites = controlPersis.traerTramites();
@@ -464,7 +498,17 @@ public class ControladorEntidades {
         return listaUsuarioRfc;
     }
 
-
+/**
+ * Método que nos ayuda a buscar los trámites de una persona mediante sus nombres
+ * @param nombre nombre de la persona
+ * @param apellido apellido de la persona
+ * @param apellidoMat apellido materno de la persona
+ * @return regresa una lista con el historial de trámites de la persona
+ */
+    
+    
+   
+    
     
     public List<HistorialTramites> filtrarHistorialPorNombre(String nombre, String apellido, String apellidoMat) {
         List<Clientes> listaClientes = controlPersis.traerClientes();

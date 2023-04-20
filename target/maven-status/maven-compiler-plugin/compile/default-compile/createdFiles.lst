@@ -1,4 +1,5 @@
 GUI/VerVehiculos.class
+GUI/GenerarReportePorTipo$1.class
 GUI/TramitePlaca$4.class
 GUI/ConsultarPlaca$1.class
 GUI/RenovacionPlaca$3.class
@@ -52,6 +53,7 @@ GUI/ReportePlaca$2.class
 GUI/RenovarLicencia$2.class
 GUI/ReporteTodos.class
 GUI/ReporteTodos$2.class
+GUI/GenerarReportePorTipo$3.class
 GUI/RenovacionPlaca$5.class
 Persistencia/ControladorPersistencia.class
 GUI/RegistroVehiculo$4.class
@@ -93,6 +95,7 @@ GUI/ReporteLicencia$4.class
 GUI/RegistroUsuario$2.class
 GUI/ConsultarLicencia$1.class
 GUI/RegistroUsuario.class
+GUI/GenerarReportePorTipo$2.class
 GUI/ConsultarPlaca$5.class
 GUI/InicioAplicacion.class
 GUI/ModuloReportes.class
@@ -129,6 +132,7 @@ GUI/TramitePlaca.class
 Entidades/Usuarios_.class
 Persistencia/TramiteJpaController.class
 GUI/RenovarPlaca$1.class
+GUI/GenerarReportePorTipo.class
 GUI/InicioAplicacion$4.class
 GUI/RenovacionLicencia$1.class
 GUI/VerClientes$1.class

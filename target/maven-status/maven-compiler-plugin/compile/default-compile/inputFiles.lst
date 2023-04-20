@@ -16,6 +16,7 @@
 /Users/luis/AgenciaTransito/src/main/java/GUI/TramiteLicencia.java
 /Users/luis/AgenciaTransito/src/main/java/Persistencia/VehiculoJpaController.java
 /Users/luis/AgenciaTransito/src/main/java/GUI/RenovarPlaca.java
+/Users/luis/AgenciaTransito/src/main/java/GUI/GenerarReportePorTipo.java
 /Users/luis/AgenciaTransito/src/main/java/GUI/VerVehiculos.java
 /Users/luis/AgenciaTransito/src/main/java/Persistencia/exceptions/IllegalOrphanException.java
 /Users/luis/AgenciaTransito/src/main/java/GUI/ReportePlaca.java

@@ -8,9 +8,9 @@ import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Vehiculo;
 import java.awt.Color;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -71,29 +71,16 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         public boolean validarNumSerie(String numSerie) {
 
-        for (int i = 0; i < numSerie.length(); i++) {
-            char caracter = numSerie.charAt(i);
-            if (caracter == '0'
-                    || caracter == '1'
-                    || caracter == '2'
-                    || caracter == '3'
-                    || caracter == '4'
-                    || caracter == '5'
-                    || caracter == '6'
-                    || caracter == '7'
-                    || caracter == '8'
-                    || caracter == '9'
-                    && validarSoloLetras(String.valueOf(caracter)) == false) {
-                return true;
-            }else{
-                return false;
-            
+            String regex = "^[a-zA-Z0-9]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(numSerie);
+        if (matcher.matches()) {
+            return true;
+        } else {
+           return false;
         }
-          
-          
     }
-        return true;
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -475,11 +462,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                     "Error de información",
                     JOptionPane.ERROR_MESSAGE);
 
-        }  else if (validarSoloLetras(this.txtNumSerie.getText())==true) {
-            JOptionPane.showMessageDialog(null, "Solo se permiten valores numéricos en Número de serie a ");
-            this.txtNumSerie.setBackground(Color.YELLOW);
-            this.btnRegistrar.setEnabled(false);
-        } else if (validarSoloLetras(this.txtMarca.getText().trim()) == false) {
+        }  else if (validarSoloLetras(this.txtMarca.getText().trim()) == false) {
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Marca ");
             this.txtNumSerie.setBackground(Color.WHITE);
             this.txtMarca.setBackground(Color.YELLOW);
@@ -499,7 +482,13 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             this.txtColor.setBackground(Color.YELLOW);
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Color ");
             this.btnRegistrar.setEnabled(false);
-        } else {
+        }else if (txtModelo.getText().length()!=4){
+            JOptionPane.showMessageDialog(null, "El año no es valido");
+            this.btnRegistrar.setEnabled(false);
+        }else if(validarNumSerie(this.txtNumSerie.getText())==false) {
+            JOptionPane.showMessageDialog(null, "Número de serie incorrecto");
+        }else{
+            
             int vehiculo = cmbVehiculo.getSelectedIndex();
 
             if (vehiculo == 1) {
@@ -552,7 +541,14 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             this.txtColor.setBackground(Color.YELLOW);
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Color ");
             this.btnRegistrar.setEnabled(false);
-        } else  {
+        } else if(control.validarAuto(this.txtNumSerie.getText())==true){
+     
+            this.txtNumSerie.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(null, "El número de serie ya se encuentra registrado. Revise sus datos.");
+            this.btnRegistrar.setEnabled(false);
+        }else if(validarNumSerie(this.txtNumSerie.getText())==false) {
+            JOptionPane.showMessageDialog(null, "Número de serie incorrecto");
+        }else  {
 
             String tipoVehiculo = (String) cmbVehiculo.getSelectedItem();
             String numSerie = txtNumSerie.getText();
