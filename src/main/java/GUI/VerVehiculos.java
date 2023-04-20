@@ -189,6 +189,9 @@ public class VerVehiculos extends javax.swing.JFrame {
     private javax.swing.JTable tablaVehiculos;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo para cargar la informacion Automaticamente del Vehiculo
+     */
     private void cargarTabla() {
         DefaultTableModel tabla = new DefaultTableModel(){
             
@@ -213,6 +216,12 @@ public class VerVehiculos extends javax.swing.JFrame {
         tablaVehiculos.setModel(tabla); 
     }
     
+    /**
+     * Metodo que Muestra mensajes
+     * @param mensaje El mensaje de la Tabla
+     * @param tipo El tipo del mensaje
+     * @param titulo El titulo del Mensaje
+     */
     public void mostrarMensaje (String mensaje, String tipo, String titulo){
         JOptionPane optionPane = new JOptionPane(mensaje);
         if(tipo.equals("Info")){

@@ -33,8 +33,8 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         cargarPlacas();
         this.btnRegistrar.setEnabled(false);
         this.cli = cli;
-        lblRFC.setText(cli.getRFC());
         this.jLabel14.setVisible(false);
+        lblRFC.setText(cli.getRFC());
 
     }
 
@@ -121,13 +121,13 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         cmbVehiculo = new javax.swing.JComboBox<>();
         btnConfirmarDatos = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        lblRFC = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        lblRFC = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,23 +154,18 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(189, 74, 54));
         jLabel8.setText("Modelo:");
 
-        txtNumSerie.setBackground(new java.awt.Color(255, 255, 255));
         txtNumSerie.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNumSerie.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtColor.setBackground(new java.awt.Color(255, 255, 255));
         txtColor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtColor.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtModelo.setBackground(new java.awt.Color(255, 255, 255));
         txtModelo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtModelo.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtMarca.setBackground(new java.awt.Color(255, 255, 255));
         txtMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMarca.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtLinea.setBackground(new java.awt.Color(255, 255, 255));
         txtLinea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtLinea.setForeground(new java.awt.Color(189, 74, 54));
 
@@ -190,13 +185,11 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(189, 74, 54));
         jLabel10.setText("Fecha ");
 
-        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(189, 74, 54));
         txtCodigo.setBorder(null);
 
         txtPrecio.setEditable(false);
-        txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
         txtPrecio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPrecio.setForeground(new java.awt.Color(189, 74, 54));
         txtPrecio.setText("0.0");
@@ -213,7 +206,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         txtFechaRecepcion.setForeground(new java.awt.Color(189, 74, 54));
         txtFechaRecepcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(189, 74, 54));
         btnCancelar.setText("Cancelar");
@@ -224,7 +216,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(189, 74, 54));
         btnRegistrar.setText("Registrar");
@@ -247,7 +238,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             }
         });
 
-        btnConfirmarDatos.setBackground(new java.awt.Color(255, 255, 255));
         btnConfirmarDatos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConfirmarDatos.setForeground(new java.awt.Color(189, 74, 54));
         btnConfirmarDatos.setText("Confirmar Datos");
@@ -257,13 +247,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                 btnConfirmarDatosActionPerformed(evt);
             }
         });
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(189, 74, 54));
-        jLabel12.setText("Cliente:");
-
-        lblRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblRFC.setForeground(new java.awt.Color(189, 74, 54));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(189, 74, 54));
@@ -280,6 +263,12 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(189, 74, 54));
         jLabel16.setText("Recepción");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(189, 74, 54));
+        jLabel12.setText("Cliente:");
+
+        lblRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -327,21 +316,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                                 .addComponent(txtNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,13 +335,28 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtFechaEmision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtFechaRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 68, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addComponent(jLabel9)
                         .addGap(35, 35, 35)
                         .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,22 +371,23 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                                 .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addComponent(jLabel1)
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(27, 27, 27)
+                                    .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 22, Short.MAX_VALUE)))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)

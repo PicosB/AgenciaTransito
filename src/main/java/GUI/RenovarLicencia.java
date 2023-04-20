@@ -384,6 +384,10 @@ public class RenovarLicencia extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecio1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo para cargar datos automaticamente del Cliente
+     * @param id El del Cliente a Renovar
+     */
     private void cargarDatos(int id) {
         this.lic = control.traerLicencia(id);
         
@@ -395,6 +399,12 @@ public class RenovarLicencia extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Metodo que Muestra mensajes
+     * @param mensaje El mensaje de la Tabla
+     * @param tipo El tipo del mensaje
+     * @param titulo El titulo del Mensaje
+     */
     public void mostrarMensaje (String mensaje, String tipo, String titulo){
         JOptionPane optionPane = new JOptionPane(mensaje);
         if(tipo.equals("Info")){

@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Licencia;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -18,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class RenovacionLicencia extends javax.swing.JFrame {
 
     ControladorEntidades control = null;
+    private List<Licencia> listaTabla;
     /**
      * Creates new form RenovacionLicencia
      */
@@ -41,6 +44,8 @@ public class RenovacionLicencia extends javax.swing.JFrame {
         tablaLicencias = new javax.swing.JTable();
         btnRenovar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        txtRFC = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -99,6 +104,16 @@ public class RenovacionLicencia extends javax.swing.JFrame {
             }
         });
 
+        txtRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRFCKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Buscar por RFC:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +130,12 @@ public class RenovacionLicencia extends javax.swing.JFrame {
                         .addComponent(btnRenovar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(btnRegresar)))
+                        .addComponent(btnRegresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,14 +143,18 @@ public class RenovacionLicencia extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(btnRegresar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGap(27, 27, 27)
                         .addComponent(btnRenovar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -166,13 +190,19 @@ public class RenovacionLicencia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRenovarActionPerformed
 
+    private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
+        cargarTablaRFC();
+    }//GEN-LAST:event_txtRFCKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRenovar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaLicencias;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
@@ -195,6 +225,35 @@ public class RenovacionLicencia extends javax.swing.JFrame {
             }
         }
         tablaLicencias.setModel(tabla);
+    }
+    
+    public void cargarTablaRFC(){
+        DefaultTableModel tabla = (DefaultTableModel) tablaLicencias.getModel();
+        
+        String titulos[] = {"NumeroLicencia","Fecha Expedicion","Fecha Vigencia", "Años", "Discapacitado","Precio","RFC Cliente"};
+        tabla.setColumnIdentifiers(titulos);
+        
+        listaTabla = control.traerLicencias();
+        List<Licencia> aux = new ArrayList<>();
+        if(listaTabla != null){
+            if(!txtRFC.getText().equalsIgnoreCase("")){
+                for(Licencia lic : listaTabla){
+                    Clientes cli = lic.getCli();
+                    String RFC = cli.getRFC();
+                    
+                    if(RFC.toUpperCase().contains(txtRFC.getText().toUpperCase())){
+                        aux.add(lic);
+                    }
+                }
+                listaTabla = aux;
+            }
+            tabla.setRowCount(0);
+            for(Licencia lic : listaTabla){
+                Object[] objeto = {lic.getId(),lic.getFechaExpedicion(),lic.getVigencia(),lic.getAnios(),lic.getDiscapacitado(),lic.getPrecio(),lic.getCli().getRFC()};
+                tabla.addRow(objeto);
+            }
+            tablaLicencias.setModel(tabla); 
+        }
     }
     
     public void mostrarMensaje (String mensaje, String tipo, String titulo){

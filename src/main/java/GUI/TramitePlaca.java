@@ -163,8 +163,8 @@ public class TramitePlaca extends javax.swing.JFrame {
         
         if(!RFC.isEmpty()){
             control.validarCliente(RFC);
+            this.setVisible(false);
         }
-        this.setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnRenovacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovacionActionPerformed

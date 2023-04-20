@@ -288,7 +288,8 @@ public class Tramites extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte1ActionPerformed
-        // TODO add your handling code here:
+        new ModuloReportes().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnReporte1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

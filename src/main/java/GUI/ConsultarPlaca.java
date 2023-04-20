@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Placa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -17,12 +19,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultarPlaca extends javax.swing.JFrame {
     ControladorEntidades control = null;
+    
+    private List<Placa> listaTabla;
     /**
      * Creates new form RenovacionPlaca
      */
     public ConsultarPlaca() {
         control = new ControladorEntidades();
         initComponents();
+        this.listaTabla = new ArrayList<Placa>();
     }
 
     /**
@@ -40,6 +45,8 @@ public class ConsultarPlaca extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPlacas = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtRFC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -90,6 +97,16 @@ public class ConsultarPlaca extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Buscar por RFC:");
+
+        txtRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRFCKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -103,7 +120,12 @@ public class ConsultarPlaca extends javax.swing.JFrame {
                             .addComponent(btnRegresar)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(256, 256, 256)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -111,7 +133,11 @@ public class ConsultarPlaca extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(57, 57, 57)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegresar)
@@ -144,15 +170,24 @@ public class ConsultarPlaca extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
+    private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
+        cargarTablaRFC();
+    }//GEN-LAST:event_txtRFCKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaPlacas;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo que carga la tabla en el JTable
+     */
     private void cargarTabla() {
         DefaultTableModel tabla = new DefaultTableModel(){
         
@@ -175,6 +210,43 @@ public class ConsultarPlaca extends javax.swing.JFrame {
         tablaPlacas.setModel(tabla);
     }
     
+    /**
+     * Metodo que carga la tabla en el JTable por RFC
+     */
+    public void cargarTablaRFC(){
+        DefaultTableModel tabla = (DefaultTableModel) tablaPlacas.getModel();
+        String titulos [] = {"id_Placa","Codigo","Precio","FechaEmision","FechaRecepcion","NumSerieVehiculo","RFC Cliente"};
+        tabla.setColumnIdentifiers(titulos);
+        
+        listaTabla = control.traerPlacas();
+        List<Placa> aux = new ArrayList<>();
+        if(listaTabla !=null){
+            if(!txtRFC.getText().equalsIgnoreCase("")){
+                for(Placa pl : listaTabla){
+                    Clientes cli = pl.getCli();
+                    String RFC = cli.getRFC();
+                    
+                    if(RFC.toUpperCase().contains(txtRFC.getText().toUpperCase())){
+                        aux.add(pl);
+                    }
+                }
+                listaTabla = aux;
+            }
+            tabla.setRowCount(0);
+            for(Placa pl : listaTabla){
+                Object[] objeto = {pl.getId(),pl.getCodigo(),pl.getPrecio(),pl.getFechaEmision(),pl.getFechaRecepcion(),pl.getVeh().getNumSerie(),pl.getVeh().getCli().getRFC()};
+                tabla.addRow(objeto);
+            }
+            tablaPlacas.setModel(tabla);
+        }
+    }
+    
+    /**
+     * Metodo que Muestra mensajes
+     * @param mensaje El mensaje de la Tabla
+     * @param tipo El tipo del mensaje
+     * @param titulo El titulo del Mensaje
+     */
     public void mostrarMensaje (String mensaje, String tipo, String titulo){
         JOptionPane optionPane = new JOptionPane(mensaje);
         if(tipo.equals("Info")){

@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Licencia;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -18,12 +20,15 @@ import javax.swing.table.DefaultTableModel;
 public class ConsultarLicencia extends javax.swing.JFrame {
 
     ControladorEntidades control = null;
+    
+    private List<Licencia> listaTabla;
     /**
      * Creates new form RenovacionLicencia
      */
     public ConsultarLicencia() {
         control = new ControladorEntidades();
         initComponents();
+        this.listaTabla = new ArrayList<Licencia>();
     }
 
     /**
@@ -41,6 +46,8 @@ public class ConsultarLicencia extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaLicencias = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
+        txtRFC = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -91,6 +98,16 @@ public class ConsultarLicencia extends javax.swing.JFrame {
             }
         });
 
+        txtRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRFCKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Buscar por RFC:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -106,13 +123,23 @@ public class ConsultarLicencia extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegresar)
@@ -148,15 +175,24 @@ public class ConsultarLicencia extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
+    private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
+        cargarTablaRFC();
+    }//GEN-LAST:event_txtRFCKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaLicencias;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo que carga la tabla en el JTable
+     */
     private void cargarTabla() {
         DefaultTableModel tabla = new DefaultTableModel(){
         
@@ -179,6 +215,44 @@ public class ConsultarLicencia extends javax.swing.JFrame {
         tablaLicencias.setModel(tabla);
     }
     
+    /**
+     * Metodo que carga la tabla en el JTable por RFC
+     */
+    public void cargarTablaRFC(){
+        DefaultTableModel tabla = (DefaultTableModel) tablaLicencias.getModel();
+        
+        String titulos[] = {"NumeroLicencia","Fecha Expedicion","Fecha Vigencia", "Años", "Discapacitado","Precio","RFC Cliente"};
+        tabla.setColumnIdentifiers(titulos);
+        
+        listaTabla = control.traerLicencias();
+        List<Licencia> aux = new ArrayList<>();
+        if(listaTabla != null){
+            if(!txtRFC.getText().equalsIgnoreCase("")){
+                for(Licencia lic : listaTabla){
+                    Clientes cli = lic.getCli();
+                    String RFC = cli.getRFC();
+                    
+                    if(RFC.toUpperCase().contains(txtRFC.getText().toUpperCase())){
+                        aux.add(lic);
+                    }
+                }
+                listaTabla = aux;
+            }
+            tabla.setRowCount(0);
+            for(Licencia lic : listaTabla){
+                Object[] objeto = {lic.getId(),lic.getFechaExpedicion(),lic.getVigencia(),lic.getAnios(),lic.getDiscapacitado(),lic.getPrecio(),lic.getCli().getRFC()};
+                tabla.addRow(objeto);
+            }
+            tablaLicencias.setModel(tabla); 
+        }
+    }
+    
+    /**
+     * Metodo que Muestra mensajes
+     * @param mensaje El mensaje de la Tabla
+     * @param tipo El tipo del mensaje
+     * @param titulo El titulo del Mensaje
+     */
     public void mostrarMensaje (String mensaje, String tipo, String titulo){
         JOptionPane optionPane = new JOptionPane(mensaje);
         if(tipo.equals("Info")){

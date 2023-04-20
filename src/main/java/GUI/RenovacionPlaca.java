@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Placa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RenovacionPlaca extends javax.swing.JFrame {
     ControladorEntidades control = null;
+    private List<Placa> listaTabla;
     /**
      * Creates new form RenovacionPlaca
      */
@@ -40,6 +43,8 @@ public class RenovacionPlaca extends javax.swing.JFrame {
         tablaPlacas = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
         btnRenovar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtRFC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -98,6 +103,16 @@ public class RenovacionPlaca extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Buscar por RFC:");
+
+        txtRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRFCKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,33 +120,44 @@ public class RenovacionPlaca extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRenovar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(btnRegresar)))
+                        .addGap(33, 33, 33)
+                        .addComponent(btnRegresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(268, 268, 268))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(btnRenovar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(106, 106, 106)
+                        .addComponent(btnRenovar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(btnRegresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -164,13 +190,19 @@ public class RenovacionPlaca extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
+    private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
+        cargarTablaRFC();
+    }//GEN-LAST:event_txtRFCKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRenovar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaPlacas;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
@@ -182,17 +214,45 @@ public class RenovacionPlaca extends javax.swing.JFrame {
             }
         };
         
-        String titulos [] = {"id_Placa","Codigo","Precio","FechaEmision","FechaRecepcion","NumSerieVehiculo"};
+        String titulos [] = {"id_Placa","Codigo","Precio","FechaEmision","FechaRecepcion","NumSerieVehiculo","RFC Cliente"};
         tabla.setColumnIdentifiers(titulos);
         List<Placa> listaPlacas = control.traerPlacas();
         
         if(listaPlacas != null){
             for (Placa pl : listaPlacas){
-                Object[] objeto = {pl.getId(),pl.getCodigo(),pl.getPrecio(),pl.getFechaEmision(),pl.getFechaRecepcion(),pl.getVeh().getNumSerie()};
+                Object[] objeto = {pl.getId(),pl.getCodigo(),pl.getPrecio(),pl.getFechaEmision(),pl.getFechaRecepcion(),pl.getVeh().getNumSerie(),pl.getVeh().getCli().getRFC()};
                 tabla.addRow(objeto);
             }
         }
         tablaPlacas.setModel(tabla);
+    }
+    
+    public void cargarTablaRFC(){
+        DefaultTableModel tabla = (DefaultTableModel) tablaPlacas.getModel();
+        String titulos [] = {"id_Placa","Codigo","Precio","FechaEmision","FechaRecepcion","NumSerieVehiculo","RFC Cliente"};
+        tabla.setColumnIdentifiers(titulos);
+        
+        listaTabla = control.traerPlacas();
+        List<Placa> aux = new ArrayList<>();
+        if(listaTabla !=null){
+            if(!txtRFC.getText().equalsIgnoreCase("")){
+                for(Placa pl : listaTabla){
+                    Clientes cli = pl.getCli();
+                    String RFC = cli.getRFC();
+                    
+                    if(RFC.toUpperCase().contains(txtRFC.getText().toUpperCase())){
+                        aux.add(pl);
+                    }
+                }
+                listaTabla = aux;
+            }
+            tabla.setRowCount(0);
+            for(Placa pl : listaTabla){
+                Object[] objeto = {pl.getId(),pl.getCodigo(),pl.getPrecio(),pl.getFechaEmision(),pl.getFechaRecepcion(),pl.getVeh().getNumSerie(),pl.getVeh().getCli().getRFC()};
+                tabla.addRow(objeto);
+            }
+            tablaPlacas.setModel(tabla);
+        }
     }
     
     public void mostrarMensaje (String mensaje, String tipo, String titulo){

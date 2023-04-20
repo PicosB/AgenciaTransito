@@ -295,6 +295,11 @@ public class ModificarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo para cargar los datos del Cliente
+     * al momento de editarlo
+     * @param id El id del Cliente
+     */
     private void cargarDatos(int id) {
         this.cli = control.traerCliente(id);
         
@@ -306,6 +311,12 @@ public class ModificarCliente extends javax.swing.JFrame {
         txtTelefono.setText(cli.getNumTelefono());
     }
     
+    /**
+     * Metodo que Muestra mensajes
+     * @param mensaje El mensaje de la Tabla
+     * @param tipo El tipo del mensaje
+     * @param titulo El titulo del Mensaje
+     */
     public void mostrarMensaje (String mensaje, String tipo, String titulo){
         JOptionPane optionPane = new JOptionPane(mensaje);
         if(tipo.equals("Info")){

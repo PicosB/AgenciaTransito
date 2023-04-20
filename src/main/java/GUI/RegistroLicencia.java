@@ -29,6 +29,10 @@ public class RegistroLicencia extends javax.swing.JFrame {
         btnRegistrar.setEnabled(false);
     }
 
+    /**
+     * Metodo para validar datos en blanco
+     * @return 
+     */
     private boolean validarDatos() {
         if (txtNombre.getText().isEmpty()
                 || txtApellidoM.getText().isEmpty()
@@ -42,6 +46,11 @@ public class RegistroLicencia extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para validar Cadenas
+     * @param input
+     * @return 
+     */
     public boolean validarCadenas (String input) {
         if (input.matches("^[a-zA-Z ]*$")) {
             return true;
@@ -50,15 +59,30 @@ public class RegistroLicencia extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para validar Numeros
+     * @param datos
+     * @return 
+     */
     public static boolean validarNumeros(String datos) {
         return datos.matches("[0-9]");
 
     }
 
+    /**
+     * Metodo para validar Letras
+     * @param dato
+     * @return 
+     */
     public boolean validarSoloLetras(String dato) {
         return dato.matches("[a-zA-Z]*");
     }
 
+    /**
+     * Metodo para validar Telefono
+     * @param telefono el Telefono del Cliente
+     * @return true
+     */
     public boolean validarTelefono(String telefono) {
 
         for (int i = 0; i < telefono.length(); i++) {
@@ -139,7 +163,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
         jLabel9.setText("Fecha Vigencia:");
 
         cmbVigencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 año", "2 años", "3 años" }));
+        cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1", "2", "3" }));
         cmbVigencia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cmbVigenciaMouseClicked(evt);
@@ -180,7 +204,6 @@ public class RegistroLicencia extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(189, 74, 54));
         jLabel3.setText("Nombre: ");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(189, 74, 54));
         jButton1.setText("Aceptar Datos");
@@ -219,27 +242,22 @@ public class RegistroLicencia extends javax.swing.JFrame {
             }
         });
 
-        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(189, 74, 54));
         txtNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtRFC.setBackground(new java.awt.Color(255, 255, 255));
         txtRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtRFC.setForeground(new java.awt.Color(189, 74, 54));
         txtRFC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
         txtTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(189, 74, 54));
         txtTelefono.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtApellidoP.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidoP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtApellidoP.setForeground(new java.awt.Color(189, 74, 54));
         txtApellidoP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtApellidoM.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidoM.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtApellidoM.setForeground(new java.awt.Color(189, 74, 54));
         txtApellidoM.setBorder(javax.swing.BorderFactory.createEtchedBorder());
