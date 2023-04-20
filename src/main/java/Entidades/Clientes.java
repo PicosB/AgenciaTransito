@@ -76,6 +76,15 @@ public class Clientes implements Serializable {
         this.numTelefono = numTelefono;
         this.fechaNacimiento = fechaNacimiento;
     }
+   public Clientes( String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento) {
+       
+        this.RFC = RFC;
+        this.nombres = nombres;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.numTelefono = numTelefono;
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
     public Clientes(Integer id, String RFC, String nombres, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento, List<Tramite> listaTramites) {
         this.id = id;

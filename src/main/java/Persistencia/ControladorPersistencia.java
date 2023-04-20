@@ -7,6 +7,7 @@ package Persistencia;
 import Entidades.Clientes;
 import Entidades.HistorialTramites;
 import Entidades.Licencia;
+
 import Entidades.Placa;
 import Entidades.Tramite;
 import Entidades.Usuarios;
@@ -154,6 +155,6 @@ public class ControladorPersistencia {
         return ht.findHistorialTramitesEntities();
     }
     
-    
+   
     
 }

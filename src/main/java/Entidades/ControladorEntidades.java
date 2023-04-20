@@ -58,6 +58,19 @@ public class ControladorEntidades {
         controlPersis.guardarCliente(cl);
         controlPersis.guardarLicencia(lic);
     }
+     public void guardarClienteParaMasivo(String RFC, String nombre, String apellidoP, String apellidoM, String numTelefono, Date fechaNacimiento ) {
+        Clientes cl = new Clientes();
+        cl.setRFC(RFC);
+        cl.setNombres(nombre);
+        cl.setApellidoP(apellidoP);
+        cl.setApellidoM(apellidoM);
+        cl.setFechaNacimiento(fechaNacimiento);
+        cl.setNumTelefono(numTelefono);
+
+
+        controlPersis.guardarCliente(cl);
+      
+    }
 
     public List<Clientes> traerClientes() {
         return controlPersis.traerClientes();
@@ -239,4 +252,6 @@ public class ControladorEntidades {
       }
       return true;
     }
+    
+     
 }
