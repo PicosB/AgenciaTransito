@@ -4,7 +4,7 @@
  */
 package Entidades;
 
-import static Entidades.Placa_.veh;
+
 import GUI.RegistroVehiculo;
 import GUI.Tramites;
 import Persistencia.ControladorPersistencia;

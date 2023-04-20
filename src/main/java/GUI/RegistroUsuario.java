@@ -191,7 +191,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        String Usuario = txtUsuario.getText();
+        
+        if(this.txtUsuario.getText().isBlank() || this.txtContrasena.getText().isBlank()){
+            JOptionPane.showMessageDialog(null, "Registro inválido");
+        }else{
+             String Usuario = txtUsuario.getText();
         String Contrasena = txtContrasena.getText();
 
         control.guardarUsuario(Usuario,Contrasena);
@@ -203,6 +207,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         this.setVisible(false);
         new IniciarSesion().setVisible(true);
+        }
+       
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
