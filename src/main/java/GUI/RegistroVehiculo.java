@@ -8,6 +8,9 @@ import Entidades.Clientes;
 import Entidades.ControladorEntidades;
 import Entidades.Vehiculo;
 import java.awt.Color;
+import java.awt.Image;
+import static java.lang.Thread.sleep;
+import java.util.*;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,12 +21,16 @@ import javax.swing.JOptionPane;
  *
  * @author PC
  */
-public class RegistroVehiculo extends javax.swing.JFrame {
+public class RegistroVehiculo extends javax.swing.JFrame implements Runnable{
 
     ControladorEntidades control = new ControladorEntidades();
     Date date = new Date();
     Vehiculo vehiculo = new Vehiculo();
     Clientes cli = new Clientes();
+    
+    String hora, minutos, segundos, ampm;
+    Calendar calendario;
+    Thread h1;
 
     /**
      * Creates new form RegistroVehiculo
@@ -33,9 +40,11 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         cargarPlacas();
         this.btnRegistrar.setEnabled(false);
         this.cli = cli;
-        this.jLabel14.setVisible(false);
+        this.lblAuto.setVisible(false);
         lblRFC.setText(cli.getRFC());
-
+        Fondo Imagen = new Fondo();
+        h1 = new Thread(this);
+        h1.start();
     }
 
     private boolean validarDatos() {
@@ -118,11 +127,12 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         btnConfirmarDatos = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lblAuto = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblRFC = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,23 +159,18 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(189, 74, 54));
         jLabel8.setText("Modelo:");
 
-        txtNumSerie.setBackground(new java.awt.Color(255, 255, 255));
         txtNumSerie.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNumSerie.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtColor.setBackground(new java.awt.Color(255, 255, 255));
         txtColor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtColor.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtModelo.setBackground(new java.awt.Color(255, 255, 255));
         txtModelo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtModelo.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtMarca.setBackground(new java.awt.Color(255, 255, 255));
         txtMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMarca.setForeground(new java.awt.Color(189, 74, 54));
 
-        txtLinea.setBackground(new java.awt.Color(255, 255, 255));
         txtLinea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtLinea.setForeground(new java.awt.Color(189, 74, 54));
 
@@ -185,13 +190,13 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(189, 74, 54));
         jLabel10.setText("Fecha ");
 
+        txtCodigo.setEditable(false);
         txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(189, 74, 54));
         txtCodigo.setBorder(null);
 
         txtPrecio.setEditable(false);
-        txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
         txtPrecio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPrecio.setForeground(new java.awt.Color(189, 74, 54));
         txtPrecio.setText("0.0");
@@ -208,7 +213,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         txtFechaRecepcion.setForeground(new java.awt.Color(189, 74, 54));
         txtFechaRecepcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(189, 74, 54));
         btnCancelar.setText("Cancelar");
@@ -219,7 +223,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(189, 74, 54));
         btnRegistrar.setText("Registrar");
@@ -235,14 +238,18 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         jLabel11.setText("Numero Serie:");
 
         cmbVehiculo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automovil" }));
+        cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automovil", "Motocicleta", "Camion" }));
         cmbVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cmbVehiculoMouseClicked(evt);
             }
         });
+        cmbVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbVehiculoActionPerformed(evt);
+            }
+        });
 
-        btnConfirmarDatos.setBackground(new java.awt.Color(255, 255, 255));
         btnConfirmarDatos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConfirmarDatos.setForeground(new java.awt.Color(189, 74, 54));
         btnConfirmarDatos.setText("Confirmar Datos");
@@ -259,7 +266,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/LogotipoGobiernoSonora_LogotipoColorTricromía.png"))); // NOI18N
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/vintage-car-silhouette-of-side-view_icon-icons.com_70578.png"))); // NOI18N
+        lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/vintage-car-silhouette-of-side-view_icon-icons.com_70578.png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(189, 74, 54));
@@ -275,124 +282,130 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         lblRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        lblReloj.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(189, 74, 54));
+        lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblReloj.setText("jLabel14");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(205, 205, 205))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6))
-                        .addGap(114, 114, 114)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(58, 58, 58)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel7))
-                            .addGap(24, 24, 24)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(4, 4, 4)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6))
+                                .addGap(114, 114, 114)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(41, 41, 41)
-                                    .addComponent(jLabel5))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(22, 22, 22)
+                                    .addGap(40, 40, 40)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jLabel15)))
-                                .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel7))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(10, 10, 10)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnConfirmarDatos)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtFechaEmision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFechaRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 68, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jLabel9)
-                        .addGap(35, 35, 35)
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12))
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(41, 41, 41)
+                                                    .addComponent(jLabel5))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(22, 22, 22)
+                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel10)
+                                                        .addComponent(jLabel15)))
+                                                .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnConfirmarDatos)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtFechaEmision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(txtFechaRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(77, 77, 77)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(172, 172, 172)
+                                .addComponent(jLabel9)
+                                .addGap(35, 35, 35)
+                                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58))))
+                                .addComponent(lblAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel13)
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblReloj, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblReloj, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(lblRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(23, 23, 23)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -444,10 +457,10 @@ public class RegistroVehiculo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 500));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 490));
 
         pack();
         setLocationRelativeTo(null);
@@ -458,9 +471,9 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         if (validarDatos() == true) {
             JOptionPane.showMessageDialog(null,
-                    "Hay uno o más campos vacíos",
-                    "Error de información",
-                    JOptionPane.ERROR_MESSAGE);
+                "Hay uno o más campos vacíos",
+                "Error de información",
+                JOptionPane.ERROR_MESSAGE);
 
         }  else if (validarSoloLetras(this.txtMarca.getText().trim()) == false) {
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Marca ");
@@ -488,23 +501,38 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         }else if(validarNumSerie(this.txtNumSerie.getText())==false) {
             JOptionPane.showMessageDialog(null, "Número de serie incorrecto");
         }else{
-            
+
             int vehiculo = cmbVehiculo.getSelectedIndex();
 
             if (vehiculo == 1) {
                 txtPrecio.setText("$1,500");
+                this.lblAuto.setVisible(true);
 
+                setVisible(true);
+            }else if(vehiculo == 2){
+                txtPrecio.setText("$1,000");
+                
+                this.lblAuto.setVisible(false);
+            }else if (vehiculo == 3){
+                txtPrecio.setText("$2,000");
+                
+                this.lblAuto.setVisible(false);
             }
+
             Date fecha = this.txtFechaEmision.getDate();
 
             fecha.setYear(fecha.getYear() + 1);
 
             this.txtFechaRecepcion.setDate(fecha);
             this.btnRegistrar.setEnabled(true);
-            this.jLabel14.setVisible(true);
+
         }
         this.btnRegistrar.setEnabled(true);
     }//GEN-LAST:event_btnConfirmarDatosActionPerformed
+
+    private void cmbVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbVehiculoActionPerformed
 
     private void cmbVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbVehiculoMouseClicked
 
@@ -516,9 +544,9 @@ public class RegistroVehiculo extends javax.swing.JFrame {
 
         if (precioValidacion.equalsIgnoreCase("0.0")) {
             JOptionPane.showMessageDialog(null,
-                    "Revise su selección de discapacidad y/o vigencia",
-                    "Error de información",
-                    JOptionPane.ERROR_MESSAGE);
+                "Revise su selección de discapacidad y/o vigencia",
+                "Error de información",
+                JOptionPane.ERROR_MESSAGE);
             btnRegistrar.setEnabled(false);
         } else if (validarSoloLetras(this.txtMarca.getText().trim()) == false) {
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Marca ");
@@ -534,7 +562,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             this.txtLinea.setBackground(Color.WHITE);
             this.txtModelo.setBackground(Color.YELLOW);
             JOptionPane.showMessageDialog(null, "Solo se permiten datos numéricos en Modelo. "
-                    + "Intente de nuevo ");
+                + "Intente de nuevo ");
             this.btnRegistrar.setEnabled(false);
         } else if (validarSoloLetras(this.txtColor.getText().trim()) == false) {
             this.txtModelo.setBackground(Color.WHITE);
@@ -542,7 +570,7 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se permiten datos numéricos en Color ");
             this.btnRegistrar.setEnabled(false);
         } else if(control.validarAuto(this.txtNumSerie.getText())==true){
-     
+
             this.txtNumSerie.setBackground(Color.YELLOW);
             JOptionPane.showMessageDialog(null, "El número de serie ya se encuentra registrado. Revise sus datos.");
             this.btnRegistrar.setEnabled(false);
@@ -563,8 +591,8 @@ public class RegistroVehiculo extends javax.swing.JFrame {
             String precio = txtPrecio.getText();
 
             control.guardarPlaca(tipoVehiculo, numSerie, marca, linea, modelo, color, codigo, fechaEmi, fechaRece, precio, cli);
-            control.guardarEnHistorial("Placa", precio, date, cli.getRFC());  
-          
+            control.guardarEnHistorial("Placa", precio, date, cli.getRFC());
+
             JOptionPane optionPane = new JOptionPane("Se guardó correctamente la infomación");
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
             JDialog dialog = optionPane.createDialog("Guardado exitoso");
@@ -603,7 +631,6 @@ public class RegistroVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -616,7 +643,9 @@ public class RegistroVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JLabel lblAuto;
     private javax.swing.JLabel lblRFC;
+    private javax.swing.JLabel lblReloj;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtColor;
     private com.toedter.calendar.JDateChooser txtFechaEmision;
@@ -650,5 +679,38 @@ public class RegistroVehiculo extends javax.swing.JFrame {
         if (txtCodigo.getText().length() > 7 || txtCodigo.getText().length() < 7) {
             cargarPlacas();
         }
+    }
+
+    @Override
+    public void run() {
+        Thread ct = Thread.currentThread();
+        
+        while(ct == h1){
+            calcula();
+            lblReloj.setText(hora + ":" + minutos + ":" + segundos + ":" + ampm);
+            
+            try{
+                Thread.sleep(1000);
+            } catch(InterruptedException e){
+                
+            }
+        }
+    }
+
+    private void calcula() {
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+        
+        calendario.setTime(fechaHoraActual);
+        ampm = calendario.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
+        
+        if(ampm.equals("PM")){
+            int h = calendario.get(Calendar.HOUR_OF_DAY)-13;
+            hora = h>9?""+h:"0"+h;
+        }else{
+            hora  = calendario.get(Calendar.HOUR_OF_DAY)>9?""+calendario.get(Calendar.HOUR_OF_DAY):"0"+(calendario.get(Calendar.HOUR_OF_DAY)-1);
+        }
+        minutos = calendario.get(Calendar.MINUTE)>9?""+ calendario.get(Calendar.MINUTE):"0"+ calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND)>9?""+ calendario.get(Calendar.SECOND):"0" + calendario.get(Calendar.SECOND);
     }
 }

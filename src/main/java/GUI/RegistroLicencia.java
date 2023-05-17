@@ -7,7 +7,9 @@ package GUI;
 import Entidades.ControladorEntidades;
 import Persistencia.ClientesJpaController;
 import java.awt.Color;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JDialog;
@@ -17,18 +19,23 @@ import javax.swing.JOptionPane;
  *
  * @author PC
  */
-public class RegistroLicencia extends javax.swing.JFrame {
+public class RegistroLicencia extends javax.swing.JFrame implements Runnable {
 
     ControladorEntidades control = new ControladorEntidades();
     Date date = new Date();
     ClientesJpaController cliJpa = new ClientesJpaController();
 
+    String hora, minutos, segundos, ampm;
+    Calendar calendario;
+    Thread h1;
     /**
      * Creates new form RegistroLicencia
      */
     public RegistroLicencia() {
         initComponents();
         btnRegistrar.setEnabled(false);
+        h1 = new Thread(this);
+        h1.start();
 
     }
 
@@ -154,6 +161,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
         labelErrorNombre = new javax.swing.JLabel();
         labelErrorApellido = new javax.swing.JLabel();
         labelErrorApellidoMat = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -286,15 +294,17 @@ public class RegistroLicencia extends javax.swing.JFrame {
         txtFechaNac2.setForeground(new java.awt.Color(189, 74, 54));
         txtFechaNac2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        lblReloj.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(189, 74, 54));
+        lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblReloj.setText("jLabel14");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,15 +370,22 @@ public class RegistroLicencia extends javax.swing.JFrame {
                                 .addGap(242, 242, 242)
                                 .addComponent(btnCancelar)
                                 .addGap(28, 28, 28)
-                                .addComponent(btnRegistrar)))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addComponent(btnRegistrar))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblReloj, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblReloj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbDiscapacitado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -407,7 +424,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
                             .addComponent(jLabel9))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(txtFechaNac2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -419,7 +436,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -440,7 +457,10 @@ public class RegistroLicencia extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -664,6 +684,7 @@ public class RegistroLicencia extends javax.swing.JFrame {
     private javax.swing.JLabel labelErrorApellido;
     private javax.swing.JLabel labelErrorApellidoMat;
     private javax.swing.JLabel labelErrorNombre;
+    private javax.swing.JLabel lblReloj;
     private javax.swing.JTextField txtApellidoM;
     private javax.swing.JTextField txtApellidoP;
     private com.toedter.calendar.JDateChooser txtFechaExpedicion;
@@ -675,15 +696,36 @@ public class RegistroLicencia extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
-//    public String generaRfc(){
-//        String rfc = this.txtApellidoP.getText().substring(0, 2)+
-//                this.txtApellidoM.getText().charAt(0)+
-//                this.txtNombre.getText().charAt(0)+
-//                this.txtFechaNac2.getDate().toString().substring(26, 28)+
-//                this.txtFechaNac2.getDate().getMonth()+
-//                this.txtFechaNac2.getDate().toString().substring(8, 10)+
-//                "1HO";
-//       
-//        return rfc.toUpperCase();
-//    }
+    @Override
+    public void run() {
+        Thread ct = Thread.currentThread();
+        
+        while(ct == h1){
+            calcula();
+            lblReloj.setText(hora + ":" + minutos + ":" + segundos + ":" + ampm);
+            
+            try{
+                Thread.sleep(1000);
+            } catch(InterruptedException e){
+                
+            }
+        }
+    }
+
+    private void calcula() {
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+        
+        calendario.setTime(fechaHoraActual);
+        ampm = calendario.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
+        
+        if(ampm.equals("PM")){
+            int h = calendario.get(Calendar.HOUR_OF_DAY)-13;
+            hora = h>9?""+h:"0"+h;
+        }else{
+            hora  = calendario.get(Calendar.HOUR_OF_DAY-1)>9?""+calendario.get(Calendar.HOUR_OF_DAY-1):"0"+calendario.get(Calendar.HOUR_OF_DAY-1);
+        }
+        minutos = calendario.get(Calendar.MINUTE)>9?""+ calendario.get(Calendar.MINUTE):"0"+ calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND)>9?""+ calendario.get(Calendar.SECOND):"0" + calendario.get(Calendar.SECOND);
+    }
 }

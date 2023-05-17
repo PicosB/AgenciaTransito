@@ -4,17 +4,23 @@
  */
 package GUI;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author PC
  */
-public class TramiteLicencia extends javax.swing.JFrame {
+public class TramiteLicencia extends javax.swing.JFrame implements Runnable{
 
-    /**
-     * Creates new form TramiteLicencia
-     */
+    String hora, minutos, segundos, ampm;
+    Calendar calendario;
+    Thread h1;
     public TramiteLicencia() {
         initComponents();
+        h1 = new Thread(this);
+        h1.start();
     }
 
     /**
@@ -34,6 +40,7 @@ public class TramiteLicencia extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trámites de licencia");
@@ -43,7 +50,6 @@ public class TramiteLicencia extends javax.swing.JFrame {
 
         btnClientes.setBackground(new java.awt.Color(189, 74, 54));
         btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnClientes.setForeground(new java.awt.Color(0, 0, 0));
         btnClientes.setText("Clientes");
         btnClientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -53,12 +59,10 @@ public class TramiteLicencia extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Tramites de Licencia");
 
         btnRegistro.setBackground(new java.awt.Color(189, 74, 54));
         btnRegistro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegistro.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistro.setText("Registro");
         btnRegistro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +73,6 @@ public class TramiteLicencia extends javax.swing.JFrame {
 
         btnRenovacion.setBackground(new java.awt.Color(189, 74, 54));
         btnRenovacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRenovacion.setForeground(new java.awt.Color(0, 0, 0));
         btnRenovacion.setText("Renovación");
         btnRenovacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRenovacion.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +83,6 @@ public class TramiteLicencia extends javax.swing.JFrame {
 
         btnAtras.setBackground(new java.awt.Color(189, 74, 54));
         btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAtras.setForeground(new java.awt.Color(0, 0, 0));
         btnAtras.setText("Atras");
         btnAtras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -133,19 +135,28 @@ public class TramiteLicencia extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/carnet-de-conducir (1) 2.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
+        lblReloj.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
+        lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblReloj.setText("jLabel3");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblReloj, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblReloj, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -185,5 +196,39 @@ public class TramiteLicencia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblReloj;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        Thread ct = Thread.currentThread();
+        
+        while(ct == h1){
+            calcula();
+            lblReloj.setText(hora + ":" + minutos + ":" + segundos + ":" + ampm);
+            
+            try{
+                Thread.sleep(1000);
+            } catch(InterruptedException e){
+                
+            }
+        }
+    }
+
+    private void calcula() {
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+        
+        calendario.setTime(fechaHoraActual);
+        ampm = calendario.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
+        
+        if(ampm.equals("PM")){
+            int h = calendario.get(Calendar.HOUR_OF_DAY)-13;
+            hora = h>9?""+h:"0"+h;
+        }else{
+            hora  = calendario.get(Calendar.HOUR_OF_DAY-1)>9?""+calendario.get(Calendar.HOUR_OF_DAY-1):"0"+calendario.get(Calendar.HOUR_OF_DAY-1);
+        }
+        minutos = calendario.get(Calendar.MINUTE)>9?""+ calendario.get(Calendar.MINUTE):"0"+ calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND)>9?""+ calendario.get(Calendar.SECOND):"0" + calendario.get(Calendar.SECOND);
+    }
 }

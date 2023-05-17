@@ -192,7 +192,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         
-        if(this.txtUsuario.getText().isBlank() || this.txtContrasena.getText().isBlank()){
+        if(this.txtUsuario.getText().isEmpty()|| this.txtContrasena.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Registro inválido");
         }else{
              String Usuario = txtUsuario.getText();

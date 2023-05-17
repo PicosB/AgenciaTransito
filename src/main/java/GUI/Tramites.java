@@ -11,8 +11,10 @@ import Entidades.Tramite;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -20,16 +22,18 @@ import javax.swing.JOptionPane;
  *
  * @author PC
  */
-public class Tramites extends javax.swing.JFrame {
+public class Tramites extends javax.swing.JFrame implements Runnable {
 
-    /**
-     * Creates new form Tramites
-     */
     ControladorEntidades control = new ControladorEntidades();
     RegistroLicencia reg;
 
+    String hora, minutos, segundos, ampm;
+    Calendar calendario;
+    Thread h1;
     public Tramites() {
         initComponents();
+        h1 = new Thread(this);
+        h1.start();
     }
 
     /**
@@ -51,6 +55,7 @@ public class Tramites extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnAtras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Seleccionar trámite");
@@ -139,6 +144,12 @@ public class Tramites extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/documento (1).png"))); // NOI18N
         jLabel2.setText("+");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 220));
+
+        lblReloj.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
+        lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblReloj.setText("jLabel3");
+        jPanel2.add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 460));
 
@@ -320,5 +331,39 @@ public class Tramites extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblReloj;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        Thread ct = Thread.currentThread();
+        
+        while(ct == h1){
+            calcula();
+            lblReloj.setText(hora + ":" + minutos + ":" + segundos + ":" + ampm);
+            
+            try{
+                Thread.sleep(1000);
+            } catch(InterruptedException e){
+                
+            }
+        }
+    }
+
+    private void calcula() {
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+        
+        calendario.setTime(fechaHoraActual);
+        ampm = calendario.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
+        
+        if(ampm.equals("PM")){
+            int h = calendario.get(Calendar.HOUR_OF_DAY)-13;
+            hora = h>9?""+h:"0"+h;
+        }else{
+            hora  = calendario.get(Calendar.HOUR_OF_DAY-1)>9?""+calendario.get(Calendar.HOUR_OF_DAY-1):"0"+calendario.get(Calendar.HOUR_OF_DAY-1);
+        }
+        minutos = calendario.get(Calendar.MINUTE)>9?""+ calendario.get(Calendar.MINUTE):"0"+ calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND)>9?""+ calendario.get(Calendar.SECOND):"0" + calendario.get(Calendar.SECOND);
+    }
 }
